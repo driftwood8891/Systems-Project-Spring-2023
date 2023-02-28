@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Systems_Project_Spring_2023.Models;
 
 namespace Systems_Project_Spring_2023.Data
 {
@@ -9,5 +10,7 @@ namespace Systems_Project_Spring_2023.Data
 			: base(options)
 		{
 		}
+		public virtual DbSet<Student> Student { get; set; }
+
 	}
 }
