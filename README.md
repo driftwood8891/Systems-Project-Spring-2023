@@ -1,7 +1,7 @@
 # Systems-Project-Spring-2023
 
 
-## An Inventory Management System built using the ASP.NET Core Framework
+## Inventory Management System
 
 
 
@@ -12,3 +12,9 @@ Students in the IT programs can check out different kits and items based on thei
 application allows the user to check in/out kits and items to students and records the transactions and information
 within a database.
 
+### Built With
+
+..* ASP.NET
+..* Bootstrap
+..* Entity Framework
+..* C#
