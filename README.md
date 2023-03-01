@@ -14,7 +14,7 @@ within a database.
 
 ### Built With
 
-..* ASP.NET
-..* Bootstrap
-..* Entity Framework
-..* C#
+* ASP.NET
+* Bootstrap
+* Entity Framework
+* C#
