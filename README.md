@@ -1,5 +1,5 @@
-![collaborators](https://img.shields.io/badge/collaborators-12-blue)
-![coverage](https://img.shields.io/badge/coverage-80%25-yellowgreen)
+![Collaborators](https://img.shields.io/badge/collaborators-12-blue)
+
 # Systems-Project-Spring-2023
 
 
