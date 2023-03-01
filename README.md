@@ -1,6 +1,9 @@
 # Systems-Project-Spring-2023
 
-## A Inventory Management System built using the ASP.NET Core Framework
+
+## An Inventory Management System built using the ASP.NET Core Framework
+
+
 
 ### About the Project
 This project is the second version of the Inventory Management project built fall of 2022 for the college.  This
