@@ -34,6 +34,10 @@ namespace Systems_Project_Spring_2023.Models
 		[Required(ErrorMessage = "Phone number is required.")]
 		public string Student_phone { get; set; }
 
+		[Phone]
+		[Display(Name = "Emergency Contact")]
+		public string Student_ephone { get; set; }
+
 		[Display(Name = "Address")]
 		[Required(ErrorMessage = "Address name is required.")]
 		public string Student_addr { get; set; }
