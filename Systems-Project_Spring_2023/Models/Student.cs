@@ -7,7 +7,7 @@ namespace Systems_Project_Spring_2023.Models
 	public class Student
 	{
 		[Key]
-		[Display(Name = "Student ID")]                        // Display field name
+		[Display(Name = "Student ID")]                        // Display field name. Test
 		[Required(ErrorMessage = "Student ID is required.")]  // Requires you to enter data into the field or will output error message
 		public int Student_id { get; set; }
 
