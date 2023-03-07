@@ -39,7 +39,7 @@ namespace Systems_Project_Spring_2023.Models
         public virtual int Student_id { get; set; }
 
         [ForeignKey("Student_id")]
-        public virtual Student.Student_id { get; set; }
+        public virtual Student Student { get; set; }
     }
 }
 
