@@ -23,7 +23,7 @@ namespace Systems_Project_Spring_2023.Models
 
         [Display(Name = "Kit Cost")]
         [Required(ErrorMessage = "Kit Cost is required.")]
-        public string Kit_cost { get; set; }
+        public Decimal Kit_cost { get; set; }
 
         [Display(Name = "Kit Date")]
         public DateTime Kit_date { get; set; }
