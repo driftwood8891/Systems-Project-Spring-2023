@@ -1,18 +1,136 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
+/********************************** 
+ * Team Page
+ * Credit to https://www.bootdey.com/ for parts of CSS
+**********************************/
+.welcome-banner {
+    background: url("/Images/team-welcome-banner.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.wb-layer {
+    background: rgb(0, 0, 0, 0.75);
+    color: white;
+}
+
+.our-team {
+    margin-bottom: 30px;
+    box-shadow: 10px 10px 10px -10px rgba(0, 64, 128, .3);
+    transform: scale(1, 1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.our-team:hover {
+    transform: scale(1.05, 1.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+.our-team .team-content {
+    padding: 20px 0;
+    background: #fff;
+}
+
+.our-team .title {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(205,32,40);
+    text-transform: capitalize;
+    margin: 0 0 20px;
+    position: relative;
+}
+
+.our-team .title:before {
+    content: "";
+    width: 25px;
+    height: 1px;
+    background: rgb(205,32,40);
+    position: absolute;
+    bottom: -10px;
+    right: 50%;
+    margin-right: 9px;
+    transition-duration: 0.25s;
+}
+
+.our-team .title:after {
+    content: "";
+    width: 25px;
+    height: 1px;
+    background: rgb(205,32,40);
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    margin-left: 9px;
+    transition-duration: 0.25s;
+}
+
+.our-team:hover .title:before,
+.our-team:hover .title:after {
+    width: 50px;
+}
+
+.our-team .post {
+    display: inline-block;
+    font-size: 15px;
+    text-transform: capitalize;
+}
+
+.our-team .post span {
+    position: relative;
+    top: -10px;
+}
+
+.our-team .post:before {
+    content: "";
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgb(205, 32, 40);
+    margin: 0 auto;
+    position: relative;
+    top: -13px;
+}
+
+@media only screen and (max-width: 990px) {
+    .our-team {
+        margin-bottom: 30px;
+    }
+}
+
+/********************************** 
+ * Team Member Page
+**********************************/
+.about-card .about-text, .about-card a {
+    text-align: left;
+    float: left;
+    margin-left: 0px;
+    padding: 0px;
+}
+
+.about-card .row div {
+    margin-top: 50px;
+}
+
+.about-card .about-title { }
+
+.about-card .about-subtitle { }
