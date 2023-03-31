@@ -34,9 +34,19 @@ namespace Systems_Project_Spring_2023.Controllers
             return View();
         }
 
-        public IActionResult MichaelKariuki()
+		public IActionResult HaldanToomsen()
+		{
+			return View();
+		}
+
+        public IActionResult AmayaKorakanto()
         {
             return View();
         }
-    }
+
+		public IActionResult MichaelKariuki()
+		{
+			return View();
+		}
+	}
 }
