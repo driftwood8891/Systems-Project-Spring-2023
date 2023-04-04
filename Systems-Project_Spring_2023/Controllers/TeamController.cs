@@ -48,5 +48,11 @@ namespace Systems_Project_Spring_2023.Controllers
 		{
 			return View();
 		}
-	}
+
+        public IActionResult JacobSchroeder()
+        {
+            return View();
+        }
+
+    }
 }
