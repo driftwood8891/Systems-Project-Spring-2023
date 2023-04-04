@@ -7,51 +7,63 @@ namespace Systems_Project_Spring_2023.Models
 	public class Student
 	{
 		[Key]
-		[Display(Name = "Student ID")]                        // Display field name. Test
-		[Required(ErrorMessage = "Student ID is required.")]  // Requires you to enter data into the field or will output error message
-		public int Student_id { get; set; }
+		[Display(Name = "MACC ID")]
+		[StringLength(10)]
+		[Required(ErrorMessage = "MACC ID is required.")]
+		public string Student_macid { get; set; } = null!;
 
 		[Display(Name = "First Name")]
-		[Required(ErrorMessage = "First name is required.")]
-		public string Student_fname { get; set; }
+		[StringLength(20)]
+		[Required(ErrorMessage = "First Name is required.")]
+		public string Student_fname { get; set; } = null!;
 
 		[Display(Name = "Last Name")]
-		[Required(ErrorMessage = "Last name is required.")]
-		public string Student_lname { get; set; }
+		[StringLength(20)]
+		[Required(ErrorMessage = "Last Name is required.")]
+		public string Student_lname { get; set;} = null!;
 
+		[Display(Name = "Student Email")]
 		[EmailAddress]
-		[Display(Name = "College email")]
-		[Required(ErrorMessage = "College email is required.")]
-		public string Student_cmail { get; set; }
+		[StringLength(40)]
+		[Required(ErrorMessage = "Student email is required.")]
+		public string Student_cmail { get; set;} = null!;
 
+		[Display(Name = "Personal Email")]
 		[EmailAddress]
-		[Display(Name = "Personal email")]
+		[StringLength(50)]
 		[Required(ErrorMessage = "Personal email is required.")]
-		public string Student_pmail { get; set; }
+		public string Student_pmail { get; set;} = null!;
 
+		[Display(Name = "Phone Number")]
 		[Phone]
-		[Display(Name = "Phone number")]
+		[StringLength(20)]
 		[Required(ErrorMessage = "Phone number is required.")]
-		public string Student_phone { get; set; }
+		public string Student_phone { get;set;} = null!;
 
+		[Display(Name = "Emergency Phone Number")]
 		[Phone]
-		[Display(Name = "Emergency Contact")]
-		public string Student_ephone { get; set; }
+		[StringLength(20)]
+		[Required(ErrorMessage = "Emergency phone number is required.")]
+		public string Student_ephone { get; set;} = null!;
 
 		[Display(Name = "Address")]
-		[Required(ErrorMessage = "Address name is required.")]
-		public string Student_addr { get; set; }
+		[StringLength(80)]
+		[Required(ErrorMessage = "Address is required.")]
+		public string Student_addr { get; set;} = null!;
 
-		[Display(Name = "Course name")]
+		[Display(Name = "Course")]
+		[StringLength(10)]
 		[Required(ErrorMessage = "Course name is required.")]
-		public string Student_cour { get; set; }
+		public string Student_cour { get; set;} = null!;
 
 		[Display(Name = "Campus")]
-		[Required(ErrorMessage = "Campus name is required.")]
-		public string Student_camp { get; set; }
-		
+		[StringLength(3)]
+		[Required(ErrorMessage = "Campus abbreviation is required.")]
+		public string Student_camp { get; set;} = null!;
+
 		[Display(Name = "Instructor Name")]
-		[Required(ErrorMessage = "Instructor name is required.")]
-		public string Student_instr { get; set; }
+		[StringLength(20)]
+		[Required(ErrorMessage = "Name of instructor is required.")]
+		public string Student_instr { get; set;} = null!;
 	}
 }
