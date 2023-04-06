@@ -134,3 +134,11 @@ body {
 .about-card .about-title { }
 
 .about-card .about-subtitle { }
+
+.about-card .nav-link {
+    clear: both;
+    float: none;
+    display: block;
+    margin-top: 10px;
+    margin-left: 0px;
+}
