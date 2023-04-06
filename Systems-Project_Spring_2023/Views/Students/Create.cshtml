@@ -1,0 +1,83 @@
+﻿@model Systems_Project_Spring_2023.Models.Student
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Student</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Student_macid" class="control-label"></label>
+                <input asp-for="Student_macid" class="form-control" />
+                <span asp-validation-for="Student_macid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Student_fname" class="control-label"></label>
+                <input asp-for="Student_fname" class="form-control" />
+                <span asp-validation-for="Student_fname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Student_lname" class="control-label"></label>
+                <input asp-for="Student_lname" class="form-control" />
+                <span asp-validation-for="Student_lname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Student_cmail" class="control-label"></label>
+                <input asp-for="Student_cmail" class="form-control" />
+                <span asp-validation-for="Student_cmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Student_pmail" class="control-label"></label>
+                <input asp-for="Student_pmail" class="form-control" />
+                <span asp-validation-for="Student_pmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Student_phone" class="control-label"></label>
+                <input asp-for="Student_phone" class="form-control" />
+                <span asp-validation-for="Student_phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Student_ephone" class="control-label"></label>
+                <input asp-for="Student_ephone" class="form-control" />
+                <span asp-validation-for="Student_ephone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Student_addr" class="control-label"></label>
+                <input asp-for="Student_addr" class="form-control" />
+                <span asp-validation-for="Student_addr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Student_cour" class="control-label"></label>
+                <input asp-for="Student_cour" class="form-control" />
+                <span asp-validation-for="Student_cour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Student_camp" class="control-label"></label>
+                <input asp-for="Student_camp" class="form-control" />
+                <span asp-validation-for="Student_camp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Student_instr" class="control-label"></label>
+                <input asp-for="Student_instr" class="form-control" />
+                <span asp-validation-for="Student_instr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
