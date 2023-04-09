@@ -8,9 +8,7 @@ namespace Systems_Project_Spring_2023.Models
     public class LabAssistant
     {
 	    [Key]
-	    [Display(Name = "Lab Assistant ID")]
-	    [Required(ErrorMessage = "Lab Assistant ID is required.")]
-	    public string La_id { get; set; } = null!;
+	    public int La_id { get; set; }
 
 	    [Display(Name = "First Name")]
 	    [Required(ErrorMessage = "First name is required.")]
