@@ -22,6 +22,11 @@ namespace Systems_Project_Spring_2023.Models
 		[Required(ErrorMessage = "Item Name is required.")]
 		public string Item_name { get; set; } = null!;
 
+		[Display(Name = "Item Quantity")]
+		[Range(1, 9)]
+		[Required(ErrorMessage = "Item quantity is required.")]
+		public int Item_qty { get; set; }
+
 		[Display(Name = "Item Cost")]
 		[DataType(DataType.Currency)]
 		[Column(TypeName = "decimal(8,2)")]

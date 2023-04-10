@@ -56,7 +56,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Item_id,Item_barcode,Item_name,Item_cost,Item_date,Item_note,Status_code,Student_macid")] Item item)
+        public async Task<IActionResult> Create([Bind("Item_id,Item_barcode,Item_name,Item_qty,Item_cost,Item_date,Item_note,Status_code,Student_macid")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Item_id,Item_barcode,Item_name,Item_cost,Item_date,Item_note,Status_code,Student_macid")] Item item)
+        public async Task<IActionResult> Edit(string id, [Bind("Item_id,Item_barcode,Item_name,Item_qty,Item_cost,Item_date,Item_note,Status_code,Student_macid")] Item item)
         {
             if (id != item.Item_id)
             {
