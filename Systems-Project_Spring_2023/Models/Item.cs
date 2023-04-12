@@ -23,7 +23,7 @@ namespace Systems_Project_Spring_2023.Models
 		public string Item_name { get; set; } = null!;
 
 		[Display(Name = "Item Quantity")]
-		[Range(1, 9)]
+		[Range(1, 3)]
 		[Required(ErrorMessage = "Item quantity is required.")]
 		public int Item_qty { get; set; }
 

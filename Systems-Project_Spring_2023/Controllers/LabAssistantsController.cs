@@ -22,20 +22,20 @@ namespace Systems_Project_Spring_2023.Controllers
         // GET: LabAssistants
         public async Task<IActionResult> Index()
         {
-              return _context.LabAssistants != null ? 
-                          View(await _context.LabAssistants.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.LabAssistants'  is null.");
+              return _context.LabAssistant != null ? 
+                          View(await _context.LabAssistant.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.LabAssistant'  is null.");
         }
 
         // GET: LabAssistants/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.LabAssistants == null)
+            if (id == null || _context.LabAssistant == null)
             {
                 return NotFound();
             }
 
-            var labAssistant = await _context.LabAssistants
+            var labAssistant = await _context.LabAssistant
                 .FirstOrDefaultAsync(m => m.La_id == id);
             if (labAssistant == null)
             {
@@ -70,12 +70,12 @@ namespace Systems_Project_Spring_2023.Controllers
         // GET: LabAssistants/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.LabAssistants == null)
+            if (id == null || _context.LabAssistant == null)
             {
                 return NotFound();
             }
 
-            var labAssistant = await _context.LabAssistants.FindAsync(id);
+            var labAssistant = await _context.LabAssistant.FindAsync(id);
             if (labAssistant == null)
             {
                 return NotFound();
@@ -121,12 +121,12 @@ namespace Systems_Project_Spring_2023.Controllers
         // GET: LabAssistants/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.LabAssistants == null)
+            if (id == null || _context.LabAssistant == null)
             {
                 return NotFound();
             }
 
-            var labAssistant = await _context.LabAssistants
+            var labAssistant = await _context.LabAssistant
                 .FirstOrDefaultAsync(m => m.La_id == id);
             if (labAssistant == null)
             {
@@ -141,14 +141,14 @@ namespace Systems_Project_Spring_2023.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.LabAssistants == null)
+            if (_context.LabAssistant == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.LabAssistants'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.LabAssistant'  is null.");
             }
-            var labAssistant = await _context.LabAssistants.FindAsync(id);
+            var labAssistant = await _context.LabAssistant.FindAsync(id);
             if (labAssistant != null)
             {
-                _context.LabAssistants.Remove(labAssistant);
+                _context.LabAssistant.Remove(labAssistant);
             }
             
             await _context.SaveChangesAsync();
@@ -157,7 +157,7 @@ namespace Systems_Project_Spring_2023.Controllers
 
         private bool LabAssistantExists(int id)
         {
-          return (_context.LabAssistants?.Any(e => e.La_id == id)).GetValueOrDefault();
+          return (_context.LabAssistant?.Any(e => e.La_id == id)).GetValueOrDefault();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Systems_Project_Spring_2023.Models
         public string Kit_name { get; set; } = null!;
 
         [Display(Name = "Kit Quantity")]
-        [Range(1, 9)]
+        [Range(1, 2)]
         [Required(ErrorMessage = "Kit quantity is required.")]
         public int Kit_qty { get; set; }
 
@@ -48,7 +48,6 @@ namespace Systems_Project_Spring_2023.Models
 
         [Display(Name = "Kit Type")]
         [StringLength(8)]
-        //[Index(IsUnique = true)]
         [Required(ErrorMessage = "Kit type is required.")]
         public string Kt_id { get; set; } = null!;
 
