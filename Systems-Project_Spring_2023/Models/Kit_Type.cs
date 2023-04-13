@@ -33,6 +33,7 @@ namespace Systems_Project_Spring_2023.Models
 		public DateTime Kt_date { get; set; } = DateTime.Now;
 
 		[Display(Name = "Item Id")]
+		[StringLength(10)]
 		[Required(ErrorMessage = "Item Id is required.")]
 		public string Item_id { get; set; } = null!;
 
