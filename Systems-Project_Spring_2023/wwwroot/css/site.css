@@ -4,6 +4,8 @@
 **********************************/
 html {
     font-size: 14px;
+    height: 100%;
+    margin: 0;
 }
 
 @media (min-width: 768px) {
@@ -12,24 +14,114 @@ html {
     }
 }
 
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    margin-bottom: 60px;
-}
-
 .macc-logo {
     width: 125px;
     height: auto;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.navbar {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 25px;
+}
+
+.profile-icon {
+    width: 35px;
+    height: 35px;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.sub-menu-items li {
+    margin-left: 0px !important;
+}
+
+.sub-menu-items li:hover {
+    background-color: rgb(225, 225, 225);
+    cursor: pointer;
+}
+
+.addHeaderPopup {
+    width: 0px;
+    height: 0px;
+}
+
+.sub-menu-items {
+    padding: 0px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 3px black;
+    position: relative;
+    right: 156.5px;
+    top: 5px;
+    z-index: 10;
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 1px;
+    background-color: white;
+}
+
+.sub-menu-items li {
+    margin: 0px;
+    list-style-type: none;
+}
+
+.top-bot {
+    position: absolute;
+    top: -21px;
+    right: -1px;
+    z-index: 10;
+    width: 0;
+    height: 0;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+.addHeaderPopup {
+    display: block;
+}
+
+.removeHeaderPopup {
+    display: none;
+}
+
+.top-bot-border {
+    top: -19px;
+    border-color: transparent transparent #fff transparent;
+}
+
+footer {
+    background-color: #333333;
+    flex-shrink: 0;
+    flex: 1 0 auto;
+    color: white;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 25px;
+}
 
 /********************************** 
  * General Layout
 **********************************/
-/*cd2028
-*/
+/*.welcome-page {
+    background-color: #cd2028 !important;
+}
+.bg-ellipse {
+    width: 60vw;
+    height: 120vh;
+    background-color: white;
+    border-radius: 0% 100% 100% 0%;
+    position: absolute;
+    top: -10vh;
+}
+.welcome-page nav {
+    background-color: rgba(0, 0, 0, 0);
+}*/
 
