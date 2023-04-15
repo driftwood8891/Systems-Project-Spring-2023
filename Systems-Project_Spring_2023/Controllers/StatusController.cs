@@ -10,87 +10,87 @@ using Systems_Project_Spring_2023.Models;
 
 namespace Systems_Project_Spring_2023.Controllers
 {
-    public class ItemsController : Controller
+    public class StatusController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ItemsController(ApplicationDbContext context)
+        public StatusController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Items
+        // GET: Status
         public async Task<IActionResult> Index()
         {
-              return _context.Items != null ? 
-                          View(await _context.Items.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Items'  is null.");
+              return _context.Statuses != null ? 
+                          View(await _context.Statuses.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.Statuses'  is null.");
         }
 
-        // GET: Items/Details/5
+        // GET: Status/Details/5
         public async Task<IActionResult> Details(string id)
         {
-            if (id == null || _context.Items == null)
+            if (id == null || _context.Statuses == null)
             {
                 return NotFound();
             }
 
-            var item = await _context.Items
-                .FirstOrDefaultAsync(m => m.Item_id == id);
-            if (item == null)
+            var status = await _context.Statuses
+                .FirstOrDefaultAsync(m => m.Status_code == id);
+            if (status == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            return View(status);
         }
 
-        // GET: Items/Create
+        // GET: Status/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Items/Create
+        // POST: Status/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Item_id,Item_barcode,Item_name,Item_qty,Item_cost,Item_date,Item_note,Status_code,Student_macid")] Item item)
+        public async Task<IActionResult> Create([Bind("Status_code,Status_desc")] Status status)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(item);
+                _context.Add(status);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(status);
         }
 
-        // GET: Items/Edit/5
+        // GET: Status/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
-            if (id == null || _context.Items == null)
+            if (id == null || _context.Statuses == null)
             {
                 return NotFound();
             }
 
-            var item = await _context.Items.FindAsync(id);
-            if (item == null)
+            var status = await _context.Statuses.FindAsync(id);
+            if (status == null)
             {
                 return NotFound();
             }
-            return View(item);
+            return View(status);
         }
 
-        // POST: Items/Edit/5
+        // POST: Status/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Item_id,Item_barcode,Item_name,Item_qty,Item_cost,Item_date,Item_note,Status_code,Student_macid")] Item item)
+        public async Task<IActionResult> Edit(string id, [Bind("Status_code,Status_desc")] Status status)
         {
-            if (id != item.Item_id)
+            if (id != status.Status_code)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace Systems_Project_Spring_2023.Controllers
             {
                 try
                 {
-                    _context.Update(item);
+                    _context.Update(status);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemExists(item.Item_id))
+                    if (!StatusExists(status.Status_code))
                     {
                         return NotFound();
                     }
@@ -115,49 +115,49 @@ namespace Systems_Project_Spring_2023.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(status);
         }
 
-        // GET: Items/Delete/5
+        // GET: Status/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
-            if (id == null || _context.Items == null)
+            if (id == null || _context.Statuses == null)
             {
                 return NotFound();
             }
 
-            var item = await _context.Items
-                .FirstOrDefaultAsync(m => m.Item_id == id);
-            if (item == null)
+            var status = await _context.Statuses
+                .FirstOrDefaultAsync(m => m.Status_code == id);
+            if (status == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            return View(status);
         }
 
-        // POST: Items/Delete/5
+        // POST: Status/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            if (_context.Items == null)
+            if (_context.Statuses == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Items'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Statuses'  is null.");
             }
-            var item = await _context.Items.FindAsync(id);
-            if (item != null)
+            var status = await _context.Statuses.FindAsync(id);
+            if (status != null)
             {
-                _context.Items.Remove(item);
+                _context.Statuses.Remove(status);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ItemExists(string id)
+        private bool StatusExists(string id)
         {
-          return (_context.Items?.Any(e => e.Item_id == id)).GetValueOrDefault();
+          return (_context.Statuses?.Any(e => e.Status_code == id)).GetValueOrDefault();
         }
     }
 }

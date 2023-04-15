@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
 
 namespace Systems_Project_Spring_2023.Models
 {
@@ -21,6 +23,11 @@ namespace Systems_Project_Spring_2023.Models
 		[StringLength(20)]
 		[Required(ErrorMessage = "Item Name is required.")]
 		public string Item_name { get; set; } = null!;
+
+		[Display(Name = "Item Quantity")]
+		[Range(1, 3)]
+		[Required(ErrorMessage = "Item quantity is required.")]
+		public int Item_qty { get; set; }
 
 		[Display(Name = "Item Cost")]
 		[DataType(DataType.Currency)]
@@ -50,5 +57,13 @@ namespace Systems_Project_Spring_2023.Models
 		public virtual Student? Student { get; set; }
 
 		public virtual Status? Status { get; set; }
+
+		public class MyModelConfiguration : IEntityTypeConfiguration<Item>
+		{
+			public void Configure(EntityTypeBuilder<Item> builder)
+			{
+				builder.HasIndex(x => x.Item_id).IsUnique();
+			}
+		}
 	}
 }

@@ -25,6 +25,7 @@ namespace Systems_Project_Spring_2023.Models
         public string Kit_name { get; set; } = null!;
 
         [Display(Name = "Kit Quantity")]
+        [Range(1, 2)]
         [Required(ErrorMessage = "Kit quantity is required.")]
         public int Kit_qty { get; set; }
 
@@ -43,19 +44,21 @@ namespace Systems_Project_Spring_2023.Models
         public DateTime Kit_date { get; set; }
 
         [Display(Name = "Notes")]
+        [StringLength(60)]
         public string? Kit_note { get; set; }
 
         [Display(Name = "Kit Type")]
         [StringLength(8)]
-        //[Index(IsUnique = true)]
         [Required(ErrorMessage = "Kit type is required.")]
         public string Kt_id { get; set; } = null!;
 
         [Display(Name = "Status Code")]
+        [StringLength(2)]
         [Required(ErrorMessage = "Status code is required.")]
         public string Status_code { get; set; } = null!;
 
         [Display(Name = "MACC ID/Room number")]
+        [StringLength(10)]
         [Required(ErrorMessage = "MACC ID or Room number is required.")]
         public string Student_macid { get; set; } = null!;
 
@@ -69,7 +72,7 @@ namespace Systems_Project_Spring_2023.Models
         {
             public void Configure(EntityTypeBuilder<Kit> builder)
             {
-                builder.HasIndex(x => x.Kt_id).IsUnique();
+                builder.HasIndex(x => x.Kit_id).IsUnique();
             }
         }
     }

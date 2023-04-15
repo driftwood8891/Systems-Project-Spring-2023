@@ -10,87 +10,87 @@ using Systems_Project_Spring_2023.Models;
 
 namespace Systems_Project_Spring_2023.Controllers
 {
-    public class ItemsController : Controller
+    public class LabAssistantsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ItemsController(ApplicationDbContext context)
+        public LabAssistantsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Items
+        // GET: LabAssistants
         public async Task<IActionResult> Index()
         {
-              return _context.Items != null ? 
-                          View(await _context.Items.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Items'  is null.");
+              return _context.LabAssistant != null ? 
+                          View(await _context.LabAssistant.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.LabAssistant'  is null.");
         }
 
-        // GET: Items/Details/5
-        public async Task<IActionResult> Details(string id)
+        // GET: LabAssistants/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Items == null)
+            if (id == null || _context.LabAssistant == null)
             {
                 return NotFound();
             }
 
-            var item = await _context.Items
-                .FirstOrDefaultAsync(m => m.Item_id == id);
-            if (item == null)
+            var labAssistant = await _context.LabAssistant
+                .FirstOrDefaultAsync(m => m.La_id == id);
+            if (labAssistant == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            return View(labAssistant);
         }
 
-        // GET: Items/Create
+        // GET: LabAssistants/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Items/Create
+        // POST: LabAssistants/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Item_id,Item_barcode,Item_name,Item_qty,Item_cost,Item_date,Item_note,Status_code,Student_macid")] Item item)
+        public async Task<IActionResult> Create([Bind("La_id,La_fname,La_lname,La_camp,La_sch")] LabAssistant labAssistant)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(item);
+                _context.Add(labAssistant);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(labAssistant);
         }
 
-        // GET: Items/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        // GET: LabAssistants/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Items == null)
+            if (id == null || _context.LabAssistant == null)
             {
                 return NotFound();
             }
 
-            var item = await _context.Items.FindAsync(id);
-            if (item == null)
+            var labAssistant = await _context.LabAssistant.FindAsync(id);
+            if (labAssistant == null)
             {
                 return NotFound();
             }
-            return View(item);
+            return View(labAssistant);
         }
 
-        // POST: Items/Edit/5
+        // POST: LabAssistants/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Item_id,Item_barcode,Item_name,Item_qty,Item_cost,Item_date,Item_note,Status_code,Student_macid")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("La_id,La_fname,La_lname,La_camp,La_sch")] LabAssistant labAssistant)
         {
-            if (id != item.Item_id)
+            if (id != labAssistant.La_id)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace Systems_Project_Spring_2023.Controllers
             {
                 try
                 {
-                    _context.Update(item);
+                    _context.Update(labAssistant);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemExists(item.Item_id))
+                    if (!LabAssistantExists(labAssistant.La_id))
                     {
                         return NotFound();
                     }
@@ -115,49 +115,49 @@ namespace Systems_Project_Spring_2023.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(labAssistant);
         }
 
-        // GET: Items/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        // GET: LabAssistants/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Items == null)
+            if (id == null || _context.LabAssistant == null)
             {
                 return NotFound();
             }
 
-            var item = await _context.Items
-                .FirstOrDefaultAsync(m => m.Item_id == id);
-            if (item == null)
+            var labAssistant = await _context.LabAssistant
+                .FirstOrDefaultAsync(m => m.La_id == id);
+            if (labAssistant == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            return View(labAssistant);
         }
 
-        // POST: Items/Delete/5
+        // POST: LabAssistants/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Items == null)
+            if (_context.LabAssistant == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Items'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.LabAssistant'  is null.");
             }
-            var item = await _context.Items.FindAsync(id);
-            if (item != null)
+            var labAssistant = await _context.LabAssistant.FindAsync(id);
+            if (labAssistant != null)
             {
-                _context.Items.Remove(item);
+                _context.LabAssistant.Remove(labAssistant);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ItemExists(string id)
+        private bool LabAssistantExists(int id)
         {
-          return (_context.Items?.Any(e => e.Item_id == id)).GetValueOrDefault();
+          return (_context.LabAssistant?.Any(e => e.La_id == id)).GetValueOrDefault();
         }
     }
 }

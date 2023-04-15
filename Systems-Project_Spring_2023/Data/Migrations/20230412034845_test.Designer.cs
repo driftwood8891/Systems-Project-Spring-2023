@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Systems_Project_Spring_2023.Data;
 
@@ -11,9 +12,10 @@ using Systems_Project_Spring_2023.Data;
 namespace Systems_Project_Spring_2023.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230412034845_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -376,35 +378,6 @@ namespace Systems_Project_Spring_2023.Data.Migrations
                     b.HasIndex("Item_id1");
 
                     b.ToTable("Kit_types");
-                });
-
-            modelBuilder.Entity("Systems_Project_Spring_2023.Models.LabAssistant", b =>
-                {
-                    b.Property<int>("La_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("La_id"), 1L, 1);
-
-                    b.Property<string>("La_camp")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("La_fname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("La_lname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("La_sch")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("La_id");
-
-                    b.ToTable("LabAssistant");
                 });
 
             modelBuilder.Entity("Systems_Project_Spring_2023.Models.Status", b =>
