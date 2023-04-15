@@ -17,7 +17,16 @@ namespace Systems_Project_Spring_2023.Controllers
 
 		public IActionResult Index()
 		{
-			return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                // User is logged in, return the user's profile
+                return View("UserProfile");
+            }
+            else
+            {
+                // User is not logged in, return a welcome screen
+                return View("Welcome");
+            }
 		}
 
 		public IActionResult Privacy()

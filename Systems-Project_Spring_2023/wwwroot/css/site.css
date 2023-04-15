@@ -134,18 +134,20 @@ footer {
     margin-top: 5px;
 }
 
-/*.welcome-page {
-    background-color: #cd2028 !important;
+/** Styling Buttons **/
+.btn-primary {
+    background-color: #cd2028;
+    border: none;
 }
-.bg-ellipse {
-    width: 60vw;
-    height: 120vh;
-    background-color: white;
-    border-radius: 0% 100% 100% 0%;
-    position: absolute;
-    top: -10vh;
+    .btn-primary:hover {
+        background-color: #921020;
+    }
+.btn-outline-primary {
+    border-color: #cd2028;
+    color: #cd2028;
 }
-.welcome-page nav {
-    background-color: rgba(0, 0, 0, 0);
-}*/
-
+    .btn-outline-primary:hover {
+        border-color: #fd2028;
+        color: white;
+        background-color: #921020;
+    }
