@@ -34,11 +34,6 @@ namespace Systems_Project_Spring_2023.Controllers
 			return View();
 		}
 
-        public IActionResult Assistants()
-        {
-            return View();
-        }
-
         public IActionResult InventoryManagement()
         {
             return View();
@@ -64,11 +59,6 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         public IActionResult Reports()
-        {
-            return View();
-        }
-
-        public IActionResult StatusUpdate()
         {
             return View();
         }
