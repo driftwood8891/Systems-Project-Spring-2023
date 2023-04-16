@@ -39,3 +39,4 @@ document.addEventListener("click", function (event) {
     if (event.target.closest(".account-icon-container")) { return }
     clearHeaderPopup();
 })
+
