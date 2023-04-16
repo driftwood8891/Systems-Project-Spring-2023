@@ -1,5 +1,32 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model JoinData
+
+<form method="post" asp-action="Checkin">
+	<label for="kitName">Select a Kit:</label>
+	<select id="kitName" name="kitName">
+		<option value="">-- Select a Kit --</option>
+		@foreach (var kit in Model.Kits)
+		{
+			<option value="@kit.Kit_name">@kit.Kit_name</option>
+		}
+	</select>
+
+	<label for="studentName">Select a Student:</label>
+	<select id="studentName" name="studentName">
+		<option value="">-- Select a Student --</option>
+		@foreach (var student in Model.Students)
+		{
+			<option value="@student.Student_fname">@student.Student_fname</option>
+		}
+	</select>
+
+	<label for="itemName">Select an Item:</label>
+	<select id="itemName" name="itemName">
+		<option value="">-- Select an Item --</option>
+		@foreach (var item in Model.Items)
+		{
+			<option value="@item.Item_name">@item.Item_name</option>
+		}
+	</select>
+
+	<button type="submit">Submit</button>
+</form>
