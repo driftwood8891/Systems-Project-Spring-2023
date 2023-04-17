@@ -50,7 +50,8 @@ namespace Systems_Project_Spring_2023.Controllers
         {
 	        var viewModel = new JoinData();
 			
-	        viewModel.Kits = _context.Kits.ToList();
+	        
+            viewModel.Kits = _context.Kits.Where(k => k.Status_code == "1").ToList();
 	        viewModel.Students = _context.Students.ToList();
 	        viewModel.Items = _context.Items.ToList();
 	        return View(viewModel);
@@ -83,7 +84,7 @@ namespace Systems_Project_Spring_2023.Controllers
         {
 	        var viewModel = new JoinData();
 			
-	        viewModel.Kits = _context.Kits.ToList();
+            viewModel.Kits = _context.Kits.Where(k => k.Status_code == "2").ToList();
 	        viewModel.Students = _context.Students.ToList();
 	        viewModel.Items = _context.Items.ToList();
 	        return View(viewModel);

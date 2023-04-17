@@ -8,6 +8,22 @@ namespace Systems_Project_Spring_2023.Models
 {
 	public class Item
 	{
+        public Item()
+        {
+            // Retrieve the TimeZoneInfo object for Central Standard Time
+            var cstTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            var timeZoneOffset = cstTimeZone.BaseUtcOffset;
+
+            // Check if daylight saving time is in effect
+            if (cstTimeZone.IsDaylightSavingTime(DateTime.UtcNow))
+            {
+                timeZoneOffset += TimeSpan.FromHours(1);
+            }
+
+            // Adjust the UTC time by the time zone offset
+            Item_date = DateTime.UtcNow.Add(timeZoneOffset);
+        }
+
 		[Key]
 		[Display(Name = "Item ID")]
 		[StringLength(10)]
@@ -35,8 +51,8 @@ namespace Systems_Project_Spring_2023.Models
 		[Required(ErrorMessage = "Item cost is required.")]
 		public decimal Item_cost { get; set; }
 
-		[Display(Name = "Creation Date")]
-		[Required(ErrorMessage = "Creation date is required.")]
+		//[Display(Name = "Creation Date")]
+		//[Required(ErrorMessage = "Creation date is required.")]
 		public DateTime Item_date { get; set; }
 
 		[Display(Name = "Item Notes")]

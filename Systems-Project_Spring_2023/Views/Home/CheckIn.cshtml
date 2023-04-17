@@ -3,16 +3,16 @@
 <form method="post" asp-action="Checkin">
 	<label for="kitName">Select a Kit:</label>
 	<select id="kitName" name="kitName">
-		<option value="">-- Select a Kit --</option>
+		<option value="">-- Select a Kit to check in --</option>
 		@foreach (var kit in Model.Kits)
 		{
 			<option value="@kit.Kit_name">@kit.Kit_name</option>
 		}
 	</select>
 
-	<label for="studentName">Select a Student:</label>
+	<label for="studentName">Check-In location:</label>
 	<select id="studentName" name="studentName">
-		<option value="">-- Select a Student --</option>
+		<option value="">-- Location --</option>
 		@foreach (var student in Model.Students)
 		{
 			<option value="@student.Student_fname">@student.Student_fname</option>
@@ -21,12 +21,12 @@
 
 	<label for="itemName">Select an Item:</label>
 	<select id="itemName" name="itemName">
-		<option value="">-- Select an Item --</option>
+		<option value="">-- Select an Item to check in --</option>
 		@foreach (var item in Model.Items)
 		{
 			<option value="@item.Item_name">@item.Item_name</option>
 		}
 	</select>
 
-	<button type="submit">Submit</button>
+	<button type="submit">Check-In</button>
 </form>

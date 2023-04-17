@@ -6,8 +6,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Systems_Project_Spring_2023.Models
 {
+
     public class Kit
     {
+        public Kit()
+        {
+            // Retrieve the TimeZoneInfo object for Central Standard Time
+            var cstTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            var timeZoneOffset = cstTimeZone.BaseUtcOffset;
+
+            // Check if daylight saving time is in effect
+            if (cstTimeZone.IsDaylightSavingTime(DateTime.UtcNow))
+            {
+                timeZoneOffset += TimeSpan.FromHours(1);
+            }
+
+            // Adjust the UTC time by the time zone offset
+            Kit_date = DateTime.UtcNow.Add(timeZoneOffset);
+        }
+
         [Key]
         [Display(Name = "Kit ID")]
         [StringLength(10)]
@@ -39,8 +56,6 @@ namespace Systems_Project_Spring_2023.Models
         [Required(ErrorMessage = "Kit cost is required.")]
         public decimal Kit_cost { get; set; }
 
-        [Display(Name = "Kit Date")]
-        [Required(ErrorMessage = "Kit date is required.")]
         public DateTime Kit_date { get; set; }
 
         [Display(Name = "Notes")]
