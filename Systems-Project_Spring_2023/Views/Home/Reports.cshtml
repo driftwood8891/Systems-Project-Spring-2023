@@ -1,5 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Systems_Project_Spring_2023.Models
+
 @{
+    // Get the log items
+    var logItems = LogFileHelper.GetLogItems("~/wwwroot/LogFile/log.txt");
+
 }
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>Description</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in logItems)
+        {
+            <tr>
+                <td>@item.Event</td>
+                <td>@item.Description</td>
+                <td>@item.Date</td>
+            </tr>
+        }
+    </tbody>
+</table>

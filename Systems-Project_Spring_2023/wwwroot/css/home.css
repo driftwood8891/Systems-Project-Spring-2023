@@ -2,13 +2,6 @@
 .profile-report {
     margin-top: 0px;
     margin-bottom: 5px;
-}
-
-.image-container {
-    height: 400px;
-    overflow-y: hidden;
-}
-.image-container img {
-    object-fit: cover;
-    object-position: center;
+    padding: 5px;
+    background-color: rgb(200, 200, 200);
 }
