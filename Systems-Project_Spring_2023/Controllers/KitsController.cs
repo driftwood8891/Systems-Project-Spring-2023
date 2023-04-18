@@ -11,7 +11,7 @@ using Systems_Project_Spring_2023.Models;
 
 namespace Systems_Project_Spring_2023.Controllers
 {
-    [Authorize(Roles = "Assistant")]
+    
     public class KitsController : Controller
     {
         private readonly ApplicationDbContext _context;
