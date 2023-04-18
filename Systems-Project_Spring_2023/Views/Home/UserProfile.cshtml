@@ -4,8 +4,35 @@
 @{
 }
 
+<hr class="hr-w hr-w-3" />
+
 <div class="container">
-    <hr class="hr-w hr-w-3" />
-    <h1>UserProfile Page</h1>
-    <hr class="hr-w hr-w-3" />
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Rich Bright</h2>
+            <p>Welcome, Rich Bright!</p>
+            
+            <hr class="hr-w hr-w-4" />
+
+            <h2>Latest Transactions</h2>
+            <p class="profile-report">Network Kit #4 Checked In</p>
+            <p class="profile-report">Raspberry Pi Kit #8 Created</p>
+            <button>All Reports</button>
+
+            <hr class="hr-w hr-w-4" />
+
+            <h2>Inventory Management</h2>
+            <p>Use the buttons below for quick navigation for common tasks.</p>
+            <a class="btn btn-primary btn-md btn-fix" asp-controller="Kit_Type" asp-action="Create">Create Kit Type</a>
+            <a class="btn btn-primary btn-md btn-fix" asp-controller="Item" asp-action="Create">Create Item/Kit</a>
+            <a class="btn btn-primary btn-md btn-fix" asp-controller="Home" asp-action="CheckIn">Check In Item/Kit</a>
+            <a class="btn btn-primary btn-md btn-fix" asp-controller="Home" asp-action="CheckOut">Check Out Item/Kit</a>
+        </div>
+        <div class="col-md-6 align-items-center">
+            <img class="img-fluid" src="@Url.Content("~/Images/laptop.jpg")" />
+        </div>
+    </div>
 </div>
+
+
+<hr class="hr-w hr-w-2" />
