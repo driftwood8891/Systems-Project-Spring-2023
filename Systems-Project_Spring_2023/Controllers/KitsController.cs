@@ -48,6 +48,10 @@ namespace Systems_Project_Spring_2023.Controllers
         // GET: Kits/Create
         public IActionResult Create()
         {
+            // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
+            var statusCode = _context.Statuses.ToList();
+            ViewBag.Statuses = new SelectList(statusCode, "Status_code", "Status_desc");
+
             return View();
         }
 
