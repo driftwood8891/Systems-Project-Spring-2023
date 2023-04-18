@@ -151,3 +151,9 @@ footer {
     color: white;
     background-color: #921020;
 }
+
+
+.btn-fix {
+    width: 250px;
+    margin: 5px 0px;
+}

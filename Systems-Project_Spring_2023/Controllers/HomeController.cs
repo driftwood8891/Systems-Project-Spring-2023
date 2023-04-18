@@ -21,8 +21,7 @@ namespace Systems_Project_Spring_2023.Controllers
 			_logger = logger;
 		}
 
-
-		public IActionResult Index()
+        public IActionResult Index()
 		{
             if (User.Identity.IsAuthenticated)
             {
