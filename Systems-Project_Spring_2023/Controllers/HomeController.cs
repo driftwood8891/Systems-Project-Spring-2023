@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Systems_Project_Spring_2023.Models;
 using System.Web;
+using Microsoft.AspNetCore.Authorization;
 using Systems_Project_Spring_2023.Data;
 using Microsoft.Extensions.Logging;
 
 namespace Systems_Project_Spring_2023.Controllers
 {
+	//[Authorize(Roles = "Student")]
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
