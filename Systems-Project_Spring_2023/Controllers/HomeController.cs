@@ -6,6 +6,7 @@ using System.Web;
 using Microsoft.AspNetCore.Authorization;
 using Systems_Project_Spring_2023.Data;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace Systems_Project_Spring_2023.Controllers
 {
@@ -40,12 +41,22 @@ namespace Systems_Project_Spring_2023.Controllers
 			return View();
 		}
 
-        public IActionResult InventoryManagement()
+        public async Task<IActionResult> InventoryManagement()
         {
-            return View();
+            var items = await _context.Items.ToListAsync();
+            var kits = await _context.Kits.ToListAsync();
+
+            var viewModel = new List<ItemKit>
+			{
+				new ItemKit(items, kits)
+			};
+
+            return View(viewModel);
         }
 
-      
+
+
+
 
         public IActionResult Checkout()
         {

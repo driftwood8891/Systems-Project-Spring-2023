@@ -1,7 +1,34 @@
 ﻿
+/**************
+ * Profile Page
+***************/
 .profile-report {
     margin-top: 0px;
     margin-bottom: 5px;
     padding: 5px;
     background-color: rgb(200, 200, 200);
 }
+
+/**************
+ * Reports Page
+***************/
+.reports-table {
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+    .reports-table th,
+    .reports-table td {
+        border: none;
+        padding: 0.5rem;
+    }
+
+    .reports-table th {
+        font-weight: 600;
+        text-align: left;
+    }
+
+    .reports-table tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
