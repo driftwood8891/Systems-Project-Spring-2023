@@ -1,0 +1,23 @@
+﻿@model List<LogItem>
+
+<h2>Log Report</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>Description</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var logItem in Model)
+        {
+            <tr>
+                <td>@logItem.Event</td>
+                <td>@logItem.Description</td>
+                <td>@logItem.Date</td>
+            </tr>
+        }
+    </tbody>
+</table>

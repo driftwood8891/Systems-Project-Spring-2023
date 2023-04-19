@@ -2,17 +2,27 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Systems_Project_Spring_2023.Models
 {
     public class LogFileHelper
     {
-        public static List<LogItem> GetLogItems(string logFilePath)
+        private readonly IWebHostEnvironment _env;
+
+        public LogFileHelper(IWebHostEnvironment env)
+        {
+            _env = env;
+        }
+
+        public List<LogItem> GetLogItems(string logFileName)
         {
             var logItems = new List<LogItem>();
 
             try
             {
+                // build file path
+                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
                 // Read all lines from the log file
                 var lines = File.ReadAllLines(logFilePath);
 
@@ -44,8 +54,8 @@ namespace Systems_Project_Spring_2023.Models
 
     public class LogItem
     {
-        public string Event { get; set; }
-        public string Description { get; set; }
+        public string? Event { get; set; }
+        public string? Description { get; set; }
         public DateTime Date { get; set; }
     }
 }
