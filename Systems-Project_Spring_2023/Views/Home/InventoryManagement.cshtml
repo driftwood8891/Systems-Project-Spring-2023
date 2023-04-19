@@ -1,8 +1,35 @@
-﻿@model IEnumerable<Systems_Project_Spring_2023.Models.ItemKit>
+﻿@model List<ItemKit>
 
 @{
     ViewData["Title"] = "Inventory Management";
 }
 
-<h1>Inventory Management</h1>
+<h2>Inventory Management</h2>
 
+<table>
+    <thead>
+        <tr>
+            <th>Item/Kit Barcode</th>
+            <th>Item/Kit Name</th>
+            <th>Item/Kit Type</th>
+            <th>Item/Kit Cost</th>
+            <th>Item/Kit Notes</th>
+            <th>Status Code</th>
+            <th>MACC ID/Room Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var itemKit in Model)
+        {
+            <tr>
+                <td>@itemKit.Item_Kit_Barcode</td>
+                <td>@itemKit.Item_Kit_Name</td>
+                <td>@itemKit.Item_Kit_Type</td>
+                <td>@itemKit.Item_Kit_Cost</td>
+                <td>@itemKit.Item_Kit_Note</td>
+                <td>@itemKit.Status_code</td>
+                <td>@itemKit.Student_macid</td>
+            </tr>
+        }
+    </tbody>
+</table>

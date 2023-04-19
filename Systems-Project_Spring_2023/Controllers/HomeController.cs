@@ -41,18 +41,43 @@ namespace Systems_Project_Spring_2023.Controllers
 			return View();
 		}
 
-        public async Task<IActionResult> InventoryManagement()
+        public IActionResult InventoryManagement()
         {
-            var items = await _context.Items.ToListAsync();
-            var kits = await _context.Kits.ToListAsync();
+            var itemKits = new List<ItemKit>();
+            var kits = _context.Kits.ToList();
+            var items = _context.Items.ToList();
 
-            var viewModel = new List<ItemKit>
-			{
-				new ItemKit(items, kits)
-			};
+            foreach (var kit in kits)
+            {
+                itemKits.Add(new ItemKit
+                {
+                    Item_Kit_Barcode = kit.Kit_barcd,
+                    Item_Kit_Name = kit.Kit_name,
+                    Item_Kit_Cost = kit.Kit_cost,
+                    Item_Kit_Note = kit.Kit_note,
+                    Item_Kit_Type = "kit",
+                    Status_code = kit.Status_code,
+                    Student_macid = kit.Student_macid
+                });
+            }
 
-            return View(viewModel);
+            foreach (var item in items)
+            {
+                itemKits.Add(new ItemKit
+                {
+                    Item_Kit_Barcode = item.Item_barcode,
+                    Item_Kit_Name = item.Item_name,
+                    Item_Kit_Cost = item.Item_cost,
+                    Item_Kit_Note = item.Item_note,
+                    Item_Kit_Type = "item",
+                    Status_code = item.Status_code,
+                    Student_macid = item.Student_macid
+                });
+            }
+
+            return View(itemKits);
         }
+
 
 
 
