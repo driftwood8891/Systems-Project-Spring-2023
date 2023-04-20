@@ -2,6 +2,10 @@
  * General Layout
 **********************************/
 
+.Index{
+    color: red !important;
+
+}
 /** Font Size **/
 html {
     font-size: 14px;
