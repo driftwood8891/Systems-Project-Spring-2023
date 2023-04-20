@@ -122,6 +122,9 @@ namespace Systems_Project_Spring_2023.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    // Test code to try and assign Student role to every registered account
+                    await _userManager.AddToRoleAsync(user, "Student");
+
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

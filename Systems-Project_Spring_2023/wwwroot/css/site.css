@@ -138,6 +138,11 @@ footer {
     margin-top: 5px;
 }
 
+.border-bottom {
+    border-color: #cd2028 !important;
+    border-width: 500px;
+}
+
 /** Styling Buttons **/
 .btn-primary {
     background-color: #cd2028;
@@ -153,7 +158,13 @@ footer {
 .btn-outline-primary:hover {
     border-color: #fd2028;
     color: white;
+    background-color: #dc3545;
+}
+.btn.active,
+.btn:active {
+    color: #fff;
     background-color: #921020;
+    border-color: #dc3545;
 }
 
 

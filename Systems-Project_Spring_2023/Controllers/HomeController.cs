@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Systems_Project_Spring_2023.Models;
 using System.Web;
+using Microsoft.AspNetCore.Authorization;
 using Systems_Project_Spring_2023.Data;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace Systems_Project_Spring_2023.Controllers
 {
+	//[Authorize(Roles = "Student")]
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
@@ -19,8 +22,7 @@ namespace Systems_Project_Spring_2023.Controllers
 			_logger = logger;
 		}
 
-
-		public IActionResult Index()
+        public IActionResult Index()
 		{
             if (User.Identity.IsAuthenticated)
             {
@@ -41,10 +43,45 @@ namespace Systems_Project_Spring_2023.Controllers
 
         public IActionResult InventoryManagement()
         {
-            return View();
+            var itemKits = new List<ItemKit>();
+            var kits = _context.Kits.ToList();
+            var items = _context.Items.ToList();
+
+            foreach (var kit in kits)
+            {
+                itemKits.Add(new ItemKit
+                {
+                    Item_Kit_Barcode = kit.Kit_barcd,
+                    Item_Kit_Name = kit.Kit_name,
+                    Item_Kit_Cost = kit.Kit_cost,
+                    Item_Kit_Note = kit.Kit_note,
+                    Item_Kit_Type = "kit",
+                    Status_code = kit.Status_code,
+                    Student_macid = kit.Student_macid
+                });
+            }
+
+            foreach (var item in items)
+            {
+                itemKits.Add(new ItemKit
+                {
+                    Item_Kit_Barcode = item.Item_barcode,
+                    Item_Kit_Name = item.Item_name,
+                    Item_Kit_Cost = item.Item_cost,
+                    Item_Kit_Note = item.Item_note,
+                    Item_Kit_Type = "item",
+                    Status_code = item.Status_code,
+                    Student_macid = item.Student_macid
+                });
+            }
+
+            return View(itemKits);
         }
 
-      
+
+
+
+
 
         public IActionResult Checkout()
         {
@@ -120,11 +157,6 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         public IActionResult Help()
-        {
-            return View();
-        }
-
-        public IActionResult Reports()
         {
             return View();
         }

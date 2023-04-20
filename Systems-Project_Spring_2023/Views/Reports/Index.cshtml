@@ -1,0 +1,33 @@
+﻿@model List<LogItem>
+
+<hr class="hr-w hr-w-3" />
+
+<div class="container">
+    <h2 class="pb-3 mb-4 border-bottom">Report</h2>
+
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover reports-table">
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var logItem in Model)
+                {
+                    <tr>
+                        <td>@logItem.Event</td>
+                        <td>@logItem.Description</td>
+                        <td>@logItem.Date</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<hr class="hr-w hr-w-3" />
