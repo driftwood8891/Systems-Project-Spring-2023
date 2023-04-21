@@ -1,3 +1,11 @@
 Item Checked Out|Oren Kirchoff checked out Raspberry PI #4 Kit to Nathan Cochran|4/17/23
 Lab Assistant Created|Mr. Bright created a lab assistant, Brenden Hoffman|4/15/23
 New Kit Type Created|Mr. Pence created a new kit type labeled "Networking Kit"|4/17/23
+Item Created|created a new item|4/21/2023 12:31:36 AM
+
+Item Created|created a new item'VGA-Cable #6'|4/21/2023 12:36:41 AM
+
+Item Edited|edited item'DVI-Cable #1'|4/21/2023 1:09:16 AM
+
+Item Created|created a new item'HDMI cable #18'|4/21/2023 1:59:29 PM
+

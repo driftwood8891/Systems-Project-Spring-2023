@@ -1,32 +1,64 @@
 ﻿@model JoinData
 
-<form method="post" asp-action="Checkin">
-	<label for="kitName">Select a Kit:</label>
-	<select id="kitName" name="kitName">
-		<option value="">-- Select a Kit to check in --</option>
-		@foreach (var kit in Model.Kits)
-		{
-			<option value="@kit.Kit_name">@kit.Kit_name</option>
-		}
-	</select>
+<form method="post" asp-action="CheckIn">
+	<label>Select an option:</label>
+	<label><input type="radio" name="checkInOption" value="kit" checked> Check in a Kit</label>
+	<label><input type="radio" name="checkInOption" value="item"> Check in an Item</label>
 
-	<label for="studentName">Check-In location:</label>
+	<div id="kitDropdown">
+		<label for="kitName">Select a Kit:</label>
+		<select id="kitName" name="kitName">
+			<option value="">-- Select a Kit --</option>
+			@foreach (var kit in Model.Kits)
+			{
+				<option value="@kit.Kit_name">@kit.Kit_name</option>
+			}
+		</select>
+	</div>
+
+	<div id="itemDropdown" style="display: none;">
+		<label for="itemName">Select an Item:</label>
+		<select id="itemName" name="itemName">
+			<option value="">-- Select an Item --</option>
+			@foreach (var item in Model.Items)
+			{
+				<option value="@item.Item_name">@item.Item_name</option>
+			}
+		</select>
+	</div>
+
+	<label for="studentName">Select a Location:</label>
 	<select id="studentName" name="studentName">
-		<option value="">-- Location --</option>
+		<option value="">-- Select a Student --</option>
 		@foreach (var student in Model.Students)
 		{
 			<option value="@student.Student_fname">@student.Student_fname</option>
 		}
 	</select>
 
-	<label for="itemName">Select an Item:</label>
-	<select id="itemName" name="itemName">
-		<option value="">-- Select an Item to check in --</option>
-		@foreach (var item in Model.Items)
-		{
-			<option value="@item.Item_name">@item.Item_name</option>
-		}
-	</select>
-
 	<button type="submit">Check-In</button>
+
+	@*// This is our JavaScript code that hides the dropbox that isnt selected in the radio button option*@
+	<script>
+		// show/hide the corresponding dropdown box based on the selected option
+		const kitOption = document.querySelector('input[value="kit"]');
+		const itemOption = document.querySelector('input[value="item"]');
+		const kitDropdown = document.getElementById('kitDropdown');
+		const itemDropdown = document.getElementById('itemDropdown');
+
+		kitOption.addEventListener('click', () => {
+			kitDropdown.style.display = 'block';
+			itemDropdown.style.display = 'none';
+		});
+
+		itemOption.addEventListener('click', () => {
+			kitDropdown.style.display = 'none';
+			itemDropdown.style.display = 'block';
+		});
+	</script>
 </form>
+
+@if (TempData["ErrorMessage"] != null)
+{
+	<div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}

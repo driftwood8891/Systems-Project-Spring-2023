@@ -15,11 +15,13 @@ namespace Systems_Project_Spring_2023.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 		private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _env;
 
-		public HomeController(ApplicationDbContext context, ILogger<HomeController> logger)
+		public HomeController(ApplicationDbContext context, ILogger<HomeController> logger, IWebHostEnvironment env)
 		{
 			_context = context;
 			_logger = logger;
+			_env = env;
 		}
 
         public IActionResult Index()
@@ -90,64 +92,91 @@ namespace Systems_Project_Spring_2023.Controllers
 	        
             viewModel.Kits = _context.Kits.Where(k => k.Status_code == "1").ToList();
 	        viewModel.Students = _context.Students.ToList();
-	        viewModel.Items = _context.Items.ToList();
+	        viewModel.Items = _context.Items.Where(i => i.Status_code == "1").ToList();
 	        return View(viewModel);
         }
 
 
         [HttpPost]
-        public IActionResult Checkout(string kitName, string studentName, string itemName)
+        public IActionResult Checkout(string checkOutOption, string kitName, string studentName, string itemName)
         {
 	        var kit = _context.Kits.FirstOrDefault(k => k.Kit_name == kitName);
 	        var student = _context.Students.FirstOrDefault(s => s.Student_fname == studentName);
 	        var item = _context.Items.FirstOrDefault(i => i.Item_name == itemName);
-	        if (kit == null && student == null && item == null)
-	        {
-		        // handle the case where no matching Kit is found
-		        return NotFound();
-	        }
-	        else
+	        if (checkOutOption == "kit" && kit != null && student != null)
 	        {
 		        // use the selected Kit object and its properties
 		        kit.Status_code = "2";
 		        kit.Student_macid = student.Student_macid;
-		        // ...
+		        
 		        _context.SaveChanges();
+		        TempData["ErrorMessage"] = "Kits are checked out.";
+		        return RedirectToAction("Checkout");
+	        }
+	        else if (checkOutOption == "item" && item != null && student != null)
+	        {
+		        // use the selected Item object and its properties
+		        item.Status_code = "2";
+		        item.Student_macid = student.Student_macid;
+		        
+		        _context.SaveChanges();
+		        TempData["ErrorMessage"] = "Items are checked out.";
+		        return RedirectToAction("Checkout");
+	        }
+	        else
+	        {
+		        // Set an error message to display in the view
+		        TempData["ErrorMessage"] = "No matching kit, student, or item found.";
 		        return RedirectToAction("Checkout");
 	        }
         }
 
+
+
         public IActionResult Checkin()
         {
-	        var viewModel = new JoinData();
+            var viewModel = new JoinData();
 			
+	        
             viewModel.Kits = _context.Kits.Where(k => k.Status_code == "2").ToList();
-	        viewModel.Students = _context.Students.ToList();
-	        viewModel.Items = _context.Items.ToList();
-	        return View(viewModel);
+            viewModel.Students = _context.Students.ToList();
+            viewModel.Items = _context.Items.Where(i => i.Status_code == "2").ToList();
+            return View(viewModel);
         }
 
 
         [HttpPost]
-        public IActionResult Checkin(string kitName, string studentName, string itemName)
+        public IActionResult Checkin(string checkInOption, string kitName, string studentName, string itemName)
         {
-	        var kit = _context.Kits.FirstOrDefault(k => k.Kit_name == kitName);
-	        var student = _context.Students.FirstOrDefault(s => s.Student_fname == studentName);
-	        var item = _context.Items.FirstOrDefault(i => i.Item_name == itemName);
-	        if (kit == null && student == null && item == null)
-	        {
-		        // handle the case where no matching Kit is found
-		        return NotFound();
-	        }
-	        else
-	        {
-		        // use the selected Kit object and its properties
-		        kit.Status_code = "1";
-		        kit.Student_macid = student.Student_macid;
-		        // ...
-		        _context.SaveChanges();
-		        return RedirectToAction("Checkin");
-	        }
+            var kit = _context.Kits.FirstOrDefault(k => k.Kit_name == kitName);
+            var student = _context.Students.FirstOrDefault(s => s.Student_fname == studentName);
+            var item = _context.Items.FirstOrDefault(i => i.Item_name == itemName);
+            if (checkInOption == "kit" && kit != null && student != null)
+            {
+                // use the selected Kit object and its properties
+                kit.Status_code = "1";
+                kit.Student_macid = student.Student_macid;
+		        
+                _context.SaveChanges();
+                TempData["ErrorMessage"] = "Kits are checked out.";
+                return RedirectToAction("Checkin");
+            }
+            else if (checkInOption == "item" && item != null && student != null)
+            {
+                // use the selected Item object and its properties
+                item.Status_code = "1";
+                item.Student_macid = student.Student_macid;
+		        
+                _context.SaveChanges();
+                TempData["ErrorMessage"] = "Items are checked out.";
+                return RedirectToAction("Checkin");
+            }
+            else
+            {
+                // Set an error message to display in the view
+                TempData["ErrorMessage"] = "No matching kit, student, or item found.";
+                return RedirectToAction("Checkin");
+            }
         }
 
 

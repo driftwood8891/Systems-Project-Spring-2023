@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +15,12 @@ namespace Systems_Project_Spring_2023.Controllers
     public class ItemsController : Controller
     {
         private readonly ApplicationDbContext _context;
+		private readonly IWebHostEnvironment _env;
 
-        public ItemsController(ApplicationDbContext context)
+		public ItemsController(ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: Items
@@ -81,8 +85,27 @@ namespace Systems_Project_Spring_2023.Controllers
             {
                 _context.Add(item);
                 await _context.SaveChangesAsync();
+
+                // Code that generates a report in the log.txt file
+                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                var logEntry =  $"Item Created|created a new item'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+
+                // Open the log file in append mode with write-only access
+                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+
+                // Create a StreamWriter to write to the file
+                using var streamWriter = new StreamWriter(fileStream);
+
+                // Write the log entry to the file
+                streamWriter.WriteLine(logEntry);
+
+                // Flush the StreamWriter to make sure the entry is written to the file
+                streamWriter.Flush();
+
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(item);
         }
 
@@ -120,6 +143,22 @@ namespace Systems_Project_Spring_2023.Controllers
                 {
                     _context.Update(item);
                     await _context.SaveChangesAsync();
+
+                    // Code that generates a report in the log.txt file
+                    var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                    var logEntry =  $"Item Edited|edited item'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+
+                    // Open the log file in append mode with write-only access
+                    using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+
+                    // Create a StreamWriter to write to the file
+                    using var streamWriter = new StreamWriter(fileStream);
+
+                    // Write the log entry to the file
+                    streamWriter.WriteLine(logEntry);
+
+                    // Flush the StreamWriter to make sure the entry is written to the file
+                    streamWriter.Flush();
                 }
                 catch (DbUpdateConcurrencyException)
                 {

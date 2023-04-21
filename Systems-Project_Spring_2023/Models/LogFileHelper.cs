@@ -17,40 +17,44 @@ namespace Systems_Project_Spring_2023.Models
 
         public List<LogItem> GetLogItems(string logFileName)
         {
-            var logItems = new List<LogItem>();
+	        var logItems = new List<LogItem>();
 
-            try
-            {
-                // build file path
-                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                // Read all lines from the log file
-                var lines = File.ReadAllLines(logFilePath);
+	        try
+	        {
+		        // build file path
+		        var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+		        // Read all lines from the log file
+		        var lines = File.ReadAllLines(logFilePath);
 
-                // Parse each line to create a LogItem object
-                foreach (var line in lines)
-                {
-                    var fields = line.Split('|');
-                    if (fields.Length == 3)
-                    {
-                        var logItem = new LogItem
-                        {
-                            Event = fields[0],
-                            Description = fields[1],
-                            Date = DateTime.Parse(fields[2])
-                        };
-                        logItems.Add(logItem);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle any exceptions that occur while reading the log file
-                Console.WriteLine($"Error reading log file: {ex.Message}");
-            }
+		        // Parse each line to create a LogItem object
+		        foreach (var line in lines)
+		        {
+			        var fields = line.Split('|');
+			        if (fields.Length == 3)
+			        {
+				        var logItem = new LogItem
+				        {
+					        Event = fields[0],
+					        Description = fields[1],
+					        Date = DateTime.Parse(fields[2])
+				        };
+				        logItems.Add(logItem);
+			        }
+		        }
+	        }
+	        catch (Exception ex)
+	        {
+		        // Handle any exceptions that occur while reading the log file
+		        Console.WriteLine($"Error reading log file: {ex.Message}");
+	        }
 
-            return logItems;
+	        return logItems;
         }
+
     }
+
+        
+    
 
     public class LogItem
     {
@@ -58,4 +62,5 @@ namespace Systems_Project_Spring_2023.Models
         public string? Description { get; set; }
         public DateTime Date { get; set; }
     }
+
 }

@@ -53,7 +53,6 @@
                 @*We make the changes here in order to use the dropdown box created in the kit controller.*@
                 <select asp-for="Status_code" class="form-control" asp-items="@ViewBag.Statuses">
                     <option value="">--Select a Status--</option>
-                    <option value="1" selected>Checked In</option>
                 </select>
 
                 <span asp-validation-for="Status_code" class="text-danger"></span>
