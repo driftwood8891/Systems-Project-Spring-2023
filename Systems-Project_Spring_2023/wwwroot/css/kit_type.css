@@ -3,12 +3,43 @@
  * Credit to xyz
 **********************************/
 
-
-h1{
-    
-    padding-left: 100px;
+/*
+h1 {
+    font-weight: bold;
 }
 
-.row{
+h4 {
+    font-style: italic;
+}
+*/
 
+.row {
+    padding-bottom: 10px;
+}
+
+.form-group {
+    padding-bottom: 10px;
+}
+
+col-sm-2{
+    column-width: 200px !important;
+}
+
+
+/** Styling Buttons **/
+.btnIndex {
+    color: #cd2028;
+}
+
+.btnIndex:hover {
+    color: #921020;
+}
+
+.btnBackToList {
+    color: #cd2028;
+    padding-bottom: 10px;
+}
+
+.btnBackToList:hover {
+    color: #921020;
 }
