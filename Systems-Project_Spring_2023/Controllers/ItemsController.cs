@@ -86,9 +86,9 @@ namespace Systems_Project_Spring_2023.Controllers
                 _context.Add(item);
                 await _context.SaveChangesAsync();
 
-                // Code that generates a report in the log.txt file
+                // Code that generates a report in the log.txt file 
                 var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                var logEntry =  $"Item Created|created a new item'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                var logEntry =  $"Created|Created Item'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
 
                 // Open the log file in append mode with write-only access
                 using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
@@ -146,7 +146,7 @@ namespace Systems_Project_Spring_2023.Controllers
 
                     // Code that generates a report in the log.txt file
                     var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                    var logEntry =  $"Item Edited|edited item'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                    var logEntry =  $"Edited|Edited Item'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
 
                     // Open the log file in append mode with write-only access
                     using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
@@ -208,7 +208,15 @@ namespace Systems_Project_Spring_2023.Controllers
             {
                 _context.Items.Remove(item);
             }
-            
+
+            //Inserted Code for Deletion Logging
+            var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+            var logEntry = $"Deleted|Deleted Item'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+            using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
+            using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
+            streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
+            streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

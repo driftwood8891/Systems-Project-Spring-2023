@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grpc.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ namespace Systems_Project_Spring_2023.Controllers
     public class StudentsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _env;
 
         public StudentsController(ApplicationDbContext context)
         {
@@ -60,6 +62,12 @@ namespace Systems_Project_Spring_2023.Controllers
         {
             if (ModelState.IsValid)
             {
+                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                var logEntry = $"Created|Created Student'{student.Student_fname}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
+                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
+                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
+                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
                 _context.Add(student);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -99,6 +107,12 @@ namespace Systems_Project_Spring_2023.Controllers
             {
                 try
                 {
+                    var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                    var logEntry = $"Edited|Edited Student'{student.Student_fname}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                    using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
+                    using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
+                    streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
+                    streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
                     _context.Update(student);
                     await _context.SaveChangesAsync();
                 }
@@ -148,6 +162,12 @@ namespace Systems_Project_Spring_2023.Controllers
             var student = await _context.Students.FindAsync(id);
             if (student != null)
             {
+                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                var logEntry = $"Deleted|Deleted Student'{student.Student_fname}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
+                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
+                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
+                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
                 _context.Students.Remove(student);
             }
             

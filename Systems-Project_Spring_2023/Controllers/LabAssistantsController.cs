@@ -13,6 +13,7 @@ namespace Systems_Project_Spring_2023.Controllers
     public class LabAssistantsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _env;
 
         public LabAssistantsController(ApplicationDbContext context)
         {
@@ -61,6 +62,14 @@ namespace Systems_Project_Spring_2023.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(labAssistant);
+
+                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                var logEntry = $"Created|Created Lab Assistant'{labAssistant.La_fname}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
+                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
+                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
+                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -99,6 +108,12 @@ namespace Systems_Project_Spring_2023.Controllers
             {
                 try
                 {
+                    var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                    var logEntry = $"Edited|Edited Lab Assistant'{labAssistant.La_fname}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                    using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
+                    using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
+                    streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
+                    streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
                     _context.Update(labAssistant);
                     await _context.SaveChangesAsync();
                 }
@@ -148,6 +163,12 @@ namespace Systems_Project_Spring_2023.Controllers
             var labAssistant = await _context.LabAssistant.FindAsync(id);
             if (labAssistant != null)
             {
+                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                var logEntry = $"Deleted|Deleted Lab Assistant'{labAssistant.La_fname}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
+                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
+                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
+                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
                 _context.LabAssistant.Remove(labAssistant);
             }
             

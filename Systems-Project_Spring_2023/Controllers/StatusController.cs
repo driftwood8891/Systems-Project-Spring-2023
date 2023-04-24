@@ -13,6 +13,7 @@ namespace Systems_Project_Spring_2023.Controllers
     public class StatusController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _env;
 
         public StatusController(ApplicationDbContext context)
         {
@@ -60,6 +61,12 @@ namespace Systems_Project_Spring_2023.Controllers
         {
             if (ModelState.IsValid)
             {
+                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                var logEntry = $"Created|Created Status Code'{status.Status_code}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
+                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
+                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
+                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
                 _context.Add(status);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -99,6 +106,13 @@ namespace Systems_Project_Spring_2023.Controllers
             {
                 try
                 {
+
+                    var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                    var logEntry = $"Edited|Edited Status Code'{status.Status_code}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                    using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
+                    using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
+                    streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
+                    streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
                     _context.Update(status);
                     await _context.SaveChangesAsync();
                 }
@@ -148,6 +162,12 @@ namespace Systems_Project_Spring_2023.Controllers
             var status = await _context.Statuses.FindAsync(id);
             if (status != null)
             {
+                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                var logEntry = $"Deleted|Deleted Status Code'{status.Status_code}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
+                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
+                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
+                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
                 _context.Statuses.Remove(status);
             }
             

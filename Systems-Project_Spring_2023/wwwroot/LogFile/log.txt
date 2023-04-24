@@ -11,3 +11,9 @@ Item Created|created a new item'HDMI cable #18'|4/21/2023 1:59:29 PM
 
 Item Created|created a new item'HDMI cable #2'|4/23/2023 1:58:02 AM
 
+Kit Type Created|Created kit Type'Bag1'|4/23/2023 9:42:36 PM
+
+Kit Type Edited|Edited kit Type'Bag1'|4/23/2023 9:44:23 PM
+
+Kit Type Deleted|Deleted kit Type'Bag1'|4/23/2023 9:44:42 PM
+

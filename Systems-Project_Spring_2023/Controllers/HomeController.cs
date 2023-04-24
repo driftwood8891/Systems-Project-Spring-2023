@@ -108,8 +108,15 @@ namespace Systems_Project_Spring_2023.Controllers
 		        // use the selected Kit object and its properties
 		        kit.Status_code = "2";
 		        kit.Student_macid = student.Student_macid;
-		        
-		        _context.SaveChanges();
+
+                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                var logEntry = $"Checked Out|Kit Checked Out'{kit.Kit_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
+                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
+                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
+                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
+
+                _context.SaveChanges();
 		        TempData["ErrorMessage"] = "Kits are checked out.";
 		        return RedirectToAction("Checkout");
 	        }
@@ -118,8 +125,15 @@ namespace Systems_Project_Spring_2023.Controllers
 		        // use the selected Item object and its properties
 		        item.Status_code = "2";
 		        item.Student_macid = student.Student_macid;
-		        
-		        _context.SaveChanges();
+
+                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                var logEntry = $"Checked Out |Item Checked Out'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
+                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
+                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
+                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
+
+                _context.SaveChanges();
 		        TempData["ErrorMessage"] = "Items are checked out.";
 		        return RedirectToAction("Checkout");
 	        }
@@ -156,7 +170,14 @@ namespace Systems_Project_Spring_2023.Controllers
                 // use the selected Kit object and its properties
                 kit.Status_code = "1";
                 kit.Student_macid = student.Student_macid;
-		        
+
+                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                var logEntry = $"Checked In |Kit Checked In'{kit.Kit_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
+                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
+                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
+                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
+
                 _context.SaveChanges();
                 TempData["ErrorMessage"] = "Kits are checked out.";
                 return RedirectToAction("Checkin");
@@ -166,7 +187,14 @@ namespace Systems_Project_Spring_2023.Controllers
                 // use the selected Item object and its properties
                 item.Status_code = "1";
                 item.Student_macid = student.Student_macid;
-		        
+
+                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                var logEntry = $"Checked In |Item Checked In'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
+                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
+                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
+                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
+
                 _context.SaveChanges();
                 TempData["ErrorMessage"] = "Items are checked out.";
                 return RedirectToAction("Checkin");
