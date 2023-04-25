@@ -58,7 +58,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Kt_id,Kt_item_name,Kt_item_qty,Kt_item_cost,Kt_date,Item_id")] Kit_Type kit_Type)
+        public async Task<IActionResult> Create([Bind("Kt_id,Kt_item_name,Kt_item_qty,Kt_item_cost,Kt_date")] Kit_Type kit_Type)
         {
             if (ModelState.IsValid)
             {

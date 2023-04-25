@@ -69,6 +69,7 @@ namespace Systems_Project_Spring_2023.Controllers
             // Set ViewBag property for Student_macid with the list of SelectListItems
             ViewBag.Students = studentItems;
 
+            // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
             ViewBag.Statuses = new SelectList(statusCode, "Status_code", "Status_desc");
 
             return View();
@@ -79,7 +80,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Item_id,Item_barcode,Item_name,Item_qty,Item_cost,Item_date,Item_note,Status_code,Student_macid")] Item item)
+        public async Task<IActionResult> Create([Bind("Item_id,Item_barcode,Item_name,Item_type,Item_cost,Item_date,Item_note,Status_code,Student_macid")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -105,6 +106,28 @@ namespace Systems_Project_Spring_2023.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
+            /*else { 
+                // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
+                var statusCode = _context.Statuses.ToList();
+                // This is code for creating a dropdown box for the MACC IDs(Pulls MACC IDs from Student table).
+                var maccid_room = _context.Students.Select(s => new { s.Student_macid }).ToList();
+
+                //ViewBag.Students = new SelectList(maccid_room, "Student_macid", "Student_macid");
+                // Get list of students from database and convert to SelectListItems
+                var students = _context.Students.ToList();
+                var studentItems = students.Select(s => new SelectListItem
+                {
+                    Text = s.Student_macid,
+                    Value = s.Student_macid
+                });
+
+                // Set ViewBag property for Student_macid with the list of SelectListItems
+                ViewBag.Students = studentItems;
+
+                // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
+                ViewBag.Statuses = new SelectList(statusCode, "Status_code", "Status_desc");
+            }*/
+
 
             return View(item);
         }

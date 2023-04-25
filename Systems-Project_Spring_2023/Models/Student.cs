@@ -52,7 +52,7 @@ namespace Systems_Project_Spring_2023.Models
 		public string Student_addr { get; set;} = null!;
 
 		[Display(Name = "Course")]
-		[StringLength(10)]
+		[StringLength(25)]
 		[Required(ErrorMessage = "Course name is required.")]
 		public string Student_cour { get; set;} = null!;
 

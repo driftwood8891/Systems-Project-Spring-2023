@@ -57,7 +57,8 @@ namespace Systems_Project_Spring_2023.Controllers
                     Item_Kit_Name = kit.Kit_name,
                     Item_Kit_Cost = kit.Kit_cost,
                     Item_Kit_Note = kit.Kit_note,
-                    Item_Kit_Type = "kit",
+                    Item_Kit_ID = "kit",
+                    Item_Kit_Type = kit.Kit_type?.ToString(),
                     Status_code = kit.Status_code,
                     Student_macid = kit.Student_macid
                 });
@@ -71,7 +72,8 @@ namespace Systems_Project_Spring_2023.Controllers
                     Item_Kit_Name = item.Item_name,
                     Item_Kit_Cost = item.Item_cost,
                     Item_Kit_Note = item.Item_note,
-                    Item_Kit_Type = "item",
+                    Item_Kit_ID = "item",
+                    Item_Kit_Type = item.Item_type?.ToString(),
                     Status_code = item.Status_code,
                     Student_macid = item.Student_macid
                 });

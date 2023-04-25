@@ -17,16 +17,10 @@
                     @Html.DisplayNameFor(model => model.Kt_item_name)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Kt_item_qty)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Kt_item_cost)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Kt_date)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Item_id)
                 </th>
                 <th></th>
             </tr>
@@ -38,16 +32,10 @@
                     @Html.DisplayFor(modelItem => item.Kt_item_name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Kt_item_qty)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Kt_item_cost)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Kt_date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Item_id)
                 </td>
                 <td>
                     <a class="btnIndex" asp-action="Edit" asp-route-id="@item.Kt_id">Edit</a> |

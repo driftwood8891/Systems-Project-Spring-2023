@@ -15,9 +15,10 @@ namespace Systems_Project_Spring_2023.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
 
-        public LabAssistantsController(ApplicationDbContext context)
+        public LabAssistantsController(ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: LabAssistants

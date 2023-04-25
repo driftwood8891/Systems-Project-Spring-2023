@@ -23,7 +23,12 @@ namespace Systems_Project_Spring_2023.Models
 
             // Adjust the UTC time by the time zone offset
             Kit_date = DateTime.UtcNow.Add(timeZoneOffset);
+
+
+            // Generate a unique Kit ID
+            Kit_id = Guid.NewGuid().ToString().Substring(0, 10);
         }
+
 
         [Key]
         [Display(Name = "Kit ID")]
@@ -41,10 +46,10 @@ namespace Systems_Project_Spring_2023.Models
         [Required(ErrorMessage = "Kit Name is required.")]
         public string Kit_name { get; set; } = null!;
 
-        [Display(Name = "Kit Quantity")]
+        /*[Display(Name = "Kit Quantity")]
         [Range(1, 2)]
         [Required(ErrorMessage = "Kit quantity is required.")]
-        public int Kit_qty { get; set; }
+        public int Kit_qty { get; set; }*/
 
         [Display(Name = "Kit Description")]
         [StringLength(120)]

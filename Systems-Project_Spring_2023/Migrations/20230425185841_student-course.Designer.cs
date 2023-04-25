@@ -9,11 +9,11 @@ using Systems_Project_Spring_2023.Data;
 
 #nullable disable
 
-namespace Systems_Project_Spring_2023.Data.Migrations
+namespace Systems_Project_Spring_2023.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230409212027_controller1")]
-    partial class controller1
+    [Migration("20230425185841_student-course")]
+    partial class studentcourse
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -229,8 +229,8 @@ namespace Systems_Project_Spring_2023.Data.Migrations
             modelBuilder.Entity("Systems_Project_Spring_2023.Models.Item", b =>
                 {
                     b.Property<string>("Item_id")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("Item_barcode")
                         .IsRequired()
@@ -252,6 +252,11 @@ namespace Systems_Project_Spring_2023.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
+
+                    b.Property<string>("Item_type")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Status_code")
                         .IsRequired()
@@ -305,10 +310,8 @@ namespace Systems_Project_Spring_2023.Data.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Kit_note")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Kit_qty")
-                        .HasColumnType("int");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("Kit_typeKt_id")
                         .HasColumnType("nvarchar(8)");
@@ -320,14 +323,16 @@ namespace Systems_Project_Spring_2023.Data.Migrations
 
                     b.Property<string>("Status_code")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
 
                     b.Property<string>("Status_code1")
                         .HasColumnType("nvarchar(2)");
 
                     b.Property<string>("Student_macid")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Student_macid1")
                         .HasColumnType("nvarchar(10)");
@@ -349,13 +354,6 @@ namespace Systems_Project_Spring_2023.Data.Migrations
                         .HasMaxLength(8)
                         .HasColumnType("nvarchar(8)");
 
-                    b.Property<string>("Item_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Item_id1")
-                        .HasColumnType("nvarchar(10)");
-
                     b.Property<DateTime>("Kt_date")
                         .HasColumnType("datetime2");
 
@@ -367,40 +365,42 @@ namespace Systems_Project_Spring_2023.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("Kt_item_qty")
-                        .HasColumnType("int");
-
                     b.HasKey("Kt_id");
-
-                    b.HasIndex("Item_id1");
 
                     b.ToTable("Kit_types");
                 });
 
             modelBuilder.Entity("Systems_Project_Spring_2023.Models.LabAssistant", b =>
                 {
-                    b.Property<string>("La_id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("La_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("La_id"), 1L, 1);
 
                     b.Property<string>("La_camp")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
 
                     b.Property<string>("La_fname")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("La_lname")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("La_sch")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("La_id");
 
-                    b.ToTable("LabAssistants");
+                    b.ToTable("LabAssistant");
                 });
 
             modelBuilder.Entity("Systems_Project_Spring_2023.Models.Status", b =>
@@ -417,6 +417,53 @@ namespace Systems_Project_Spring_2023.Data.Migrations
                     b.HasKey("Status_code");
 
                     b.ToTable("Statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Status_code = "1",
+                            Status_desc = "Checked_In"
+                        },
+                        new
+                        {
+                            Status_code = "2",
+                            Status_desc = "Checked_Out"
+                        },
+                        new
+                        {
+                            Status_code = "3",
+                            Status_desc = "Dead"
+                        },
+                        new
+                        {
+                            Status_code = "4",
+                            Status_desc = "Lost"
+                        },
+                        new
+                        {
+                            Status_code = "5",
+                            Status_desc = "In_Transit"
+                        },
+                        new
+                        {
+                            Status_code = "6",
+                            Status_desc = "Needs_Repair"
+                        },
+                        new
+                        {
+                            Status_code = "7",
+                            Status_desc = "Pending"
+                        },
+                        new
+                        {
+                            Status_code = "8",
+                            Status_desc = "Ready"
+                        },
+                        new
+                        {
+                            Status_code = "9",
+                            Status_desc = "Unknown"
+                        });
                 });
 
             modelBuilder.Entity("Systems_Project_Spring_2023.Models.Student", b =>
@@ -442,8 +489,8 @@ namespace Systems_Project_Spring_2023.Data.Migrations
 
                     b.Property<string>("Student_cour")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Student_ephone")
                         .IsRequired()
@@ -565,15 +612,6 @@ namespace Systems_Project_Spring_2023.Data.Migrations
                     b.Navigation("Status");
 
                     b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("Systems_Project_Spring_2023.Models.Kit_Type", b =>
-                {
-                    b.HasOne("Systems_Project_Spring_2023.Models.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("Item_id1");
-
-                    b.Navigation("Item");
                 });
 #pragma warning restore 612, 618
         }

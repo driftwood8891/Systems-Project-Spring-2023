@@ -8,7 +8,7 @@ using Systems_Project_Spring_2023.Data;
 
 #nullable disable
 
-namespace Systems_Project_Spring_2023.Data.Migrations
+namespace Systems_Project_Spring_2023.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -227,8 +227,8 @@ namespace Systems_Project_Spring_2023.Data.Migrations
             modelBuilder.Entity("Systems_Project_Spring_2023.Models.Item", b =>
                 {
                     b.Property<string>("Item_id")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("Item_barcode")
                         .IsRequired()
@@ -251,8 +251,10 @@ namespace Systems_Project_Spring_2023.Data.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
-                    b.Property<int>("Item_qty")
-                        .HasColumnType("int");
+                    b.Property<string>("Item_type")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Status_code")
                         .IsRequired()
@@ -309,9 +311,6 @@ namespace Systems_Project_Spring_2023.Data.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
-                    b.Property<int>("Kit_qty")
-                        .HasColumnType("int");
-
                     b.Property<string>("Kit_typeKt_id")
                         .HasColumnType("nvarchar(8)");
 
@@ -353,14 +352,6 @@ namespace Systems_Project_Spring_2023.Data.Migrations
                         .HasMaxLength(8)
                         .HasColumnType("nvarchar(8)");
 
-                    b.Property<string>("Item_id")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("Item_id1")
-                        .HasColumnType("nvarchar(10)");
-
                     b.Property<DateTime>("Kt_date")
                         .HasColumnType("datetime2");
 
@@ -372,12 +363,7 @@ namespace Systems_Project_Spring_2023.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("Kt_item_qty")
-                        .HasColumnType("int");
-
                     b.HasKey("Kt_id");
-
-                    b.HasIndex("Item_id1");
 
                     b.ToTable("Kit_types");
                 });
@@ -501,8 +487,8 @@ namespace Systems_Project_Spring_2023.Data.Migrations
 
                     b.Property<string>("Student_cour")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Student_ephone")
                         .IsRequired()
@@ -624,15 +610,6 @@ namespace Systems_Project_Spring_2023.Data.Migrations
                     b.Navigation("Status");
 
                     b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("Systems_Project_Spring_2023.Models.Kit_Type", b =>
-                {
-                    b.HasOne("Systems_Project_Spring_2023.Models.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("Item_id1");
-
-                    b.Navigation("Item");
                 });
 #pragma warning restore 612, 618
         }
