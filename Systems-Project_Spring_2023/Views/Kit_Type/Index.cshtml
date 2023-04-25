@@ -25,9 +25,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Kt_date)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Item_id)
-                </th>
                 <th></th>
             </tr>
         </thead>
@@ -45,9 +42,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Kt_date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Item_id)
                 </td>
                 <td>
                     <a class="btnIndex" asp-action="Edit" asp-route-id="@item.Kt_id">Edit</a> |

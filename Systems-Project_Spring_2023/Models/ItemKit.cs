@@ -56,7 +56,7 @@ namespace Systems_Project_Spring_2023.Models
         public string Status_code { get; set; } = null!;
 
         [Display(Name = "Item/Kit ID")]
-        [StringLength(4)]
+        [StringLength(10)]
         [Required(ErrorMessage = "Item/Kit ID is required.")]
         public string Item_Kit_ID { get; set; } = null!;
 

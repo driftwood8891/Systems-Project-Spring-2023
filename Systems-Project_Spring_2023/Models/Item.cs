@@ -24,7 +24,7 @@ namespace Systems_Project_Spring_2023.Models
             Item_date = DateTime.UtcNow.Add(timeZoneOffset);
 
             // auto generate the Item ID
-            Item_id = Guid.NewGuid().ToString();
+            Item_id = Guid.NewGuid().ToString().Substring(0, 10);
 
             // auto generate the Item quantity
             Item_qty = 1;
@@ -32,7 +32,8 @@ namespace Systems_Project_Spring_2023.Models
 
 		[Key]
 		[Display(Name = "Item ID")]
-		[Required(ErrorMessage = "Item ID is required.")]
+        [StringLength(36)]
+        [Required(ErrorMessage = "Item ID is required.")]
 		public string Item_id { get; set; } = null!;
 
 		[Display(Name = "Item Barcode")]

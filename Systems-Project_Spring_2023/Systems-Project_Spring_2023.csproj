@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Migrations\" />
     <Folder Include="wwwroot\Icons\" />
     <Folder Include="wwwroot\LogFile\" />
   </ItemGroup>

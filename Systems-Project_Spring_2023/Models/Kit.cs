@@ -26,12 +26,13 @@ namespace Systems_Project_Spring_2023.Models
 
 
             // Generate a unique Kit ID
-            Kit_id = Guid.NewGuid().ToString();
+            Kit_id = Guid.NewGuid().ToString().Substring(0, 10);
         }
 
 
         [Key]
         [Display(Name = "Kit ID")]
+        [StringLength(10)]
         [Required(ErrorMessage = "Kit ID is required.")]
         public string Kit_id { get; set; } = null!;
 

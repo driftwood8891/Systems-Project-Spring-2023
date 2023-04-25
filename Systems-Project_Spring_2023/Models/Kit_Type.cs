@@ -7,7 +7,13 @@ namespace Systems_Project_Spring_2023.Models
 {
 	public class Kit_Type
 	{
-		[Key]
+        public Kit_Type()
+        {
+            // Generate a unique Kit ID
+            Kt_id = Guid.NewGuid().ToString().Substring(0, 8);
+        }
+
+        [Key]
 		[Display(Name = "Kit Type")]
 		[StringLength(8)]
 		[Required(ErrorMessage = "Kit type is required.")]
@@ -33,7 +39,7 @@ namespace Systems_Project_Spring_2023.Models
 		public DateTime Kt_date { get; set; } = DateTime.Now;
 
 		[Display(Name = "Item Id")]
-		[StringLength(10)]
+		[StringLength(36)]
 		[Required(ErrorMessage = "Item Id is required.")]
 		public string Item_id { get; set; } = null!;
 

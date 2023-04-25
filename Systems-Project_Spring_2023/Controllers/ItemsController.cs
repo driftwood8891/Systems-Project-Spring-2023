@@ -126,18 +126,7 @@ namespace Systems_Project_Spring_2023.Controllers
 
                 // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
                 ViewBag.Statuses = new SelectList(statusCode, "Status_code", "Status_desc");
-            }
-            */
-
-            foreach (var modelStateEntry in ModelState.Values)
-            {
-                foreach (var error in modelStateEntry.Errors)
-                {
-                    var errorMessage = error.ErrorMessage;
-                    Console.WriteLine(error.ErrorMessage);
-                    // log or do something with the error message
-                }
-            }
+            }*/
 
 
             return View(item);
