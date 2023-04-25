@@ -27,7 +27,7 @@ namespace Systems_Project_Spring_2023.Models
             Item_id = Guid.NewGuid().ToString().Substring(0, 10);
 
             // auto generate the Item quantity
-            Item_qty = 1;
+            //Item_qty = 1;
         }
 
 		[Key]
@@ -51,10 +51,10 @@ namespace Systems_Project_Spring_2023.Models
         [Required(ErrorMessage = "Item Type is required.")]
         public string Item_type { get; set; } = null!;
 
-        [Display(Name = "Item Quantity")]
+        /*[Display(Name = "Item Quantity")]
 		[Range(1, 3)]
 		[Required(ErrorMessage = "Item quantity is required.")]
-		public int Item_qty { get; set; }
+		public int Item_qty { get; set; }*/
 
 		[Display(Name = "Item Cost")]
 		[DataType(DataType.Currency)]

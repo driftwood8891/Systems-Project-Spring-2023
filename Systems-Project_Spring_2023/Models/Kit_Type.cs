@@ -24,9 +24,9 @@ namespace Systems_Project_Spring_2023.Models
 		[Required(ErrorMessage = "Kit/Item name is required.")]
 		public string Kt_item_name { get; set; } = null!;
 
-		[Display(Name = "Kit/Item Quantity")]
+		/*[Display(Name = "Kit/Item Quantity")]
 		[Required(ErrorMessage = "Kit/Item quantity is required.")]
-		public int Kt_item_qty { get; set; }
+		public int Kt_item_qty { get; set; }*/
 
 		[DataType(DataType.Currency)]
 		[Column(TypeName = "decimal(8,2)")]
@@ -38,11 +38,11 @@ namespace Systems_Project_Spring_2023.Models
 		[Required(ErrorMessage = "Kit/Item date is required.")]
 		public DateTime Kt_date { get; set; } = DateTime.Now;
 
-		[Display(Name = "Item Id")]
+		/*[Display(Name = "Item Id")]
 		[StringLength(36)]
 		[Required(ErrorMessage = "Item Id is required.")]
 		public string Item_id { get; set; } = null!;
 
-		public virtual Item? Item { get; set; }
+		public virtual Item? Item { get; set; }*/
 	}
 }
