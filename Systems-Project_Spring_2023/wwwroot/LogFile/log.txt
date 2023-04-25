@@ -17,3 +17,27 @@ Kit Type Edited|Edited kit Type'Bag1'|4/23/2023 9:44:23 PM
 
 Kit Type Deleted|Deleted kit Type'Bag1'|4/23/2023 9:44:42 PM
 
+Deleted|Deleted Item'Test'|4/24/2023 9:47:07 PM
+
+Created|Created Kit Type'Raspberry PI Kit'|4/24/2023 10:26:01 PM
+
+Deleted|Deleted Kit Type'Raspberry PI Kit'|4/24/2023 10:26:26 PM
+
+Created|Created Student'Nathan'|4/24/2023 10:30:09 PM
+
+Deleted|Deleted Student'Nathan'|4/24/2023 10:55:19 PM
+
+Deleted|Deleted Student'Nathan'|4/24/2023 10:55:23 PM
+
+Created|Created Student'Nathan'|4/24/2023 10:55:44 PM
+
+Deleted|Deleted Student'Nathan'|4/24/2023 11:09:10 PM
+
+Created|Created Student'Nathan'|4/24/2023 11:09:27 PM
+
+Created|Created Kit Type'Raspberry PI Kit'|4/24/2023 11:15:41 PM
+
+Created|Created Kit'Test'|4/24/2023 11:47:12 PM
+
+Created|Created Item'HDMI Cable #1'|4/25/2023 12:33:04 AM
+

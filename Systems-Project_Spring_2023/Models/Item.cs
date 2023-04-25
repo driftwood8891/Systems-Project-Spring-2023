@@ -22,11 +22,16 @@ namespace Systems_Project_Spring_2023.Models
 
             // Adjust the UTC time by the time zone offset
             Item_date = DateTime.UtcNow.Add(timeZoneOffset);
+
+            // auto generate the Item ID
+            Item_id = Guid.NewGuid().ToString();
+
+            // auto generate the Item quantity
+            Item_qty = 1;
         }
 
 		[Key]
 		[Display(Name = "Item ID")]
-		[StringLength(10)]
 		[Required(ErrorMessage = "Item ID is required.")]
 		public string Item_id { get; set; } = null!;
 
@@ -40,7 +45,12 @@ namespace Systems_Project_Spring_2023.Models
 		[Required(ErrorMessage = "Item Name is required.")]
 		public string Item_name { get; set; } = null!;
 
-		[Display(Name = "Item Quantity")]
+        [Display(Name = "Item Type")]
+        [StringLength(50)]
+        [Required(ErrorMessage = "Item Type is required.")]
+        public string Item_type { get; set; } = null!;
+
+        [Display(Name = "Item Quantity")]
 		[Range(1, 3)]
 		[Required(ErrorMessage = "Item quantity is required.")]
 		public int Item_qty { get; set; }

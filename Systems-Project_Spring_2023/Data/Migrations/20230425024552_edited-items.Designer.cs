@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Systems_Project_Spring_2023.Data;
 
@@ -11,9 +12,10 @@ using Systems_Project_Spring_2023.Data;
 namespace Systems_Project_Spring_2023.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230425024552_edited-items")]
+    partial class editeditems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,7 +229,8 @@ namespace Systems_Project_Spring_2023.Data.Migrations
             modelBuilder.Entity("Systems_Project_Spring_2023.Models.Item", b =>
                 {
                     b.Property<string>("Item_id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Item_barcode")
                         .IsRequired()
@@ -255,8 +258,8 @@ namespace Systems_Project_Spring_2023.Data.Migrations
 
                     b.Property<string>("Item_type")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Status_code")
                         .IsRequired()
@@ -286,7 +289,8 @@ namespace Systems_Project_Spring_2023.Data.Migrations
             modelBuilder.Entity("Systems_Project_Spring_2023.Models.Kit", b =>
                 {
                     b.Property<string>("Kit_id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Kit_barcd")
                         .IsRequired()
@@ -362,7 +366,7 @@ namespace Systems_Project_Spring_2023.Data.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Item_id1")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<DateTime>("Kt_date")
                         .HasColumnType("datetime2");

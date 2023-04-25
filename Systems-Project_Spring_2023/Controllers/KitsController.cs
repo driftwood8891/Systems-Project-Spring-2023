@@ -17,9 +17,10 @@ namespace Systems_Project_Spring_2023.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
 
-        public KitsController(ApplicationDbContext context)
+        public KitsController(ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: Kits

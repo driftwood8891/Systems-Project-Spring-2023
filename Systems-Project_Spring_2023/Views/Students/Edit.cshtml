@@ -10,9 +10,13 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Student_macid" />
+            <div class="form-group">
+                <label asp-for="Student_macid" class="control-label"></label>
+                <input asp-for="Student_macid" class="form-control" />
+                <span asp-validation-for="Student_macid" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Student_fname" class="control-label"></label>
                 <input asp-for="Student_fname" class="form-control" />
@@ -50,21 +54,54 @@
             </div>
             <div class="form-group">
                 <label asp-for="Student_cour" class="control-label"></label>
-                <input asp-for="Student_cour" class="form-control" />
+                <select asp-for="Student_cour" class="form-control">
+                    <option value="">Course</option>
+                    <option value="Networking">Networking</option>
+                    <option value="Programming">Programming</option>
+                    <option value="Cyber">Cyber</option>
+                    <option value="IT Essentials">IT Essentials</option>
+                    <option value="Linux">Linux</option>
+                    <option value="Systems Project">Systems Project</option>
+                    <option value="Windows Server">Windows Server</option>
+                    <option value="Other">Other</option>
+                </select>
                 <span asp-validation-for="Student_cour" class="text-danger"></span>
             </div>
+            @* <div class="form-group">
+            <label asp-for="Student_cour" class="control-label"></label>
+            @Html.DropDownListFor(model => model.Student_cour, new SelectList(new[] { "Networking", "Programming", "Cyber", "IT-Essentials", "Linux", "Systems-Project", "Windows-Server", "Other" }))
+            <span asp-validation-for="Student_cour" class="text-danger"></span>
+            </div>*@
+            @* <div class="form-group">
+            <label asp-for="Student_cour" class="control-label"></label>
+            <input asp-for="Student_cour" class="form-control" />
+            <span asp-validation-for="Student_cour" class="text-danger"></span>
+            </div>*@
             <div class="form-group">
                 <label asp-for="Student_camp" class="control-label"></label>
-                <input asp-for="Student_camp" class="form-control" />
+                <select asp-for="Student_camp" class="form-control">
+                    <option value="">Campus</option>
+                    <option value="MOB">Moberly</option>
+                    <option value="COL">Columbia</option>
+                    <option value="HAN">Hannibal</option>
+                    <option value="MEX">Mexico</option>
+                    <option value="KIR">Kirksville</option>
+                </select>
                 <span asp-validation-for="Student_camp" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Student_instr" class="control-label"></label>
-                <input asp-for="Student_instr" class="form-control" />
+                <select asp-for="Student_instr" class="form-control">
+                    <option value="">Instructor</option>
+                    <option value="Rich Bright">Rich Bright</option>
+                    <option value="David Pence">David Pence</option>
+                    <option value="Semi Necibi">Semi Necibi</option>
+                    <option value="Other">Other</option>
+                </select>
                 <span asp-validation-for="Student_instr" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>

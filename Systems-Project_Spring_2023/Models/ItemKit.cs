@@ -55,8 +55,13 @@ namespace Systems_Project_Spring_2023.Models
         [Required(ErrorMessage = "Status Code is required.")]
         public string Status_code { get; set; } = null!;
 
-        [Display(Name = "Item/Kit Type")]
+        [Display(Name = "Item/Kit ID")]
         [StringLength(4)]
+        [Required(ErrorMessage = "Item/Kit ID is required.")]
+        public string Item_Kit_ID { get; set; } = null!;
+
+        [Display(Name = "Item/Kit Type")]
+        [StringLength(20)]
         [Required(ErrorMessage = "Item/Kit Type is required.")]
         public string Item_Kit_Type { get; set; } = null!;
 

@@ -4,32 +4,44 @@
     ViewData["Title"] = "Inventory Management";
 }
 
-<h2>Inventory Management</h2>
+<hr class="hr-w hr-w-3" />
 
-<table>
+<div class="container">
+
+    <h2>Inventory Management</h2>
+
+    <table>
     <thead>
         <tr>
-            <th>Item/Kit Barcode</th>
-            <th>Item/Kit Name</th>
-            <th>Item/Kit Type</th>
-            <th>Item/Kit Cost</th>
-            <th>Item/Kit Notes</th>
+
+            <th>Item/Kit</th>
+            <th>Barcode</th>
+            <th>Name</th>
+            <th>Cost</th>
+            <th>Notes</th>
             <th>Status Code</th>
-            <th>MACC ID/Room Number</th>
+            <th>Location ID</th>
+            <!-- Hidden: Type -->
+            <th class="item-kit-type">Type</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var itemKit in Model)
         {
             <tr>
+                <td>@itemKit.Item_Kit_ID</td>
                 <td>@itemKit.Item_Kit_Barcode</td>
                 <td>@itemKit.Item_Kit_Name</td>
-                <td>@itemKit.Item_Kit_Type</td>
                 <td>@itemKit.Item_Kit_Cost</td>
                 <td>@itemKit.Item_Kit_Note</td>
                 <td>@itemKit.Status_code</td>
                 <td>@itemKit.Student_macid</td>
+                <!-- Hidden: Type -->
+                <th class="item-kit-type">@itemKit.Item_Kit_Type</th>
             </tr>
         }
     </tbody>
 </table>
+</div>
+
+<hr class="hr-w hr-w-3" />
