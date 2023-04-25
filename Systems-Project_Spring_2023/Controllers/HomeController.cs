@@ -151,7 +151,7 @@ namespace Systems_Project_Spring_2023.Controllers
         {
             var viewModel = new JoinData();
 			
-	        
+	        // Display data within dropdown boxes and Filtering by status code
             viewModel.Kits = _context.Kits.Where(k => k.Status_code == "2").ToList();
             viewModel.Students = _context.Students.ToList();
             viewModel.Items = _context.Items.Where(i => i.Status_code == "2").ToList();
@@ -171,6 +171,7 @@ namespace Systems_Project_Spring_2023.Controllers
                 kit.Status_code = "1";
                 kit.Student_macid = student.Student_macid;
 
+                // Adding logging to CheckIn
                 var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
                 var logEntry = $"Checked In |Kit Checked In'{kit.Kit_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
                 using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
@@ -188,6 +189,7 @@ namespace Systems_Project_Spring_2023.Controllers
                 item.Status_code = "1";
                 item.Student_macid = student.Student_macid;
 
+                // Adding logging to CheckIn
                 var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
                 var logEntry = $"Checked In |Item Checked In'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
                 using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access

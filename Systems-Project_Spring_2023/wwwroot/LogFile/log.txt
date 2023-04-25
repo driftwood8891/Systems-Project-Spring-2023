@@ -17,3 +17,5 @@ Kit Type Edited|Edited kit Type'Bag1'|4/23/2023 9:44:23 PM
 
 Kit Type Deleted|Deleted kit Type'Bag1'|4/23/2023 9:44:42 PM
 
+Checked Out |Item Checked Out'HDMI cable #22'|4/24/2023 6:58:20 PM
+
