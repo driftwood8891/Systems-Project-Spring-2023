@@ -75,7 +75,7 @@ namespace Systems_Project_Spring_2023.Areas.Identity.Pages.Account
 			///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
 			///     directly from your code. This API may change or be removed in future releases.
 			/// </summary>
-			[Required]
+			[Required(ErrorMessage = "Email format must be an MACC email.")]
 			[EmailAddress]
             [RegularExpression(@"^[a-zA-Z0-9]+@(mail\.)?macc\.edu$")]
             [Display(Name = "Email")]
