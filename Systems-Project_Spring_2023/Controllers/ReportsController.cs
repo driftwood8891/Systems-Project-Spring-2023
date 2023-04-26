@@ -30,7 +30,7 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
 
-        public async Task<IActionResult> StatusCodeReports(string status)
+        public async Task<IActionResult> StatusReports(string status)
     {
 	    var items = from i in _context.Items
 		    select i;
