@@ -63,3 +63,33 @@ Created|Created Student'Nathan'|4/25/2023 1:59:24 PM
 
 Created|Created Item'Test'|4/25/2023 2:00:52 PM
 
+Created|Created Student'Oren'|4/26/2023 4:06:13 PM
+
+Created|Created Item'HDMI cable #1'|4/26/2023 4:06:39 PM
+
+Created|Created Kit'Network Kit #1'|4/26/2023 4:32:53 PM
+
+Created|Created Student'C-29'|4/26/2023 4:33:35 PM
+
+Created|Created Student'Room #131'|4/26/2023 4:34:12 PM
+
+Created|Created Student'Bill'|4/26/2023 4:34:48 PM
+
+Created|Created Item'Keyboard #1'|4/26/2023 4:35:51 PM
+
+Created|Created Item'SD Card 32GB'|4/26/2023 4:36:47 PM
+
+Created|Created Item'Microsoft Mouse #1'|4/26/2023 4:37:10 PM
+
+Created|Created Item'Desktop #1'|4/26/2023 4:37:41 PM
+
+Created|Created Kit'Backpack Kit #1'|4/26/2023 4:38:36 PM
+
+Created|Created Kit'Network Kit #44'|4/26/2023 4:39:05 PM
+
+Created|Created Kit'Raspberry Pi 3 #22'|4/26/2023 4:40:08 PM
+
+Created|Created Kit'BuilderBox #1'|4/26/2023 4:40:38 PM
+
+Created|Created Kit'Raspberry Pi 4 #11'|4/26/2023 4:41:27 PM
+

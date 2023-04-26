@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Systems_Project_Spring_2023.Models;
 using System.Web;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Systems_Project_Spring_2023.Data;
 using Microsoft.Extensions.Logging;
 
@@ -26,5 +28,50 @@ namespace Systems_Project_Spring_2023.Controllers
             var logItems = _logFileHelper.GetLogItems("log.txt");
             return View(logItems);
         }
+
+
+        public async Task<IActionResult> StatusCodeReports(string status)
+    {
+	    var items = from i in _context.Items
+		    select i;
+
+	    if (!string.IsNullOrEmpty(status) && status != "All")
+	    {
+		    items = items.Where(i => i.Status_code == status);
+	    }
+
+	    var kits = from k in _context.Kits
+		    select k;
+
+	    if (!string.IsNullOrEmpty(status) && status != "All")
+	    {
+		    kits = kits.Where(k => k.Status_code == status);
+	    }
+
+	    var data = new SharedData()
+	    {
+		    itemdetails = await items.ToListAsync(),
+		    kitdetails = await kits.ToListAsync()
+	    };
+
+	    ViewBag.StatusCodes = new List<SelectListItem>()
+	    {
+		    new SelectListItem() { Text = "All", Value = "All", Selected = status == "All" },
+		    new SelectListItem() { Text = "Checked-In", Value = "1", Selected = status == "1" },
+		    new SelectListItem() { Text = "Checked Out", Value = "2", Selected = status == "2" },
+		    new SelectListItem() { Text = "Dead", Value = "3", Selected = status == "3" },
+		    new SelectListItem() { Text = "Lost", Value = "4", Selected = status == "4" },
+		    new SelectListItem() { Text = "In_Transit", Value = "5", Selected = status == "5" },
+		    new SelectListItem() { Text = "Needs_Repair", Value = "6", Selected = status == "6" },
+		    new SelectListItem() { Text = "Pending", Value = "7", Selected = status == "7" },
+		    new SelectListItem() { Text = "Ready", Value = "8", Selected = status == "8" },
+		    new SelectListItem() { Text = "Unknown", Value = "9", Selected = status == "9" }
+	    };
+
+	    return View(data);
     }
+
+    }
+
+    
 }
