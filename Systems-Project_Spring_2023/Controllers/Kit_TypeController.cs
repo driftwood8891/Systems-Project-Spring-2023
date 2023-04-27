@@ -58,12 +58,12 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Kt_id,Kt_item_name,Kt_item_qty,Kt_item_cost,Kt_date")] Kit_Type kit_Type)
+        public async Task<IActionResult> Create([Bind("Kt_id,Kt_name,Kt_desc,Kt_cost,Kt_date")] Kit_Type kit_Type)
         {
             if (ModelState.IsValid)
             {
                 var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                var logEntry = $"Created|Created Kit Type'{kit_Type.Kt_item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                var logEntry = $"Created|Created Kit Type'{kit_Type.Kt_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
                 using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
                 using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
                 streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
@@ -97,7 +97,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Kt_id,Kt_item_name,Kt_item_qty,Kt_item_cost,Kt_date,Item_id")] Kit_Type kit_Type)
+        public async Task<IActionResult> Edit(string id, [Bind("Kt_id,Kt_name,Kt_item_qty,Kt_cost,Kt_date,Item_id")] Kit_Type kit_Type)
         {
             if (id != kit_Type.Kt_id)
             {
@@ -109,7 +109,7 @@ namespace Systems_Project_Spring_2023.Controllers
                 try
                 {
                     var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                    var logEntry = $"Edited|Edited Kit Type'{kit_Type.Kt_item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                    var logEntry = $"Edited|Edited Kit Type'{kit_Type.Kt_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
                     using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
                     using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
                     streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
@@ -165,7 +165,7 @@ namespace Systems_Project_Spring_2023.Controllers
             if (kit_Type != null)
             {
                 var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                var logEntry = $"Deleted|Deleted Kit Type'{kit_Type.Kt_item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
+                var logEntry = $"Deleted|Deleted Kit Type'{kit_Type.Kt_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
                 using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
                 using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
                 streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file

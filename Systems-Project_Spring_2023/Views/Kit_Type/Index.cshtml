@@ -14,28 +14,33 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Kt_item_name)
+                    @Html.DisplayNameFor(model => model.Kt_name)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Kt_item_cost)
+                    @Html.DisplayNameFor(model => model.Kt_cost)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Kt_date)
                 </th>
-                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Kt_desc)
+                </th>
             </tr>
         </thead>
         <tbody>
     @foreach (var item in Model) {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Kt_item_name)
+                    @Html.DisplayFor(modelItem => item.Kt_name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Kt_item_cost)
+                    @Html.DisplayFor(modelItem => item.Kt_cost)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Kt_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kt_desc)
                 </td>
                 <td>
                     <a class="btnIndex" asp-action="Edit" asp-route-id="@item.Kt_id">Edit</a> |

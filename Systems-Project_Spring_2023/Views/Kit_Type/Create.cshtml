@@ -13,24 +13,19 @@
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Kt_id" class="control-label"></label>
-                    <input asp-for="Kt_id" class="form-control" />
-                    <span asp-validation-for="Kt_id" class="text-danger"></span>
+                    <label asp-for="Kt_name" class="control-label"></label>
+                    <input asp-for="Kt_name" class="form-control" />
+                    <span asp-validation-for="Kt_name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Kt_item_name" class="control-label"></label>
-                    <input asp-for="Kt_item_name" class="form-control" />
-                    <span asp-validation-for="Kt_item_name" class="text-danger"></span>
+                    <label asp-for="Kt_cost" class="control-label"></label>
+                    <input asp-for="Kt_cost" class="form-control" />
+                    <span asp-validation-for="Kt_cost" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Kt_item_cost" class="control-label"></label>
-                    <input asp-for="Kt_item_cost" class="form-control" />
-                    <span asp-validation-for="Kt_item_cost" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Kt_date" class="control-label"></label>
-                    <input asp-for="Kt_date" class="form-control" />
-                    <span asp-validation-for="Kt_date" class="text-danger"></span>
+                    <label asp-for="Kt_desc" class="control-label"></label>
+                    <input asp-for="Kt_desc" class="form-control" />
+                    <span asp-validation-for="Kt_desc" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />

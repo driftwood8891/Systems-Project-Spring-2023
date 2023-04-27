@@ -26,7 +26,11 @@ namespace Systems_Project_Spring_2023.Controllers
         // GET: Kits
         public async Task<IActionResult> Index()
         {
-              return _context.Kits != null ? 
+            /*var kitTypes = _context.Kit_types.Select(k => new { k.Kt_id, k.Kt_name }).ToList();
+            ViewBag.kitType = kitTypes.ToDictionary(k => k.Kt_id, k => k.Kt_name);*/
+
+
+            return _context.Kits != null ? 
                           View(await _context.Kits.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Kits'  is null.");
         }
@@ -56,6 +60,15 @@ namespace Systems_Project_Spring_2023.Controllers
             var statusCode = _context.Statuses.ToList();
             ViewBag.Statuses = new SelectList(statusCode, "Status_code", "Status_desc");
 
+            // This is code for creating a dropdown box for the Kit types
+            var kitType = _context.Kit_types.ToList();
+            ViewBag.Kit_types = new SelectList(kitType, "Kt_id", "Kt_name");
+
+            // This is code for creating a dropdown box for the MACC IDs(Pulls MACC IDs from Student table).
+            var maccid_room = _context.Students.Select(s => new { s.Student_macid }).ToList();
+
+            ViewBag.Students = new SelectList(maccid_room, "Student_macid", "Student_macid");
+
             return View();
         }
 
@@ -68,6 +81,15 @@ namespace Systems_Project_Spring_2023.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Find the Kit_cost based on the Kt_id
+                var kitType = await _context.Kit_types.FindAsync(kit.Kt_id);
+                var kitCost = kitType.Kt_cost;
+                var kitDesc = kitType.Kt_desc;
+
+                // Set the Kit_cost to the Kit_Item_cost
+                kit.Kit_cost = kitCost;
+                kit.Kit_desc = kitDesc;
+
                 _context.Add(kit);
                 var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
                 var logEntry = $"Created|Created Kit'{kit.Kit_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";

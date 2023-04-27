@@ -12,8 +12,8 @@ using Systems_Project_Spring_2023.Data;
 namespace Systems_Project_Spring_2023.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230425185338_initial-mig")]
-    partial class initialmig
+    [Migration("20230427125101_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -229,8 +229,8 @@ namespace Systems_Project_Spring_2023.Migrations
             modelBuilder.Entity("Systems_Project_Spring_2023.Models.Item", b =>
                 {
                     b.Property<string>("Item_id")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Item_barcode")
                         .IsRequired()
@@ -306,20 +306,20 @@ namespace Systems_Project_Spring_2023.Migrations
 
                     b.Property<string>("Kit_name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
 
                     b.Property<string>("Kit_note")
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("Kit_typeKt_id")
-                        .HasColumnType("nvarchar(8)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Kt_id")
                         .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Status_code")
                         .IsRequired()
@@ -351,16 +351,21 @@ namespace Systems_Project_Spring_2023.Migrations
             modelBuilder.Entity("Systems_Project_Spring_2023.Models.Kit_Type", b =>
                 {
                     b.Property<string>("Kt_id")
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<decimal>("Kt_cost")
+                        .HasColumnType("decimal(8,2)");
 
                     b.Property<DateTime>("Kt_date")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Kt_item_cost")
-                        .HasColumnType("decimal(8,2)");
+                    b.Property<string>("Kt_desc")
+                        .IsRequired()
+                        .HasMaxLength(75)
+                        .HasColumnType("nvarchar(75)");
 
-                    b.Property<string>("Kt_item_name")
+                    b.Property<string>("Kt_name")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -489,8 +494,8 @@ namespace Systems_Project_Spring_2023.Migrations
 
                     b.Property<string>("Student_cour")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Student_ephone")
                         .IsRequired()

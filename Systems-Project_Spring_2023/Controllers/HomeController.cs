@@ -45,12 +45,16 @@ namespace Systems_Project_Spring_2023.Controllers
 
         public IActionResult InventoryManagement()
         {
+
             var itemKits = new List<ItemKit>();
             var kits = _context.Kits.ToList();
             var items = _context.Items.ToList();
+            var kitTypes = _context.Kit_types.ToList();
 
             foreach (var kit in kits)
             {
+                var kitType = kitTypes.FirstOrDefault(k => k.Kt_id == kit.Kt_id);
+                
                 itemKits.Add(new ItemKit
                 {
                     Item_Kit_Barcode = kit.Kit_barcd,
@@ -58,7 +62,7 @@ namespace Systems_Project_Spring_2023.Controllers
                     Item_Kit_Cost = kit.Kit_cost,
                     Item_Kit_Note = kit.Kit_note,
                     Item_Kit_ID = "kit",
-                    Item_Kit_Type = kit.Kit_type?.ToString(),
+                    Item_Kit_Type = kitType.Kt_name,
                     Status_code = kit.Status_code,
                     Student_macid = kit.Student_macid
                 });

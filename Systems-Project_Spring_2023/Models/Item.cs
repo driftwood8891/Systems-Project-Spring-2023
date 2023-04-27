@@ -32,7 +32,7 @@ namespace Systems_Project_Spring_2023.Models
 
 		[Key]
 		[Display(Name = "Item ID")]
-        [StringLength(36)]
+        [StringLength(10)]
         [Required(ErrorMessage = "Item ID is required.")]
 		public string Item_id { get; set; } = null!;
 

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Systems_Project_Spring_2023.Data;
 
 namespace Systems_Project_Spring_2023.Models
 {
@@ -27,6 +28,7 @@ namespace Systems_Project_Spring_2023.Models
 
             // Generate a unique Kit ID
             Kit_id = Guid.NewGuid().ToString().Substring(0, 10);
+
         }
 
 
@@ -42,7 +44,7 @@ namespace Systems_Project_Spring_2023.Models
         public string? Kit_barcd { get; set; }
 
         [Display(Name = "Kit Name")]
-        [StringLength(20)]
+        [StringLength(35)]
         [Required(ErrorMessage = "Kit Name is required.")]
         public string Kit_name { get; set; } = null!;
 
@@ -68,7 +70,7 @@ namespace Systems_Project_Spring_2023.Models
         public string? Kit_note { get; set; }
 
         [Display(Name = "Kit Type")]
-        [StringLength(8)]
+        [StringLength(10)]
         [Required(ErrorMessage = "Kit type is required.")]
         public string Kt_id { get; set; } = null!;
 

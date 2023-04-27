@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Systems_Project_Spring_2023.Migrations
 {
-    public partial class initialmig : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,9 +52,10 @@ namespace Systems_Project_Spring_2023.Migrations
                 name: "Kit_types",
                 columns: table => new
                 {
-                    Kt_id = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
-                    Kt_item_name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Kt_item_cost = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    Kt_id = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Kt_name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Kt_desc = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
+                    Kt_cost = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     Kt_date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -102,7 +103,7 @@ namespace Systems_Project_Spring_2023.Migrations
                     Student_phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Student_ephone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Student_addr = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
-                    Student_cour = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Student_cour = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     Student_camp = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
                     Student_instr = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
@@ -221,7 +222,7 @@ namespace Systems_Project_Spring_2023.Migrations
                 name: "Items",
                 columns: table => new
                 {
-                    Item_id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    Item_id = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Item_barcode = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Item_name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Item_type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -254,17 +255,17 @@ namespace Systems_Project_Spring_2023.Migrations
                 {
                     Kit_id = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Kit_barcd = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    Kit_name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Kit_name = table.Column<string>(type: "nvarchar(35)", maxLength: 35, nullable: false),
                     Kit_desc = table.Column<string>(type: "nvarchar(120)", maxLength: 120, nullable: true),
                     Kit_cost = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     Kit_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Kit_note = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
-                    Kt_id = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    Kt_id = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Status_code = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
                     Student_macid = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Student_macid1 = table.Column<string>(type: "nvarchar(10)", nullable: true),
                     Status_code1 = table.Column<string>(type: "nvarchar(2)", nullable: true),
-                    Kit_typeKt_id = table.Column<string>(type: "nvarchar(8)", nullable: true)
+                    Kit_typeKt_id = table.Column<string>(type: "nvarchar(10)", nullable: true)
                 },
                 constraints: table =>
                 {
