@@ -17,10 +17,12 @@ namespace Systems_Project_Spring_2023.Areas.Identity.Pages.Account
     public class ConfirmEmailModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public ConfirmEmailModel(UserManager<IdentityUser> userManager)
+        public ConfirmEmailModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         /// <summary>
@@ -31,6 +33,7 @@ namespace Systems_Project_Spring_2023.Areas.Identity.Pages.Account
         public string StatusMessage { get; set; }
         public async Task<IActionResult> OnGetAsync(string userId, string code)
         {
+
             if (userId == null || code == null)
             {
                 return RedirectToPage("/Index");
@@ -44,8 +47,32 @@ namespace Systems_Project_Spring_2023.Areas.Identity.Pages.Account
 
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ConfirmEmailAsync(user, code);
-            StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
+
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                return RedirectToPage("/Index");
+            }
+
+            StatusMessage = "Error confirming your email.";
             return Page();
+            
+
+            //if (userId == null || code == null)
+            //{
+            //    return RedirectToPage("/Index");
+            //}
+
+            //var user = await _userManager.FindByIdAsync(userId);
+            //if (user == null)
+            //{
+            //    return NotFound($"Unable to load user with ID '{userId}'.");
+            //}
+
+            //code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+            //var result = await _userManager.ConfirmEmailAsync(user, code);
+            //StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
+            //return Page();
         }
     }
 }

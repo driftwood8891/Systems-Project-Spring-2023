@@ -1,4 +1,5 @@
-﻿@*
+﻿@using Microsoft.AspNetCore.Identity
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -10,7 +11,7 @@
     <div class="row">
         <div class="col-lg-6">
             <h2>Rich Bright</h2>
-            <p>Welcome, Rich Bright!</p>
+            <p>Welcome, @User.Identity.Name!</p>
 
             <hr class="hr-w hr-w-4" />
 
@@ -27,6 +28,14 @@
             <a class="btn btn-primary btn-md btn-fix" asp-controller="Items" asp-action="Create">Create Item/Kit</a>
             <a class="btn btn-primary btn-md btn-fix" asp-controller="Home" asp-action="CheckIn">Check In Item/Kit</a>
             <a class="btn btn-primary btn-md btn-fix" asp-controller="Home" asp-action="CheckOut">Check Out Item/Kit</a>
+            
+            @if (User.IsInRole("Admin"))
+            {
+	            <h2>User Management</h2>
+	            
+	            <a class="btn btn-primary btn-md btn-fix" asp-area="Identity" asp-page="/Account/AssignRoles">Assign Roles</a>
+	           
+            }
         </div>
         <div class="col-lg-6 align-items-center">
             <hr class="d-sm-block d-md-none col-sm hr-w hr-w-2" />
