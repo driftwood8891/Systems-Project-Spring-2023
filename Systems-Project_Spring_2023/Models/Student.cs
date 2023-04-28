@@ -24,8 +24,9 @@ namespace Systems_Project_Spring_2023.Models
 
 		[Display(Name = "Student Email")]
 		[EmailAddress]
-		[StringLength(40)]
-		[Required(ErrorMessage = "Student email is required.")]
+        [RegularExpression(@"^[a-zA-Z0-9]+@(mail\.)?macc\.edu$", ErrorMessage = "Email format must be an MACC email.")]
+        [StringLength(40)]
+
 		public string Student_cmail { get; set;} = null!;
 
 		[Display(Name = "Personal Email")]

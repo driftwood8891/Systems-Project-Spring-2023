@@ -71,6 +71,10 @@ namespace Systems_Project_Spring_2023.Controllers
 
                 _context.Add(kit_Type);
                 await _context.SaveChangesAsync();
+
+                //Create Alert
+                TempData["success"] = "Kit Type was created successfully";
+
                 return RedirectToAction(nameof(Index));
             }
             return View(kit_Type);
@@ -129,6 +133,10 @@ namespace Systems_Project_Spring_2023.Controllers
                         throw;
                     }
                 }
+
+                //Edit Alert
+                TempData["success"] = "Kit Type was edited successfully";
+
                 return RedirectToAction(nameof(Index));
             }
             return View(kit_Type);
@@ -174,6 +182,10 @@ namespace Systems_Project_Spring_2023.Controllers
             }
             
             await _context.SaveChangesAsync();
+
+            //Delete Alert
+            TempData["success"] = "Kit Type was deleted successfully";
+
             return RedirectToAction(nameof(Index));
         }
 

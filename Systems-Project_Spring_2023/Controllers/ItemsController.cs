@@ -93,6 +93,8 @@ namespace Systems_Project_Spring_2023.Controllers
                 // Flush the StreamWriter to make sure the entry is written to the file
                 streamWriter.Flush();
 
+                //Create Alert
+                TempData["success"] = "Item was created successfully";
 
                 return RedirectToAction(nameof(Index));
             }
@@ -184,6 +186,10 @@ namespace Systems_Project_Spring_2023.Controllers
                         throw;
                     }
                 }
+
+                //Edit Alert
+                TempData["success"] = "Item was edited successfully";
+
                 return RedirectToAction(nameof(Index));
             }
             return View(item);
@@ -231,6 +237,10 @@ namespace Systems_Project_Spring_2023.Controllers
             streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
 
             await _context.SaveChangesAsync();
+
+            //Delete Alert
+            TempData["success"] = "Item was deleted successfully";
+
             return RedirectToAction(nameof(Index));
         }
 

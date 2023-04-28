@@ -98,6 +98,10 @@ namespace Systems_Project_Spring_2023.Controllers
                 streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
                 streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
                 await _context.SaveChangesAsync();
+
+                //Create Alert
+                TempData["success"] = "Kit was created successfully";
+
                 return RedirectToAction(nameof(Index));
             }
             return View(kit);
@@ -156,6 +160,10 @@ namespace Systems_Project_Spring_2023.Controllers
                         throw;
                     }
                 }
+
+                //Edit Alert
+                TempData["success"] = "Kit was edited successfully";
+
                 return RedirectToAction(nameof(Index));
             }
             return View(kit);
@@ -201,6 +209,10 @@ namespace Systems_Project_Spring_2023.Controllers
             }
             
             await _context.SaveChangesAsync();
+
+            //Delete Alert
+            TempData["success"] = "Kit was deleted successfully";
+
             return RedirectToAction(nameof(Index));
         }
 
