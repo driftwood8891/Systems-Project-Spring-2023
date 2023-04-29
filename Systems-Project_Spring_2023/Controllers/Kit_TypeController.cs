@@ -54,7 +54,7 @@ namespace Systems_Project_Spring_2023.Controllers
                 _context.Add(kit_Type);
                 await _context.SaveChangesAsync();
 
-                //Create Alert
+                // Create Alert
                 TempData["success"] = "Kit Type was created successfully";
 
                 return RedirectToAction(nameof(Index));

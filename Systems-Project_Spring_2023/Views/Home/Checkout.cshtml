@@ -1,62 +1,86 @@
 ﻿@model JoinData
+@{
+	ViewData["Title"] = "Checkout";
+}
 
-<form method="post" asp-action="Checkout">
-	<label>Select an option:</label>
-	<label><input type="radio" name="checkOutOption" value="kit" checked> Check out a Kit</label>
-	<label><input type="radio" name="checkOutOption" value="item"> Check out an Item</label>
+<hr class="hr-w hr-w-3" />
 
-	<div id="kitDropdown">
-		<label for="kitName">Select a Kit:</label>
-		<select id="kitName" name="kitName">
-			<option value="">-- Select a Kit --</option>
-			@foreach (var kit in Model.Kits)
-			{
-				<option value="@kit.Kit_name">@kit.Kit_name</option>
-			}
-		</select>
-	</div>
+<div class="container">
+	<h1 class="pb-3 mb-4 border-bottom">Checkout an Item/Kit</h1>
 
-	<div id="itemDropdown" style="display: none;">
-		<label for="itemName">Select an Item:</label>
-		<select id="itemName" name="itemName">
-			<option value="">-- Select an Item --</option>
-			@foreach (var item in Model.Items)
-			{
-				<option value="@item.Item_name">@item.Item_name</option>
-			}
-		</select>
-	</div>
+	<hr class="hr-w hr-w-4" />
 
-	<label for="studentName">Select a Student:</label>
-	<select id="studentName" name="studentName">
-		<option value="">-- Select a Student --</option>
-		@foreach (var student in Model.Students)
-		{
-			<option value="@student.Student_fname">@student.Student_fname</option>
-		}
-	</select>
+    <form method="post" asp-action="Checkout">
+      <div class="form-group">
+        <label for="checkOutOption">Select an option:</label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="checkOutOption" id="checkOutOptionKit" value="kit" checked>
+          <label class="form-check-label" for="checkOutOptionKit">Check out a Kit</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="checkOutOption" id="checkOutOptionItem" value="item">
+          <label class="form-check-label" for="checkOutOptionItem">Check out an Item</label>
+        </div>
+      </div>
 
-	<button type="submit">Check-Out</button>
-	
-	@*// This is our JavaScript code that hides the dropbox that isnt selected in the radio button option*@
-	<script>
-		// show/hide the corresponding dropdown box based on the selected option
-		const kitOption = document.querySelector('input[value="kit"]');
-		const itemOption = document.querySelector('input[value="item"]');
-		const kitDropdown = document.getElementById('kitDropdown');
-		const itemDropdown = document.getElementById('itemDropdown');
+      <div id="kitDropdown" class="form-group">
+        <label for="kitName">Select a Kit:</label>
+        <select class="form-control" id="kitName" name="kitName">
+          <option value="">Select a Kit</option>
+          @foreach (var kit in Model.Kits)
+          {
+            <option value="@kit.Kit_name">@kit.Kit_name</option>
+          }
+        </select>
+      </div>
 
-		kitOption.addEventListener('click', () => {
-			kitDropdown.style.display = 'block';
-			itemDropdown.style.display = 'none';
-		});
+      <div id="itemDropdown" class="form-group" style="display: none;">
+        <label for="itemName">Select an Item:</label>
+        <select class="form-control" id="itemName" name="itemName">
+          <option value="">Select an Item</option>
+          @foreach (var item in Model.Items)
+          {
+            <option value="@item.Item_name">@item.Item_name</option>
+          }
+        </select>
+      </div>
 
-		itemOption.addEventListener('click', () => {
-			kitDropdown.style.display = 'none';
-			itemDropdown.style.display = 'block';
-		});
-	</script>
-</form>
+      <div class="form-group">
+        <label for="studentName">Select a Student:</label>
+        <select class="form-control" id="studentName" name="studentName">
+          <option value="">Select a Student</option>
+          @foreach (var student in Model.Students)
+          {
+            <option value="@student.Student_fname">@student.Student_fname</option>
+          }
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Check Out</button>
+      </form>
+
+</div>
+
+<hr class="hr-w hr-w-3" />
+
+@*// This is our JavaScript code that hides the dropbox that isnt selected in the radio button option*@
+<script>
+	// show/hide the corresponding dropdown box based on the selected option
+	const kitOption = document.querySelector('input[value="kit"]');
+	const itemOption = document.querySelector('input[value="item"]');
+	const kitDropdown = document.getElementById('kitDropdown');
+	const itemDropdown = document.getElementById('itemDropdown');
+
+	kitOption.addEventListener('click', () => {
+		kitDropdown.style.display = 'block';
+		itemDropdown.style.display = 'none';
+	});
+
+	itemOption.addEventListener('click', () => {
+		kitDropdown.style.display = 'none';
+		itemDropdown.style.display = 'block';
+	});
+</script>
 
 @if(TempData["ErrorMessage"] != null)
 {

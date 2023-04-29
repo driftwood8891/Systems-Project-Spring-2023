@@ -126,9 +126,9 @@ namespace Systems_Project_Spring_2023.Controllers
                 streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
 
                 _context.SaveChanges();
-		        TempData["ErrorMessage"] = "Kits are checked out.";
-		        return RedirectToAction("Checkout");
-	        }
+				TempData["success"] = "Kit successfully checked out"; // create alert
+				return RedirectToAction("InventoryManagement");
+			}
 	        else if (checkOutOption == "item" && item != null && student != null)
 	        {
 		        // use the selected Item object and its properties
@@ -143,9 +143,9 @@ namespace Systems_Project_Spring_2023.Controllers
                 streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
 
                 _context.SaveChanges();
-		        TempData["ErrorMessage"] = "Items are checked out.";
-		        return RedirectToAction("Checkout");
-	        }
+				TempData["success"] = "Item successfully checked out"; // create alert
+				return RedirectToAction("InventoryManagement");
+			}
 	        else
 	        {
 		        // Set an error message to display in the view
@@ -189,9 +189,9 @@ namespace Systems_Project_Spring_2023.Controllers
                 streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
 
                 _context.SaveChanges();
-                TempData["ErrorMessage"] = "Kits are checked out.";
-                return RedirectToAction("Checkin");
-            }
+				TempData["success"] = "Kit successfully checked in"; // create alert
+				return RedirectToAction("InventoryManagement");
+			}
             else if (checkInOption == "item" && item != null && student != null)
             {
                 // use the selected Item object and its properties
@@ -207,9 +207,9 @@ namespace Systems_Project_Spring_2023.Controllers
                 streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
 
                 _context.SaveChanges();
-                TempData["ErrorMessage"] = "Items are checked out.";
-                return RedirectToAction("Checkin");
-            }
+				TempData["success"] = "Item successfully checked in"; // create alert
+				return RedirectToAction("InventoryManagement");
+			}
             else
             {
                 // Set an error message to display in the view
