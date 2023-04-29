@@ -2,10 +2,12 @@ using System.Globalization;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Systems_Project_Spring_2023.Data;
 using Systems_Project_Spring_2023.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +29,16 @@ builder.Services.AddRazorPages();
 // Add the LogFileHelper service
 builder.Services.AddScoped<LogFileHelper>();
 
+
+
 var app = builder.Build();
+
+/** Remove Log Files **/
+using (var scope = app.Services.CreateScope())
+{
+    var logFileHelper = scope.ServiceProvider.GetRequiredService<LogFileHelper>();
+    logFileHelper.RemoveOldLogs();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

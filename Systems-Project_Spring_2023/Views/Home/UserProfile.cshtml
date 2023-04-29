@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@model List<LogItem>
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -16,8 +17,18 @@
             <hr class="hr-w hr-w-4" />
 
             <h2>Latest Transactions</h2>
-            <p class="profile-report">Network Kit #4 Checked In</p>
-            <p class="profile-report">Raspberry Pi Kit #8 Created</p>
+            @{ 
+                int i = 3; 
+                @foreach (var logItem in Model)
+                {
+                    <p class="profile-report">@logItem.Description</p>
+                    i--;
+                    @if (i <= 0)
+                    {
+                        break;    
+                    }
+                }
+            }
             <a class="btn btn-primary btn-md btn-fix" asp-controller="Reports" asp-action="Index">All Reports</a>
 
             <hr class="hr-w hr-w-4" />

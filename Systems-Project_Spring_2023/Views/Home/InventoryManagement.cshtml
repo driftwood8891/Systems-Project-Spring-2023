@@ -10,38 +10,106 @@
 
     <h2>Inventory Management</h2>
 
-    <table>
-    <thead>
-        <tr>
+    <label for="itemKitFilter">Filter by Items/Kits</label>
+    <select id="itemKitFilter">
+        <option value="all">All</option>
+        <option value="kit">Kits Only</option>
+        <option value="item">Items Only</option>
+    </select>
 
-            <th>Item/Kit</th>
-            <th>Barcode</th>
-            <th>Name</th>
-            <th>Cost</th>
-            <th>Notes</th>
-            <th>Status Code</th>
-            <th>Location ID</th>
-            <!-- Hidden: Type -->
-            <th class="item-kit-type">Type</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var itemKit in Model)
-        {
+    <label for="itemKitFilter">Filter by Status Codes</label>
+    <select id="statusCodeFilter">
+        <option value="all">All</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+    </select>
+
+    <table>
+        <thead>
             <tr>
-                <td>@itemKit.Item_Kit_ID</td>
-                <td>@itemKit.Item_Kit_Barcode</td>
-                <td>@itemKit.Item_Kit_Name</td>
-                <td>@itemKit.Item_Kit_Cost</td>
-                <td>@itemKit.Item_Kit_Note</td>
-                <td>@itemKit.Status_code</td>
-                <td>@itemKit.Student_macid</td>
+                <th>Item/Kit</th>
+                <th>Barcode</th>
+                <th>Name</th>
+                <th>Cost</th>
+                <th>Notes</th>
+                <th>Status Code</th>
+                <th>Location ID</th>
                 <!-- Hidden: Type -->
-                <th class="item-kit-type">@itemKit.Item_Kit_Type</th>
+                <th class="item-kit-type">Type</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var itemKit in Model)
+            {
+                <tr>
+                    <td>@itemKit.Item_Kit_ID</td>
+                    <td>@itemKit.Item_Kit_Barcode</td>
+                    <td>@itemKit.Item_Kit_Name</td>
+                    <td>@itemKit.Item_Kit_Cost</td>
+                    <td>@itemKit.Item_Kit_Note</td>
+                    <td>@itemKit.Status_code</td>
+                    <td>@itemKit.Student_macid</td>
+                    <!-- Hidden: Type -->
+                    <th class="item-kit-type">@itemKit.Item_Kit_Type</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
 </div>
 
 <hr class="hr-w hr-w-3" />
+
+@* Java Script *@
+    <script>
+        var itemKitFilter = document.getElementById('itemKitFilter');
+        var statusCodeFilter = document.getElementById("statusCodeFilter");
+        var rows = document.getElementsByTagName("tr");
+
+        /**
+        * Precondition: Assumes that column 1 is the kit_item_id and column 6 is the status code
+        **/
+        itemKitFilter.addEventListener("change", function () {
+            var itemKitFilterValue = itemKitFilter.value;
+            var statusCodeFilterValue = statusCodeFilter.value;
+
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
+
+                if ((itemKitFilterValue === "all" || itemKitFilterValue === row.cells[0].textContent) &&
+                    (statusCodeFilterValue === "all" || statusCodeFilterValue === row.cells[5].textContent)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        });
+
+        /**
+        * Precondition: Assumes that column 1 is the kit_item_id and column 6 is the status code
+        **/
+        statusCodeFilter.addEventListener("change", function () {
+            var itemKitFilterValue = itemKitFilter.value;
+            var statusCodeFilterValue = statusCodeFilter.value;
+
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
+
+                if ((itemKitFilterValue === "all" || itemKitFilterValue === row.cells[0].textContent) &&
+                    (statusCodeFilterValue === "all" || statusCodeFilterValue === row.cells[5].textContent)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        });
+    </script>
+

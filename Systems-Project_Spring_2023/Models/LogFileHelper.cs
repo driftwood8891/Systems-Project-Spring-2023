@@ -15,6 +15,7 @@ namespace Systems_Project_Spring_2023.Models
             _env = env;
         }
 
+        /** Returns List of Log Items from log.txt **/
         public List<LogItem> GetLogItems(string logFileName)
         {
 	        var logItems = new List<LogItem>();
@@ -24,7 +25,8 @@ namespace Systems_Project_Spring_2023.Models
 		        // build file path
 		        var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
 		        // Read all lines from the log file
-		        var lines = File.ReadAllLines(logFilePath);
+                // do it start at the end (reverse()) so that the most recent events are loaded first
+		        var lines = File.ReadAllLines(logFilePath).Reverse();
 
 		        // Parse each line to create a LogItem object
 		        foreach (var line in lines)
@@ -51,7 +53,60 @@ namespace Systems_Project_Spring_2023.Models
 	        return logItems;
         }
 
+        /** Removes logs after 120 days **/
+        public void RemoveOldLogs()
+        {
+            try
+            {
+                // build file path
+                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+                // Read all lines from the log file
+                var lines = File.ReadAllLines(logFilePath);
+
+                // Filter out log items that are older than 120 days
+                var filteredLines = lines.Where(line =>
+                {
+                    var fields = line.Split('|');
+                    if (fields.Length == 3)
+                    {
+                        var date = DateTime.Parse(fields[2]);
+                        var age = DateTime.Now.Subtract(date).TotalDays;
+                        return age <= 120;
+                    }
+                    return true;
+                });
+
+                // Write the filtered lines back to the log file
+                File.WriteAllLines(logFilePath, filteredLines);
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions that occur while reading or writing the log file
+                Console.WriteLine($"Error removing old log items: {ex.Message}");
+            }
+        }
+
+        /** Adds a New Log to the Log File **/
+        public void LogEvent(string evt, string desc) {
+            // Code that generates a report in the log.txt file
+            var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
+            var logEntry = $"{evt}|{desc}|{DateTime.Now.ToString()}{Environment.NewLine}";
+
+            // Open the log file in append mode with write-only access
+            using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+
+            // Create a StreamWriter to write to the file
+            using var streamWriter = new StreamWriter(fileStream);
+
+            // Write the log entry to the file
+            streamWriter.WriteLine(logEntry);
+
+            // Flush the StreamWriter to make sure the entry is written to the file
+            streamWriter.Flush();
+        }
     }
+
+
 
         
     

@@ -30,8 +30,10 @@
 			<form method="post">
 				<div class="form-group">
 					<label for="accountDropDown">Select Account</label>
-					<select class="form-control" id="accountDropDown" asp-items="@Model.Accounts" asp-for="AccountId"></select>
+					<select class="form-control" id="accountDropDown" asp-items="@Model.Accounts.Where(a => a.Value != "admin@admin.com")" asp-for="AccountId"></select>
 				</div>
+
+
 
 				<div class="form-group">
 					<label for="roleDropDown">Select Role</label>

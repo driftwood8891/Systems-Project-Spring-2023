@@ -13,23 +13,26 @@ namespace Systems_Project_Spring_2023.Controllers
 	//[Authorize(Roles = "Student")]
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> _logger;
 		private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
+        private readonly LogFileHelper _logFileHelper;
 
-		public HomeController(ApplicationDbContext context, ILogger<HomeController> logger, IWebHostEnvironment env)
+        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger, IWebHostEnvironment env, LogFileHelper logFileHelper)
 		{
 			_context = context;
 			_logger = logger;
 			_env = env;
-		}
+            _logFileHelper = logFileHelper;
+        }
 
         public IActionResult Index()
 		{
             if (User.Identity.IsAuthenticated)
             {
                 // User is logged in, return the user's profile
-                return View("UserProfile");
+                var logItems = _logFileHelper.GetLogItems("log.txt");
+                return View("UserProfile", logItems);
             }
             else
             {
@@ -228,7 +231,8 @@ namespace Systems_Project_Spring_2023.Controllers
 
         public IActionResult UserProfile()
         {
-            return View();
+            var logItems = _logFileHelper.GetLogItems("log.txt");
+            return View(logItems);
         }
 
         public IActionResult Credit()

@@ -35,24 +35,6 @@ namespace Systems_Project_Spring_2023.Controllers
                           Problem("Entity set 'ApplicationDbContext.Kits'  is null.");
         }
 
-        // GET: Kits/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.Kits == null)
-            {
-                return NotFound();
-            }
-
-            var kit = await _context.Kits
-                .FirstOrDefaultAsync(m => m.Kit_id == id);
-            if (kit == null)
-            {
-                return NotFound();
-            }
-
-            return View(kit);
-        }
-
         // GET: Kits/Create
         public IActionResult Create()
         {
@@ -120,6 +102,21 @@ namespace Systems_Project_Spring_2023.Controllers
             {
                 return NotFound();
             }
+
+            // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
+            var statusCode = _context.Statuses.ToList();
+            ViewBag.Statuses = new SelectList(statusCode, "Status_code", "Status_desc");
+
+            // This is code for creating a dropdown box for the Kit types
+            var kitType = _context.Kit_types.ToList();
+            ViewBag.Kit_types = new SelectList(kitType, "Kt_id", "Kt_name");
+
+            // This is code for creating a dropdown box for the MACC IDs(Pulls MACC IDs from Student table).
+            var maccid_room = _context.Students.Select(s => new { s.Student_macid }).ToList();
+
+            ViewBag.Students = new SelectList(maccid_room, "Student_macid", "Student_macid");
+
+
             return View(kit);
         }
 

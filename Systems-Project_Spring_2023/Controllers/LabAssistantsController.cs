@@ -29,24 +29,6 @@ namespace Systems_Project_Spring_2023.Controllers
                           Problem("Entity set 'ApplicationDbContext.LabAssistant'  is null.");
         }
 
-        // GET: LabAssistants/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.LabAssistant == null)
-            {
-                return NotFound();
-            }
-
-            var labAssistant = await _context.LabAssistant
-                .FirstOrDefaultAsync(m => m.La_id == id);
-            if (labAssistant == null)
-            {
-                return NotFound();
-            }
-
-            return View(labAssistant);
-        }
-
         // GET: LabAssistants/Create
         public IActionResult Create()
         {

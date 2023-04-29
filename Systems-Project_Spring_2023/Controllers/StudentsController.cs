@@ -31,24 +31,6 @@ namespace Systems_Project_Spring_2023.Controllers
                           Problem("Entity set 'ApplicationDbContext.Students'  is null.");
         }
 
-        // GET: Students/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.Students == null)
-            {
-                return NotFound();
-            }
-
-            var student = await _context.Students
-                .FirstOrDefaultAsync(m => m.Student_macid == id);
-            if (student == null)
-            {
-                return NotFound();
-            }
-
-            return View(student);
-        }
-
         // GET: Students/Create
         public IActionResult Create()
         {

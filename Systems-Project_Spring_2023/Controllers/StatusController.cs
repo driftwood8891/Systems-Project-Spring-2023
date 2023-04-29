@@ -29,24 +29,6 @@ namespace Systems_Project_Spring_2023.Controllers
                           Problem("Entity set 'ApplicationDbContext.Statuses'  is null.");
         }
 
-        // GET: Status/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.Statuses == null)
-            {
-                return NotFound();
-            }
-
-            var status = await _context.Statuses
-                .FirstOrDefaultAsync(m => m.Status_code == id);
-            if (status == null)
-            {
-                return NotFound();
-            }
-
-            return View(status);
-        }
-
         // GET: Status/Create
         public IActionResult Create()
         {

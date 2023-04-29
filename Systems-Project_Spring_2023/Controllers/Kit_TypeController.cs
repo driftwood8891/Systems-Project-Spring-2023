@@ -29,24 +29,6 @@ namespace Systems_Project_Spring_2023.Controllers
                           Problem("Entity set 'ApplicationDbContext.Kit_types'  is null.");
         }
 
-        // GET: Kit_Type/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.Kit_types == null)
-            {
-                return NotFound();
-            }
-
-            var kit_Type = await _context.Kit_types
-                .FirstOrDefaultAsync(m => m.Kt_id == id);
-            if (kit_Type == null)
-            {
-                return NotFound();
-            }
-
-            return View(kit_Type);
-        }
-
         // GET: Kit_Type/Create
         public IActionResult Create()
         {

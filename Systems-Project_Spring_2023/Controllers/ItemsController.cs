@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -16,11 +17,13 @@ namespace Systems_Project_Spring_2023.Controllers
     {
         private readonly ApplicationDbContext _context;
 		private readonly IWebHostEnvironment _env;
+        private readonly LogFileHelper _logFileHelper;
 
-		public ItemsController(ApplicationDbContext context, IWebHostEnvironment env)
+        public ItemsController(ApplicationDbContext context, IWebHostEnvironment env, LogFileHelper logFileHelper)
         {
             _context = context;
             _env = env;
+            _logFileHelper = logFileHelper;
         }
 
         // GET: Items
@@ -29,24 +32,6 @@ namespace Systems_Project_Spring_2023.Controllers
               return _context.Items != null ? 
                           View(await _context.Items.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Items'  is null.");
-        }
-
-        // GET: Items/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.Items == null)
-            {
-                return NotFound();
-            }
-
-            var item = await _context.Items
-                .FirstOrDefaultAsync(m => m.Item_id == id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-
-            return View(item);
         }
 
         // GET: Items/Create
@@ -78,6 +63,7 @@ namespace Systems_Project_Spring_2023.Controllers
                 await _context.SaveChangesAsync();
 
                 // Code that generates a report in the log.txt file 
+                //_logFileHelper.LogEvent("Created Item", $"Created Item '{item.Item_name}'");
                 var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
                 var logEntry =  $"Created|Created Item'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
 
@@ -137,6 +123,18 @@ namespace Systems_Project_Spring_2023.Controllers
             {
                 return NotFound();
             }
+
+
+            // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
+            var statusCode = _context.Statuses.ToList();
+            // This is code for creating a dropdown box for the MACC IDs(Pulls MACC IDs from Student table).
+            var maccid_room = _context.Students.Select(s => new { s.Student_macid }).ToList();
+
+            ViewBag.Students = new SelectList(maccid_room, "Student_macid", "Student_macid");
+
+            // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
+            ViewBag.Statuses = new SelectList(statusCode, "Status_code", "Status_desc");
+
             return View(item);
         }
 
