@@ -14,17 +14,19 @@ namespace Systems_Project_Spring_2023.Controllers
 {
     public class StudentsController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private readonly IWebHostEnvironment _env;
+		private readonly ApplicationDbContext _context;
+		private readonly IWebHostEnvironment _env;
+		private readonly LogFileHelper _logFileHelper;
 
-        public StudentsController(ApplicationDbContext context, IWebHostEnvironment env)
-        {
-            _context = context;
-            _env = env;
-        }
+		public StudentsController(ApplicationDbContext context, IWebHostEnvironment env, LogFileHelper logFileHelper)
+		{
+			_context = context;
+			_env = env;
+			_logFileHelper = logFileHelper;
+		}
 
-        // GET: Students
-        public async Task<IActionResult> Index()
+		// GET: Students
+		public async Task<IActionResult> Index()
         {
               return _context.Students != null ? 
                           View(await _context.Students.ToListAsync()) :
@@ -46,13 +48,10 @@ namespace Systems_Project_Spring_2023.Controllers
         {
             if (ModelState.IsValid)
             {
-                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                var logEntry = $"Created|Created Student'{student.Student_fname}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
-                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
-                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
-                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
-                _context.Add(student);
+				// Code that generates a report in the log.txt file 
+				_logFileHelper.LogEvent("Create", $"Created Student '{student.Student_fname}'");
+
+				_context.Add(student);
                 await _context.SaveChangesAsync();
 
                 //Create Alert
@@ -95,13 +94,10 @@ namespace Systems_Project_Spring_2023.Controllers
             {
                 try
                 {
-                    var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                    var logEntry = $"Edited|Edited Student'{student.Student_fname}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-                    using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
-                    using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
-                    streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
-                    streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
-                    _context.Update(student);
+					// Code that generates a report in the log.txt file 
+					_logFileHelper.LogEvent("Edit", $"Edited Student '{student.Student_fname}'");
+
+					_context.Update(student);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -154,13 +150,10 @@ namespace Systems_Project_Spring_2023.Controllers
             var student = await _context.Students.FindAsync(id);
             if (student != null)
             {
-                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                var logEntry = $"Deleted|Deleted Student'{student.Student_fname}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
-                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
-                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
-                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
-                _context.Students.Remove(student);
+				// Code that generates a report in the log.txt file 
+				_logFileHelper.LogEvent("Delete", $"Deleted Student '{student.Student_fname}'");
+
+				_context.Students.Remove(student);
             }
             
             await _context.SaveChangesAsync();

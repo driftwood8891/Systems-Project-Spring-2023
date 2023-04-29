@@ -14,17 +14,19 @@ namespace Systems_Project_Spring_2023.Controllers
     
     public class KitsController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private readonly IWebHostEnvironment _env;
+		private readonly ApplicationDbContext _context;
+		private readonly IWebHostEnvironment _env;
+		private readonly LogFileHelper _logFileHelper;
 
-        public KitsController(ApplicationDbContext context, IWebHostEnvironment env)
-        {
-            _context = context;
-            _env = env;
-        }
+		public KitsController(ApplicationDbContext context, IWebHostEnvironment env, LogFileHelper logFileHelper)
+		{
+			_context = context;
+			_env = env;
+			_logFileHelper = logFileHelper;
+		}
 
-        // GET: Kits
-        public async Task<IActionResult> Index()
+		// GET: Kits
+		public async Task<IActionResult> Index()
         {
             var kitTypes = _context.Kit_types.Select(k => new { k.Kt_id, k.Kt_name }).ToList();
             ViewBag.kitType = kitTypes.ToDictionary(k => k.Kt_id, k => k.Kt_name);
@@ -61,7 +63,19 @@ namespace Systems_Project_Spring_2023.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Kit_id,Kit_barcd,Kit_name,Kit_qty,Kit_desc,Kit_cost,Kit_date,Kit_note,Kt_id,Status_code,Student_macid")] Kit kit)
         {
-            if (ModelState.IsValid)
+			// Check if a kit with the same name already exists in the database
+			if (_context.Kits.Any(x => x.Kit_name == kit.Kit_name))
+			{
+				ModelState.AddModelError("Kit_name", "A kit with the same name already exists.");
+			}
+
+			// Check if a kit with the same barcode already exists in the database
+			if (_context.Kits.Any(x => x.Kit_barcd == kit.Kit_barcd))
+			{
+				ModelState.AddModelError("Kit_barcd", "A kit with the same barcd already exists.");
+			}
+
+			if (ModelState.IsValid)
             {
                 // Find the Kit_cost based on the Kt_id
                 var kitType = await _context.Kit_types.FindAsync(kit.Kt_id);
@@ -73,12 +87,10 @@ namespace Systems_Project_Spring_2023.Controllers
                 kit.Kit_desc = kitDesc;
 
                 _context.Add(kit);
-                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                var logEntry = $"Created|Created Kit'{kit.Kit_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
-                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
-                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
-                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
+
+				// Code that generates a report in the log.txt file 
+				_logFileHelper.LogEvent("Create", $"Created Kit '{kit.Kit_name}'");
+
                 await _context.SaveChangesAsync();
 
                 //Create Alert
@@ -132,18 +144,26 @@ namespace Systems_Project_Spring_2023.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+			// Check if a kit with the same name already exists in the database
+			if (_context.Kits.Any(x => x.Kit_name == kit.Kit_name))
+			{
+				ModelState.AddModelError("Kit_name", "A kit with the same name already exists.");
+			}
+
+			// Check if a kit with the same barcode already exists in the database
+			if (_context.Kits.Any(x => x.Kit_barcd == kit.Kit_barcd))
+			{
+				ModelState.AddModelError("Kit_barcd", "A kit with the same barcd already exists.");
+			}
+
+			if (ModelState.IsValid)
             {
                 try
                 {
+					// Code that generates a report in the log.txt file 
+					_logFileHelper.LogEvent("Edit", $"Edited Kit '{kit.Kit_name}'");
 
-                    var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                    var logEntry = $"Edited|Edited Kit'{kit.Kit_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-                    using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
-                    using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
-                    streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
-                    streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
-                    _context.Update(kit);
+					_context.Update(kit);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -196,13 +216,10 @@ namespace Systems_Project_Spring_2023.Controllers
             var kit = await _context.Kits.FindAsync(id);
             if (kit != null)
             {
-                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                var logEntry = $"Deleted|Deleted Kit'{kit.Kit_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
-                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
-                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
-                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
-                _context.Kits.Remove(kit);
+				// Code that generates a report in the log.txt file 
+				_logFileHelper.LogEvent("Delete", $"Deleted Kit '{kit.Kit_name}'");
+
+				_context.Kits.Remove(kit);
             }
             
             await _context.SaveChangesAsync();

@@ -118,13 +118,9 @@ namespace Systems_Project_Spring_2023.Controllers
 		        kit.Status_code = "2";
 		        kit.Student_macid = student.Student_macid;
 
-                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                var logEntry = $"Checked Out|Kit Checked Out'{kit.Kit_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
-                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
-                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
-                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
-
+				// Code that generates a report in the log.txt file 
+				_logFileHelper.LogEvent("Checked Out", $"Checked Out '{kit.Kit_name}'");
+                
                 _context.SaveChanges();
 				TempData["success"] = "Kit successfully checked out"; // create alert
 				return RedirectToAction("InventoryManagement");
@@ -135,12 +131,8 @@ namespace Systems_Project_Spring_2023.Controllers
 		        item.Status_code = "2";
 		        item.Student_macid = student.Student_macid;
 
-                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                var logEntry = $"Checked Out |Item Checked Out'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
-                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
-                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
-                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
+				// Code that generates a report in the log.txt file 
+				_logFileHelper.LogEvent("Checked Out", $"Checked Out '{item.Item_name}'");
 
                 _context.SaveChanges();
 				TempData["success"] = "Item successfully checked out"; // create alert
@@ -180,13 +172,8 @@ namespace Systems_Project_Spring_2023.Controllers
                 kit.Status_code = "1";
                 kit.Student_macid = student.Student_macid;
 
-                // Adding logging to CheckIn
-                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                var logEntry = $"Checked In |Kit Checked In'{kit.Kit_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
-                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
-                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
-                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
+                // Code to generate logging
+				_logFileHelper.LogEvent("Checked In", $"Checked In '{kit.Kit_name}'");
 
                 _context.SaveChanges();
 				TempData["success"] = "Kit successfully checked in"; // create alert
@@ -198,15 +185,10 @@ namespace Systems_Project_Spring_2023.Controllers
                 item.Status_code = "1";
                 item.Student_macid = student.Student_macid;
 
-                // Adding logging to CheckIn
-                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                var logEntry = $"Checked In |Item Checked In'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
-                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
-                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
-                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
+				// Code to generate logging
+				_logFileHelper.LogEvent("Checked In", $"Checked In '{item.Item_name}'");
 
-                _context.SaveChanges();
+				_context.SaveChanges();
 				TempData["success"] = "Item successfully checked in"; // create alert
 				return RedirectToAction("InventoryManagement");
 			}

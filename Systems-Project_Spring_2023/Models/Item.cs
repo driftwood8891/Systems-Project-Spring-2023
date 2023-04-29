@@ -30,6 +30,7 @@ namespace Systems_Project_Spring_2023.Models
             //Item_qty = 1;
         }
 
+
 		[Key]
 		[Display(Name = "Item ID")]
         [StringLength(10)]

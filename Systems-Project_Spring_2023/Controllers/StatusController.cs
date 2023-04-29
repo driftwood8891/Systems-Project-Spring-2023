@@ -12,17 +12,19 @@ namespace Systems_Project_Spring_2023.Controllers
 {
     public class StatusController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private readonly IWebHostEnvironment _env;
+		private readonly ApplicationDbContext _context;
+		private readonly IWebHostEnvironment _env;
+		private readonly LogFileHelper _logFileHelper;
 
-        public StatusController(ApplicationDbContext context, IWebHostEnvironment env)
-        {
-            _context = context;
-            _env = env;
-        }
+		public StatusController(ApplicationDbContext context, IWebHostEnvironment env, LogFileHelper logFileHelper)
+		{
+			_context = context;
+			_env = env;
+			_logFileHelper = logFileHelper;
+		}
 
-        // GET: Status
-        public async Task<IActionResult> Index()
+		// GET: Status
+		public async Task<IActionResult> Index()
         {
               return _context.Statuses != null ? 
                           View(await _context.Statuses.ToListAsync()) :
@@ -44,12 +46,9 @@ namespace Systems_Project_Spring_2023.Controllers
         {
             if (ModelState.IsValid)
             {
-                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                var logEntry = $"Created|Created Status Code'{status.Status_code}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
-                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
-                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
-                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
+				// Code that generates a report in the log.txt file 
+				_logFileHelper.LogEvent("Create", $"Created Status Code '{status.Status_code}'");
+
                 _context.Add(status);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -90,13 +89,10 @@ namespace Systems_Project_Spring_2023.Controllers
                 try
                 {
 
-                    var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                    var logEntry = $"Edited|Edited Status Code'{status.Status_code}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-                    using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
-                    using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
-                    streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
-                    streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
-                    _context.Update(status);
+					// Code that generates a report in the log.txt file 
+					_logFileHelper.LogEvent("Edit", $"Edited Status Code '{status.Status_code}'");
+
+					_context.Update(status);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -145,13 +141,10 @@ namespace Systems_Project_Spring_2023.Controllers
             var status = await _context.Statuses.FindAsync(id);
             if (status != null)
             {
-                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                var logEntry = $"Deleted|Deleted Status Code'{status.Status_code}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
-                using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
-                streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
-                streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
-                _context.Statuses.Remove(status);
+				// Code that generates a report in the log.txt file 
+				_logFileHelper.LogEvent("Delete", $"Deleted Status Code '{status.Status_code}'");
+
+				_context.Statuses.Remove(status);
             }
             
             await _context.SaveChangesAsync();

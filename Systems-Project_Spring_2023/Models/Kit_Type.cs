@@ -52,8 +52,8 @@ namespace Systems_Project_Spring_2023.Models
 		[Required(ErrorMessage = "Kit Type cost is required.")]
 		public decimal Kt_cost { get; set; }
 
-		[Display(Name = "Kit Type Date")]
-		[Required(ErrorMessage = "Kit Type date is required.")]
+		//[Display(Name = "Kit Type Date")]
+		//[Required(ErrorMessage = "Kit Type date is required.")]
 		public DateTime Kt_date { get; set; } = DateTime.Now;
 
 		/*[Display(Name = "Item Id")]

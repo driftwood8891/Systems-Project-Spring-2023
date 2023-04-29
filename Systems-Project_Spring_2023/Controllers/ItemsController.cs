@@ -57,54 +57,31 @@ namespace Systems_Project_Spring_2023.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Item_id,Item_barcode,Item_name,Item_type,Item_cost,Item_date,Item_note,Status_code,Student_macid")] Item item)
         {
-            if (ModelState.IsValid)
+			// Check if an item with the same name already exists in the database
+			if (_context.Items.Any(x => x.Item_name == item.Item_name))
+			{
+				ModelState.AddModelError("Item_name", "An item with the same name already exists.");
+			}
+
+			// Check if an item with the same barcode already exists in the database
+			if (_context.Items.Any(x => x.Item_barcode == item.Item_barcode))
+			{
+				ModelState.AddModelError("Item_barcode", "An item with the same barcode already exists.");
+			}
+
+			if (ModelState.IsValid)
             {
                 _context.Add(item);
                 await _context.SaveChangesAsync();
 
                 // Code that generates a report in the log.txt file 
-                //_logFileHelper.LogEvent("Created Item", $"Created Item '{item.Item_name}'");
-                var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                var logEntry =  $"Created|Created Item'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-
-                // Open the log file in append mode with write-only access
-                using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
-
-                // Create a StreamWriter to write to the file
-                using var streamWriter = new StreamWriter(fileStream);
-
-                // Write the log entry to the file
-                streamWriter.WriteLine(logEntry);
-
-                // Flush the StreamWriter to make sure the entry is written to the file
-                streamWriter.Flush();
+                _logFileHelper.LogEvent("Create", $"Created Item '{item.Item_name}'");
 
                 //Create Alert
                 TempData["success"] = "Item was created successfully";
 
                 return RedirectToAction(nameof(Index));
             }
-            /*else { 
-                // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
-                var statusCode = _context.Statuses.ToList();
-                // This is code for creating a dropdown box for the MACC IDs(Pulls MACC IDs from Student table).
-                var maccid_room = _context.Students.Select(s => new { s.Student_macid }).ToList();
-
-                //ViewBag.Students = new SelectList(maccid_room, "Student_macid", "Student_macid");
-                // Get list of students from database and convert to SelectListItems
-                var students = _context.Students.ToList();
-                var studentItems = students.Select(s => new SelectListItem
-                {
-                    Text = s.Student_macid,
-                    Value = s.Student_macid
-                });
-
-                // Set ViewBag property for Student_macid with the list of SelectListItems
-                ViewBag.Students = studentItems;
-
-                // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
-                ViewBag.Statuses = new SelectList(statusCode, "Status_code", "Status_desc");
-            }*/
 
 
             return View(item);
@@ -135,7 +112,8 @@ namespace Systems_Project_Spring_2023.Controllers
             // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
             ViewBag.Statuses = new SelectList(statusCode, "Status_code", "Status_desc");
 
-            return View(item);
+
+			return View(item);
         }
 
         // POST: Items/Edit/5
@@ -150,29 +128,28 @@ namespace Systems_Project_Spring_2023.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+			// Check if an item with the same name already exists in the database
+			if (_context.Items.Any(x => x.Item_name == item.Item_name))
+			{
+				ModelState.AddModelError("Item_name", "An item with the same name already exists.");
+			}
+
+			// Check if an item with the same barcode already exists in the database
+			if (_context.Items.Any(x => x.Item_barcode == item.Item_barcode))
+			{
+				ModelState.AddModelError("Item_barcode", "An item with the same barcode already exists.");
+			}
+
+			if (ModelState.IsValid)
             {
                 try
                 {
                     _context.Update(item);
                     await _context.SaveChangesAsync();
 
-                    // Code that generates a report in the log.txt file
-                    var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-                    var logEntry =  $"Edited|Edited Item'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-
-                    // Open the log file in append mode with write-only access
-                    using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
-
-                    // Create a StreamWriter to write to the file
-                    using var streamWriter = new StreamWriter(fileStream);
-
-                    // Write the log entry to the file
-                    streamWriter.WriteLine(logEntry);
-
-                    // Flush the StreamWriter to make sure the entry is written to the file
-                    streamWriter.Flush();
-                }
+					// Code that generates a report in the log.txt file 
+					_logFileHelper.LogEvent("Edit", $"Edited Item '{item.Item_name}'");
+				}
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!ItemExists(item.Item_id))
@@ -226,14 +203,10 @@ namespace Systems_Project_Spring_2023.Controllers
                 _context.Items.Remove(item);
             }
 
-            //Inserted Code for Deletion Logging
-            var logFilePath = Path.Combine(_env.WebRootPath, "LogFile", "log.txt");
-            var logEntry = $"Deleted|Deleted Item'{item.Item_name}'|{DateTime.Now.ToString()}{Environment.NewLine}";
-            using var fileStream = new FileStream(logFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);     // Open the log file in append mode with write-only access
-            using var streamWriter = new StreamWriter(fileStream);                                                          // Create a StreamWriter to write to the file
-            streamWriter.WriteLine(logEntry);                                                                               // Write the log entry to the file
-            streamWriter.Flush();                                                                                           // Flush the StreamWriter to make sure the entry is written to the file
 
+            // Code that generates a report in the log.txt file 
+            _logFileHelper.LogEvent("Delete", $"Deleted Item '{item.Item_name}'");
+            
             await _context.SaveChangesAsync();
 
             //Delete Alert
