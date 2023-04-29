@@ -33,19 +33,20 @@
 
             <hr class="hr-w hr-w-4" />
 
-            <h2>Inventory Management</h2>
+            <h2>Common Tasks</h2>
             <p>Use the buttons below for quick navigation for common tasks.</p>
-            <a class="btn btn-primary btn-md btn-fix" asp-controller="Kit_Type" asp-action="Create">Create Kit Type</a>
-            <a class="btn btn-primary btn-md btn-fix" asp-controller="Items" asp-action="Create">Create Item/Kit</a>
+            <a class="btn btn-primary btn-md btn-fix" asp-controller="Home" asp-action="InventoryManagement">Manage Inventory</a>
+            <a class="btn btn-primary btn-md btn-fix" asp-controller="Students" asp-action="Index">Manage Students</a>
             <a class="btn btn-primary btn-md btn-fix" asp-controller="Home" asp-action="CheckIn">Check In Item/Kit</a>
             <a class="btn btn-primary btn-md btn-fix" asp-controller="Home" asp-action="CheckOut">Check Out Item/Kit</a>
             
             @if (User.IsInRole("Admin"))
             {
+                <hr class="hr-w hr-w-4" />
 	            <h2>User Management</h2>
 	            
 	            <a class="btn btn-primary btn-md btn-fix" asp-area="Identity" asp-page="/Account/AssignRoles">Assign Roles</a>
-	           
+                <a class="btn btn-primary btn-md btn-fix" asp-controller="LabAssistants" asp-action="Index">Manage Lab Assistants</a>
             }
         </div>
         <div class="col-lg-6 align-items-center">

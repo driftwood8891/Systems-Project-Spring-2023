@@ -132,3 +132,13 @@ Deleted|Deleted Item'Test'|4/28/2023 10:18:51 PM
 
 Created|Created Item'HDMI Cable #1'|4/28/2023 10:22:07 PM
 
+Created|Created Student'Nathan'|4/28/2023 11:40:01 PM
+
+Created|Created Kit Type'Raspberry Pi 4 Kit'|4/29/2023 12:20:00 AM
+
+Deleted|Deleted Student'Nathan'|4/29/2023 12:24:16 AM
+
+Created|Created Kit'Raspberry PI 4 Kit #1'|4/29/2023 12:40:21 AM
+
+Deleted|Deleted Kit'Raspberry PI 4 Kit #1'|4/29/2023 12:49:20 AM
+

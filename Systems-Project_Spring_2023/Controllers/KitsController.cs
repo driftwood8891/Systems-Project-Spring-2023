@@ -26,8 +26,8 @@ namespace Systems_Project_Spring_2023.Controllers
         // GET: Kits
         public async Task<IActionResult> Index()
         {
-            /*var kitTypes = _context.Kit_types.Select(k => new { k.Kt_id, k.Kt_name }).ToList();
-            ViewBag.kitType = kitTypes.ToDictionary(k => k.Kt_id, k => k.Kt_name);*/
+            var kitTypes = _context.Kit_types.Select(k => new { k.Kt_id, k.Kt_name }).ToList();
+            ViewBag.kitType = kitTypes.ToDictionary(k => k.Kt_id, k => k.Kt_name);
 
 
             return _context.Kits != null ? 

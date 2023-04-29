@@ -1,92 +1,96 @@
 ﻿@model IEnumerable<Systems_Project_Spring_2023.Models.Student>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Student Management";
 }
+
+<hr class="hr-w hr-w-3" />
 
 <div class="container">
-<h1>Index</h1>
+    <h1 class="pb-3 mb-4 border-bottom">Student Management</h1>
+    <a class="btn btn-primary btn-md btn-fix" asp-action="Create">Create New Student</a>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_fname)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_lname)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_cmail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_pmail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_ephone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_addr)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_cour)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_camp)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_instr)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_fname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_lname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_cmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_pmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_ephone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_addr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_cour)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_camp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_instr)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Student_macid">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Student_macid">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Student_macid">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <hr class="hr-w hr-w-5" />
+    <div class="table-wrapper">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student_fname)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student_lname)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student_cmail)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student_pmail)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student_phone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student_ephone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student_addr)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student_cour)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student_camp)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student_instr)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student_fname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student_lname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student_cmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student_pmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student_phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student_ephone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student_addr)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student_cour)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student_camp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student_instr)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Student_macid">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Student_macid">Delete</a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
 
-                </div>
+</div>
+
+<hr class="hr-w hr-w-3" />

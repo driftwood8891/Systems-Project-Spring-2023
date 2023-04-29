@@ -1,15 +1,17 @@
 ﻿@model Systems_Project_Spring_2023.Models.Student
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Student";
 }
 
-<h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Student</h4>
-    <hr />
+<hr class="hr-w hr-w-3" />
+
+<div class="container">
+    <h1 class="pb-3 mb-4 border-bottom">Delete Student</h1>
+
+    <hr class="hr-w hr-w-4" />
+
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Student_fname)
@@ -79,3 +81,5 @@
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+
+<hr class="hr-w hr-w-3" />

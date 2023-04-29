@@ -1,17 +1,21 @@
 ﻿@model Systems_Project_Spring_2023.Models.Kit_Type
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Kit Type";
 }
-<div class="container"> 
-    <h1>Create</h1>
 
-    <h4>Kit_Type</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<hr class="hr-w hr-w-3" />
+
+<div class="container">
+    <h1 class="pb-3 mb-4 border-bottom">Create Kit Type</h1>
+
+    <hr class="hr-w hr-w-4" />
+    
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="Kt_name" class="control-label"></label>
                     <input asp-for="Kt_name" class="form-control" />
@@ -27,18 +31,20 @@
                     <input asp-for="Kt_desc" class="form-control" />
                     <span asp-validation-for="Kt_desc" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
 
     <div>
-        <a class="btn btn-primary btn-md btn-fix" asp-controller="Kit_Type" asp-action="Index">Back to List</a>
+        <a asp-action="Index">Back to List</a>
     </div>
 </div>
 
+<hr class="hr-w hr-w-3" />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -4,65 +4,84 @@
     ViewData["Title"] = "Inventory Management";
 }
 
+
 <hr class="hr-w hr-w-3" />
 
 <div class="container">
+    <h1 class="pb-3 mb-4 border-bottom">Inventory Management</h1>
+    <a class="btn btn-primary btn-md btn-fix" asp-controller="Kit_Type" asp-action="Index">Kit Type Management</a>
+    <a class="btn btn-primary btn-md btn-fix" asp-controller="Kits" asp-action="Index">Kit Management</a>
+    <a class="btn btn-primary btn-md btn-fix" asp-controller="Items" asp-action="Index">Item Management</a>
 
-    <h2>Inventory Management</h2>
+    <hr class="hr-w hr-w-2" />
+    
 
-    <label for="itemKitFilter">Filter by Items/Kits</label>
-    <select id="itemKitFilter">
-        <option value="all">All</option>
-        <option value="kit">Kits Only</option>
-        <option value="item">Items Only</option>
-    </select>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="itemKitFilter">Filter by Items/Kits</label>
+                <select id="itemKitFilter" class="form-control">
+                    <option value="all">All</option>
+                    <option value="kit">Kits Only</option>
+                    <option value="item">Items Only</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="statusCodeFilter">Filter by Status Codes</label>
+                <select id="statusCodeFilter" class="form-control">
+                    <option value="all">All</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
+            </div>
+        </div>
+    </div>
 
-    <label for="itemKitFilter">Filter by Status Codes</label>
-    <select id="statusCodeFilter">
-        <option value="all">All</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-    </select>
+    
+    <hr class="hr-w hr-w-5" />
 
-    <table>
-        <thead>
-            <tr>
-                <th>Item/Kit</th>
-                <th>Barcode</th>
-                <th>Name</th>
-                <th>Cost</th>
-                <th>Notes</th>
-                <th>Status Code</th>
-                <th>Location ID</th>
-                <!-- Hidden: Type -->
-                <th class="item-kit-type">Type</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var itemKit in Model)
-            {
+    <div class="table-wrapper">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@itemKit.Item_Kit_ID</td>
-                    <td>@itemKit.Item_Kit_Barcode</td>
-                    <td>@itemKit.Item_Kit_Name</td>
-                    <td>@itemKit.Item_Kit_Cost</td>
-                    <td>@itemKit.Item_Kit_Note</td>
-                    <td>@itemKit.Status_code</td>
-                    <td>@itemKit.Student_macid</td>
+                    <th>Item/Kit</th>
+                    <th>Barcode</th>
+                    <th>Name</th>
+                    <th>Cost</th>
+                    <th>Notes</th>
+                    <th>Status Code</th>
+                    <th>Location ID</th>
                     <!-- Hidden: Type -->
-                    <th class="item-kit-type">@itemKit.Item_Kit_Type</th>
+                    <th class="item-kit-type">Type</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+                @foreach (var itemKit in Model)
+                {
+                    <tr>
+                        <td>@itemKit.Item_Kit_ID</td>
+                        <td>@itemKit.Item_Kit_Barcode</td>
+                        <td>@itemKit.Item_Kit_Name</td>
+                        <td>@itemKit.Item_Kit_Cost</td>
+                        <td>@itemKit.Item_Kit_Note</td>
+                        <td>@itemKit.Status_code</td>
+                        <td>@itemKit.Student_macid</td>
+                        <!-- Hidden: Type -->
+                        <th class="item-kit-type">@itemKit.Item_Kit_Type</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
 </div>
 
