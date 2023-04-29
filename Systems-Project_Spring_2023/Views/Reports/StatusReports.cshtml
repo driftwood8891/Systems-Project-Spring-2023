@@ -1,87 +1,100 @@
 ﻿@model Systems_Project_Spring_2023.Models.SharedData
 
-<h1>Status Code Reports</h1>
-
-@using (Html.BeginForm("StatusReports", "Reports", FormMethod.Get))
-{
-	<div class="form-group-row">
-		<div class="col-md-4">
-		@Html.DropDownList("status", new SelectList(ViewBag.StatusCodes, "Value", "Text"), "- Select a Status Code - ", new { @class = "form-control", onchange = "this.form.submit();" })
-	</div>
-	</div>
+@{
+    ViewData["Title"] = "Status Reports";
 }
 
-<h2>Items</h2>
+<hr class="hr-w hr-w-3" />
 
-<div class="table-responsive">
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th>Item ID</th>
-                <th>Barcode</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Cost</th>
-                <th>Date</th>
-                <th>Note</th>
-                <th>Status</th>
-                <th>MACC ID/Room Number</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.itemdetails)
-            {
+<div class="container">
+    <h2 class="pb-3 mb-4 border-bottom">Status Code Reports</h2>
+
+    @using (Html.BeginForm("StatusReports", "Reports", FormMethod.Get))
+    {
+	    <div class="form-group-row">
+		    <div class="col-md-4">
+                <label class="form-check-label">Filter Report:</label>
+		        @Html.DropDownList("status", new SelectList(ViewBag.StatusCodes, "Value", "Text"), "- Select a Status Code - ", new { @class = "form-control", onchange = "this.form.submit();" })
+	        </div>
+	    </div>
+    }
+
+    <hr class="hr-w hr-w-5" />
+
+    <h2>Items</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.Item_id)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Item_barcode)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Item_name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Item_type)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Item_cost)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Item_date)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Item_note)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Status_code)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Student_macid)</td>
+                    <th>Item ID</th>
+                    <th>Barcode</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Cost</th>
+                    <th>Date</th>
+                    <th>Note</th>
+                    <th>Status</th>
+                    <th>MACC ID/Room Number</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.itemdetails)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Item_id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Item_barcode)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Item_name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Item_type)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Item_cost)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Item_date)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Item_note)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Status_code)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Student_macid)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Kits</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Kit ID</th>
+                    <th>Barcode</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Cost</th>
+                    <th>Date</th>
+                    <th>Note</th>
+                    <th>Status</th>
+                    <th>MACC ID/Room Number</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var kit in Model.kitdetails)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => kit.Kit_id)</td>
+                        <td>@Html.DisplayFor(modelItem => kit.Kit_barcd)</td>
+                        <td>@Html.DisplayFor(modelItem => kit.Kit_name)</td>
+                        <td>@Html.DisplayFor(modelItem => kit.Kit_type)</td>
+                        <td>@Html.DisplayFor(modelItem => kit.Kit_cost)</td>
+                        <td>@Html.DisplayFor(modelItem => kit.Kit_date)</td>
+                        <td>@Html.DisplayFor(modelItem => kit.Kit_note)</td>
+                        <td>@Html.DisplayFor(modelItem => kit.Status_code)</td>
+                        <td>@Html.DisplayFor(modelItem => kit.Student_macid)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
-<h2>Kits</h2>
-
-<div class="table-responsive">
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th>Kit ID</th>
-                <th>Barcode</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Cost</th>
-                <th>Date</th>
-                <th>Note</th>
-                <th>Status</th>
-                <th>MACC ID/Room Number</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var kit in Model.kitdetails)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => kit.Kit_id)</td>
-                    <td>@Html.DisplayFor(modelItem => kit.Kit_barcd)</td>
-                    <td>@Html.DisplayFor(modelItem => kit.Kit_name)</td>
-                    <td>@Html.DisplayFor(modelItem => kit.Kit_type)</td>
-                    <td>@Html.DisplayFor(modelItem => kit.Kit_cost)</td>
-                    <td>@Html.DisplayFor(modelItem => kit.Kit_date)</td>
-                    <td>@Html.DisplayFor(modelItem => kit.Kit_note)</td>
-                    <td>@Html.DisplayFor(modelItem => kit.Status_code)</td>
-                    <td>@Html.DisplayFor(modelItem => kit.Student_macid)</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-
+<hr class="hr-w hr-w-3" />
