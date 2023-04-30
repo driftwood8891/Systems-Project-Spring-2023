@@ -24,12 +24,12 @@ namespace Systems_Project_Spring_2023.Models
 
             // Adjust the UTC time by the time zone offset
             Kit_date = DateTime.UtcNow.Add(timeZoneOffset);
-
-
+            
+            
             // Generate a unique Kit ID
-            Kit_id = Guid.NewGuid().ToString().Substring(0, 10);
+			Kit_id = Guid.NewGuid().ToString().Substring(0, 10);
 
-        }
+		}
 
 
         [Key]
