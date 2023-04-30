@@ -23,7 +23,10 @@ namespace Systems_Project_Spring_2023.Models
             Kt_date = DateTime.UtcNow.Add(timeZoneOffset);
 
             // Generate a unique Kit ID
-            Kt_id = Guid.NewGuid().ToString().Substring(0, 10);
+            if (string.IsNullOrEmpty(Kt_id))
+            {
+                Kt_id = Guid.NewGuid().ToString().Substring(0, 10);
+            }
         }
 
         [Key]

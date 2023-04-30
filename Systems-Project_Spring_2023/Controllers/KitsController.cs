@@ -31,6 +31,9 @@ namespace Systems_Project_Spring_2023.Controllers
             var kitTypes = _context.Kit_types.Select(k => new { k.Kt_id, k.Kt_name }).ToList();
             ViewBag.kitType = kitTypes.ToDictionary(k => k.Kt_id, k => k.Kt_name);
 
+            var statusCodes = _context.Statuses.Select(k => new { k.Status_code, k.Status_desc }).ToList();
+            ViewBag.statusCode = statusCodes.ToDictionary(k => k.Status_code, k => k.Status_desc);
+
 
             return _context.Kits != null ? 
                           View(await _context.Kits.ToListAsync()) :
@@ -63,8 +66,8 @@ namespace Systems_Project_Spring_2023.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Kit_id,Kit_barcd,Kit_name,Kit_qty,Kit_desc,Kit_cost,Kit_date,Kit_note,Kt_id,Status_code,Student_macid")] Kit kit)
         {
-			// Check if a kit with the same name already exists in the database
-			if (_context.Kits.Any(x => x.Kit_name == kit.Kit_name))
+            // Check if a kit with the same name already exists in the database
+            if (_context.Kits.Any(x => x.Kit_name == kit.Kit_name))
 			{
 				ModelState.AddModelError("Kit_name", "A kit with the same name already exists.");
 			}

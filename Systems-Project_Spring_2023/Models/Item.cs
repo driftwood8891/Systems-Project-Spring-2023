@@ -24,10 +24,11 @@ namespace Systems_Project_Spring_2023.Models
             Item_date = DateTime.UtcNow.Add(timeZoneOffset);
 
             // auto generate the Item ID
-            Item_id = Guid.NewGuid().ToString().Substring(0, 10);
+            if (string.IsNullOrEmpty(Item_id))
+            {
+                Item_id = Guid.NewGuid().ToString().Substring(0, 10);
+            }
 
-            // auto generate the Item quantity
-            //Item_qty = 1;
         }
 
 

@@ -87,7 +87,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Kt_id,Kt_name,Kt_item_qty,Kt_cost,Kt_date,Item_id")] Kit_Type kit_Type)
+        public async Task<IActionResult> Edit(string id, [Bind("Kt_id,Kt_name,Kt_desc,Kt_cost,Kt_date,Item_id")] Kit_Type kit_Type)
         {
             if (id != kit_Type.Kt_id)
             {
@@ -95,7 +95,7 @@ namespace Systems_Project_Spring_2023.Controllers
             }
 
 			// Check if a kit type with the same name already exists in the database
-			if (_context.Kit_types.Any(x => x.Kt_name == kit_Type.Kt_name))
+			if (_context.Kit_types.Any(x => x.Kt_name == kit_Type.Kt_name && x.Kt_id != kit_Type.Kt_id))
 			{
 				ModelState.AddModelError("Kt_name", "A kit type with the same name already exists.");
 			}
@@ -128,6 +128,8 @@ namespace Systems_Project_Spring_2023.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
+
+
             return View(kit_Type);
         }
 

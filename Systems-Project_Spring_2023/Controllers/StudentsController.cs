@@ -46,6 +46,7 @@ namespace Systems_Project_Spring_2023.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Student_macid,Student_fname,Student_lname,Student_cmail,Student_pmail,Student_phone,Student_ephone,Student_addr,Student_cour,Student_camp,Student_instr")] Student student)
         {
+
             if (ModelState.IsValid)
             {
 				// Code that generates a report in the log.txt file 
