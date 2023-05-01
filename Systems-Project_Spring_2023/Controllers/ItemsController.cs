@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Mvc;
@@ -35,9 +37,10 @@ namespace Systems_Project_Spring_2023.Controllers
             return _context.Items != null ? 
                           View(await _context.Items.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Items'  is null.");
-        }
+		}
 
-        // GET: Items/Create
+		// GET: Items/Create
+        [Authorize(Roles = "Admin,Assistant")]
         public IActionResult Create()
         {
             // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
@@ -58,6 +61,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Assistant")]
         public async Task<IActionResult> Create([Bind("Item_id,Item_barcode,Item_name,Item_type,Item_cost,Item_date,Item_note,Status_code,Student_macid")] Item item)
         {
 			// Check if an item with the same name already exists in the database
@@ -102,6 +106,7 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: Items/Edit/5
+        [Authorize(Roles = "Admin,Assistant")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.Items == null)
@@ -135,6 +140,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Assistant")]
         public async Task<IActionResult> Edit(string id, [Bind("Item_id,Item_barcode,Item_name,Item_type,Item_cost,Item_date,Item_note,Status_code,Student_macid")] Item item)
         {
             if (id != item.Item_id)
@@ -198,6 +204,7 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: Items/Delete/5
+        [Authorize(Roles = "Admin,Assistant")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.Items == null)
@@ -218,6 +225,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // POST: Items/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Assistant")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.Items == null)

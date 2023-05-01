@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grpc.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -34,6 +35,7 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: Students/Create
+        
         public IActionResult Create()
         {
             return View();
@@ -44,6 +46,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Create([Bind("Student_macid,Student_fname,Student_lname,Student_cmail,Student_pmail,Student_phone,Student_ephone,Student_addr,Student_cour,Student_camp,Student_instr")] Student student)
         {
 
@@ -64,6 +67,7 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: Students/Edit/5
+       
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.Students == null)
@@ -84,6 +88,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Edit(string id, [Bind("Student_macid,Student_fname,Student_lname,Student_cmail,Student_pmail,Student_phone,Student_ephone,Student_addr,Student_cour,Student_camp,Student_instr")] Student student)
         {
             if (id != student.Student_macid)
@@ -122,6 +127,7 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: Students/Delete/5
+       
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.Students == null)
@@ -142,6 +148,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.Students == null)

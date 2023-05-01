@@ -41,6 +41,7 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: Kits/Create
+        [Authorize(Roles = "Admin,Assistant")]
         public IActionResult Create()
         {
             // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
@@ -64,6 +65,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Assistant")]
         public async Task<IActionResult> Create([Bind("Kit_id,Kit_barcd,Kit_name,Kit_qty,Kit_desc,Kit_cost,Kit_date,Kit_note,Kt_id,Status_code,Student_macid")] Kit kit)
         {
             // Check if a kit with the same name already exists in the database
@@ -121,6 +123,7 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: Kits/Edit/5
+        [Authorize(Roles = "Admin,Assistant")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.Kits == null)
@@ -156,6 +159,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Assistant")]
         public async Task<IActionResult> Edit(string id, [Bind("Kit_id,Kit_barcd,Kit_name,Kit_qty,Kit_desc,Kit_cost,Kit_date,Kit_note,Kt_id,Status_code,Student_macid")] Kit kit)
         {
             if (id != kit.Kit_id)
@@ -223,6 +227,7 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: Kits/Delete/5
+        [Authorize(Roles = "Admin,Assistant")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.Kits == null)
@@ -243,6 +248,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // POST: Kits/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Assistant")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.Kits == null)

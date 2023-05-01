@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -29,9 +31,10 @@ namespace Systems_Project_Spring_2023.Controllers
               return _context.Kit_types != null ? 
                           View(await _context.Kit_types.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Kit_types'  is null.");
-        }
+		}
 
-        // GET: Kit_Type/Create
+		// GET: Kit_Type/Create
+        [Authorize(Roles = "Admin,Assistant")]
         public IActionResult Create()
         {
             return View();
@@ -42,6 +45,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Assistant")]
         public async Task<IActionResult> Create([Bind("Kt_id,Kt_name,Kt_desc,Kt_cost,Kt_date")] Kit_Type kit_Type)
         {
 			// Check if a kit type with the same name already exists in the database
@@ -67,6 +71,7 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: Kit_Type/Edit/5
+        [Authorize(Roles = "Admin,Assistant")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.Kit_types == null)
@@ -87,6 +92,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Assistant")]
         public async Task<IActionResult> Edit(string id, [Bind("Kt_id,Kt_name,Kt_desc,Kt_cost,Kt_date,Item_id")] Kit_Type kit_Type)
         {
             if (id != kit_Type.Kt_id)
@@ -134,6 +140,7 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: Kit_Type/Delete/5
+        [Authorize(Roles = "Admin,Assistant")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.Kit_types == null)
@@ -154,6 +161,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // POST: Kit_Type/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Assistant")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.Kit_types == null)

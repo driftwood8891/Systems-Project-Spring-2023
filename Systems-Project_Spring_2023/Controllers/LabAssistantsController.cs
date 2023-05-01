@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -29,9 +31,10 @@ namespace Systems_Project_Spring_2023.Controllers
               return _context.LabAssistant != null ? 
                           View(await _context.LabAssistant.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.LabAssistant'  is null.");
-        }
+		}
 
-        // GET: LabAssistants/Create
+		// GET: LabAssistants/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -42,6 +45,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("La_id,La_fname,La_lname,La_camp,La_sch")] LabAssistant labAssistant)
         {
             if (ModelState.IsValid)
@@ -58,6 +62,8 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: LabAssistants/Edit/5
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.LabAssistant == null)
@@ -78,6 +84,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("La_id,La_fname,La_lname,La_camp,La_sch")] LabAssistant labAssistant)
         {
             if (id != labAssistant.La_id)
@@ -112,6 +119,7 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: LabAssistants/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.LabAssistant == null)
@@ -132,6 +140,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // POST: LabAssistants/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.LabAssistant == null)
