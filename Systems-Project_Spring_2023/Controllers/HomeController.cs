@@ -159,7 +159,6 @@ namespace Systems_Project_Spring_2023.Controllers
 			
 	        // Display data within dropdown boxes and Filtering by status code
             viewModel.Kits = _context.Kits.Where(k => k.Status_code == "2").ToList();
-            //viewModel.Students = _context.Students.ToList();
             viewModel.Items = _context.Items.Where(i => i.Status_code == "2").ToList();
             return View(viewModel);
         }
@@ -171,9 +170,8 @@ namespace Systems_Project_Spring_2023.Controllers
         {
             // Reference kits, students, and items by their names
             var kit = _context.Kits.FirstOrDefault(k => k.Kit_name == kitName);
-            //var student = _context.Students.FirstOrDefault(s => s.Student_fname == studentName);
-            //var student = _context.Students.FirstOrDefault(s => s.Student_camp == locationName);
             var item = _context.Items.FirstOrDefault(i => i.Item_name == itemName);
+
             // get the selected value from the drop-down list
             string selectedLocation = Request.Form["locationName"];
 
@@ -182,7 +180,6 @@ namespace Systems_Project_Spring_2023.Controllers
             {
                 // use the selected Kit object and its properties
                 kit.Status_code = "1";
-                //kit.Student_macid = student.Student_macid;
                 kit.Student_macid = selectedLocation;
 
                 // Code to generate logging
@@ -196,7 +193,6 @@ namespace Systems_Project_Spring_2023.Controllers
             {
                 // use the selected Item object and its properties
                 item.Status_code = "1";
-                //item.Student_macid = student.Student_macid;
                 item.Student_macid = selectedLocation;
 
 				// Code to generate logging
