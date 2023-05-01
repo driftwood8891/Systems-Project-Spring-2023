@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Systems_Project_Spring_2023.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Systems_Project_Spring_2023.Controllers
 {
@@ -50,10 +51,13 @@ namespace Systems_Project_Spring_2023.Controllers
         public IActionResult InventoryManagement()
         {
 
+
             var itemKits = new List<ItemKit>();
             var kits = _context.Kits.ToList();
             var items = _context.Items.ToList();
             var kitTypes = _context.Kit_types.ToList();
+
+            var statusCodes = _context.Statuses.Select(k => new { k.Status_code, k.Status_desc }).ToList().ToDictionary(k => k.Status_code, k => k.Status_desc);
 
             foreach (var kit in kits)
             {
@@ -67,7 +71,7 @@ namespace Systems_Project_Spring_2023.Controllers
                     Item_Kit_Note = kit.Kit_note,
                     Item_Kit_ID = "kit",
                     Item_Kit_Type = kitType.Kt_name,
-                    Status_code = kit.Status_code,
+                    Status_code = statusCodes[kit.Status_code],
                     Student_macid = kit.Student_macid
                 });
             }
@@ -82,10 +86,16 @@ namespace Systems_Project_Spring_2023.Controllers
                     Item_Kit_Note = item.Item_note,
                     Item_Kit_ID = "item",
                     Item_Kit_Type = item.Item_type?.ToString(),
-                    Status_code = item.Status_code,
+                    Status_code = statusCodes[item.Status_code],
                     Student_macid = item.Student_macid
                 });
             }
+
+            // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
+            var statusCode = _context.Statuses.ToList();
+            // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
+            ViewBag.Statuses = new SelectList(statusCode, "Status_desc", "Status_desc");
+
 
             return View(itemKits);
         }
@@ -165,22 +175,16 @@ namespace Systems_Project_Spring_2023.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Checkin(string checkInOption, string kitName, string locationName, string itemName)
+        public IActionResult Checkin(string checkInOption, string kitName, string campus, string itemName)
         {
             // Reference kits, students, and items by their names
             var kit = _context.Kits.FirstOrDefault(k => k.Kit_name == kitName);
-            var item = _context.Items.FirstOrDefault(i => i.Item_name == itemName);
-
-            // get the selected value from the drop-down list
-            string selectedLocation = Request.Form["locationName"];
-
-            // If else for radio buttion
-            if (checkInOption == "kit" && kit != null /*&& student != null*/)
+           var item = _context.Items.FirstOrDefault(i => i.Item_name == itemName);
+            if (checkInOption == "kit" && kit != null && campus != null)
             {
                 // use the selected Kit object and its properties
                 kit.Status_code = "1";
-                kit.Student_macid = selectedLocation;
+                kit.Student_macid = campus;
 
                 // Code to generate logging
 				_logFileHelper.LogEvent("Checked In", $"Checked In '{kit.Kit_name}'");
@@ -189,11 +193,11 @@ namespace Systems_Project_Spring_2023.Controllers
 				TempData["success"] = "Kit successfully checked in"; // create alert
 				return RedirectToAction("InventoryManagement");
 			}
-            else if (checkInOption == "item" && item != null /*&& student != null*/)
+            else if (checkInOption == "item" && item != null && campus != null)
             {
                 // use the selected Item object and its properties
                 item.Status_code = "1";
-                item.Student_macid = selectedLocation;
+                item.Student_macid = campus;
 
 				// Code to generate logging
 				_logFileHelper.LogEvent("Checked In", $"Checked In '{item.Item_name}'");
@@ -205,7 +209,7 @@ namespace Systems_Project_Spring_2023.Controllers
             else
             {
                 // Set an error message to display in the view
-                TempData["ErrorMessage"] = "No matching kit, student, or item found.";
+                TempData["ErrorMessage"] = "No matching kit, campus, or item found.";
                 return RedirectToAction("Checkin");
             }
         }

@@ -31,6 +31,9 @@ namespace Systems_Project_Spring_2023.Controllers
             var kitTypes = _context.Kit_types.Select(k => new { k.Kt_id, k.Kt_name }).ToList();
             ViewBag.kitType = kitTypes.ToDictionary(k => k.Kt_id, k => k.Kt_name);
 
+            var statusCodes = _context.Statuses.Select(k => new { k.Status_code, k.Status_desc }).ToList();
+            ViewBag.statusCode = statusCodes.ToDictionary(k => k.Status_code, k => k.Status_desc);
+
 
             return _context.Kits != null ? 
                           View(await _context.Kits.ToListAsync()) :
@@ -63,8 +66,8 @@ namespace Systems_Project_Spring_2023.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Kit_id,Kit_barcd,Kit_name,Kit_qty,Kit_desc,Kit_cost,Kit_date,Kit_note,Kt_id,Status_code,Student_macid")] Kit kit)
         {
-			// Check if a kit with the same name already exists in the database
-			if (_context.Kits.Any(x => x.Kit_name == kit.Kit_name))
+            // Check if a kit with the same name already exists in the database
+            if (_context.Kits.Any(x => x.Kit_name == kit.Kit_name))
 			{
 				ModelState.AddModelError("Kit_name", "A kit with the same name already exists.");
 			}
@@ -75,7 +78,7 @@ namespace Systems_Project_Spring_2023.Controllers
 				ModelState.AddModelError("Kit_barcd", "A kit with the same barcd already exists.");
 			}
 
-			if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 // Find the Kit_cost based on the Kt_id
                 var kitType = await _context.Kit_types.FindAsync(kit.Kt_id);
@@ -88,8 +91,8 @@ namespace Systems_Project_Spring_2023.Controllers
 
                 _context.Add(kit);
 
-				// Code that generates a report in the log.txt file 
-				_logFileHelper.LogEvent("Create", $"Created Kit '{kit.Kit_name}'");
+                // Code that generates a report in the log.txt file 
+                _logFileHelper.LogEvent("Create", $"Created Kit '{kit.Kit_name}'");
 
                 await _context.SaveChangesAsync();
 
@@ -98,7 +101,23 @@ namespace Systems_Project_Spring_2023.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            return View(kit);
+            else 
+            {
+				// This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
+				var statusCode = _context.Statuses.ToList();
+				ViewBag.Statuses = new SelectList(statusCode, "Status_code", "Status_desc");
+
+				// This is code for creating a dropdown box for the Kit types
+				var kitType = _context.Kit_types.ToList();
+				ViewBag.Kit_types = new SelectList(kitType, "Kt_id", "Kt_name");
+
+				// This is code for creating a dropdown box for the MACC IDs(Pulls MACC IDs from Student table).
+				var maccid_room = _context.Students.Select(s => new { s.Student_macid }).ToList();
+
+				ViewBag.Students = new SelectList(maccid_room, "Student_macid", "Student_macid");
+			}
+
+			return View(kit);
         }
 
         // GET: Kits/Edit/5
@@ -145,13 +164,14 @@ namespace Systems_Project_Spring_2023.Controllers
             }
 
 			// Check if a kit with the same name already exists in the database
-			if (_context.Kits.Any(x => x.Kit_name == kit.Kit_name))
+			if (_context.Kits.Any(x => x.Kit_name == kit.Kit_name && x.Kit_id != kit.Kit_id))
 			{
 				ModelState.AddModelError("Kit_name", "A kit with the same name already exists.");
 			}
 
+
 			// Check if a kit with the same barcode already exists in the database
-			if (_context.Kits.Any(x => x.Kit_barcd == kit.Kit_barcd))
+			if (_context.Kits.Any(x => x.Kit_barcd == kit.Kit_barcd && x.Kit_id != kit.Kit_id))
 			{
 				ModelState.AddModelError("Kit_barcd", "A kit with the same barcd already exists.");
 			}
@@ -183,7 +203,23 @@ namespace Systems_Project_Spring_2023.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            return View(kit);
+			else
+			{
+				// This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
+				var statusCode = _context.Statuses.ToList();
+				ViewBag.Statuses = new SelectList(statusCode, "Status_code", "Status_desc");
+
+				// This is code for creating a dropdown box for the Kit types
+				var kitType = _context.Kit_types.ToList();
+				ViewBag.Kit_types = new SelectList(kitType, "Kt_id", "Kt_name");
+
+				// This is code for creating a dropdown box for the MACC IDs(Pulls MACC IDs from Student table).
+				var maccid_room = _context.Students.Select(s => new { s.Student_macid }).ToList();
+
+				ViewBag.Students = new SelectList(maccid_room, "Student_macid", "Student_macid");
+			}
+
+			return View(kit);
         }
 
         // GET: Kits/Delete/5

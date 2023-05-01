@@ -8,3 +8,79 @@ Create|Created Kit 'Raspberry PI 4 Kit #1'|4/29/2023 4:48:44 PM
 
 Create|Created Kit Type 'Raspberry Pi 3 Kit'|4/29/2023 5:33:30 PM
 
+Delete|Deleted Kit 'Raspberry PI 4 Kit #1'|4/30/2023 2:35:48 PM
+
+Delete|Deleted Item 'HDMI Cable #1'|4/30/2023 2:36:20 PM
+
+Create|Created Kit 'Raspberry PI 4 Kit #1'|4/30/2023 2:56:38 PM
+
+Create|Created Kit 'Raspberry PI 4 Kit #2'|4/30/2023 2:57:00 PM
+
+Delete|Deleted Kit 'Raspberry PI 4 Kit #1'|4/30/2023 3:18:34 PM
+
+Delete|Deleted Kit 'Raspberry PI 4 Kit #2'|4/30/2023 3:18:40 PM
+
+Create|Created Kit 'Raspberry PI 4 Kit #1'|4/30/2023 3:18:56 PM
+
+Create|Created Kit Type 'Raspberry Pi 4 Kit'|4/30/2023 3:27:19 PM
+
+Create|Created Kit 'Raspberry PI 4 Kit #1'|4/30/2023 3:27:37 PM
+
+Create|Created Item 'HDMI Cable #1'|4/30/2023 3:38:26 PM
+
+Delete|Deleted Kit 'Raspberry PI 4 Kit #1'|4/30/2023 3:40:47 PM
+
+Create|Created Kit 'Raspberry PI 4 Kit #1'|4/30/2023 3:41:00 PM
+
+Delete|Deleted Kit 'Raspberry PI 4 Kit #1'|4/30/2023 3:42:08 PM
+
+Create|Created Kit 'Test'|4/30/2023 3:42:23 PM
+
+Edit|Edited Kit 'Test'|4/30/2023 3:42:32 PM
+
+Edit|Edited Kit 'Test'|4/30/2023 3:43:12 PM
+
+Delete|Deleted Kit 'Test'|4/30/2023 3:45:21 PM
+
+Create|Created Kit 'Raspberry PI 4 Kit #1'|4/30/2023 3:45:39 PM
+
+Delete|Deleted Kit 'Raspberry PI 4 Kit #1'|4/30/2023 3:52:26 PM
+
+Create|Created Kit 'Raspberry PI 4 Kit #1'|4/30/2023 4:36:15 PM
+
+Edit|Edited Kit 'Raspberry PI 4 Kit #1'|4/30/2023 4:41:22 PM
+
+Edit|Edited Kit 'Raspberry PI 4 Kit #1'|4/30/2023 4:52:43 PM
+
+Create|Created Kit 'Raspberry PI 4 Kit #2'|4/30/2023 4:53:08 PM
+
+Create|Created Kit Type 'Raspberry Pi 3 Kit'|4/30/2023 4:53:29 PM
+
+Create|Created Student 'Nathan'|4/30/2023 5:04:11 PM
+
+Edit|Edited Student 'Nathan'|4/30/2023 5:04:17 PM
+
+Create|Created Student 'Nathan'|4/30/2023 5:04:49 PM
+
+Edit|Edited Kit Type 'Raspberry Pi 4 Kit'|4/30/2023 5:10:33 PM
+
+Edit|Edited Kit Type 'Raspberry Pi 4 Kit'|4/30/2023 5:10:51 PM
+
+Create|Created Kit 'Raspberry PI 3 Kit #2'|4/30/2023 5:11:48 PM
+
+Edit|Edited Kit 'Raspberry PI 4 Kit #2'|4/30/2023 5:12:25 PM
+
+Edit|Edited Kit 'Raspberry PI 3 Kit #2'|4/30/2023 5:12:37 PM
+
+Edit|Edited Item 'HDMI Cable #1'|4/30/2023 5:13:48 PM
+
+Checked Out|Checked Out 'Raspberry PI 4 Kit #2'|4/30/2023 5:20:49 PM
+
+Checked In|Checked In 'Raspberry PI 4 Kit #2'|4/30/2023 5:27:47 PM
+
+Checked Out|Checked Out 'Raspberry PI 4 Kit #2'|4/30/2023 5:28:10 PM
+
+Checked In|Checked In 'Raspberry PI 4 Kit #2'|4/30/2023 5:28:20 PM
+
+Create|Created Item 'Test'|4/30/2023 5:42:56 PM
+

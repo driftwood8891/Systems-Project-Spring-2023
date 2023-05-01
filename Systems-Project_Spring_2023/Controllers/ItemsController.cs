@@ -29,7 +29,10 @@ namespace Systems_Project_Spring_2023.Controllers
         // GET: Items
         public async Task<IActionResult> Index()
         {
-              return _context.Items != null ? 
+            var statusCodes = _context.Statuses.Select(k => new { k.Status_code, k.Status_desc }).ToList();
+            ViewBag.statusCode = statusCodes.ToDictionary(k => k.Status_code, k => k.Status_desc);
+
+            return _context.Items != null ? 
                           View(await _context.Items.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Items'  is null.");
         }
@@ -69,7 +72,7 @@ namespace Systems_Project_Spring_2023.Controllers
 				ModelState.AddModelError("Item_barcode", "An item with the same barcode already exists.");
 			}
 
-			if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _context.Add(item);
                 await _context.SaveChangesAsync();
@@ -82,7 +85,18 @@ namespace Systems_Project_Spring_2023.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
+            else 
+            {
+                // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
+                var statusCode = _context.Statuses.ToList();
+                // This is code for creating a dropdown box for the MACC IDs(Pulls MACC IDs from Student table).
+                var maccid_room = _context.Students.Select(s => new { s.Student_macid }).ToList();
 
+                ViewBag.Students = new SelectList(maccid_room, "Student_macid", "Student_macid");
+
+                // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
+                ViewBag.Statuses = new SelectList(statusCode, "Status_code", "Status_desc");
+            }
 
             return View(item);
         }
@@ -121,7 +135,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Item_id,Item_barcode,Item_name,Item_qty,Item_cost,Item_date,Item_note,Status_code,Student_macid")] Item item)
+        public async Task<IActionResult> Edit(string id, [Bind("Item_id,Item_barcode,Item_name,Item_type,Item_cost,Item_date,Item_note,Status_code,Student_macid")] Item item)
         {
             if (id != item.Item_id)
             {
@@ -129,27 +143,27 @@ namespace Systems_Project_Spring_2023.Controllers
             }
 
 			// Check if an item with the same name already exists in the database
-			if (_context.Items.Any(x => x.Item_name == item.Item_name))
+			if (_context.Items.Any(x => x.Item_name == item.Item_name && x.Item_id != item.Item_id))
 			{
 				ModelState.AddModelError("Item_name", "An item with the same name already exists.");
 			}
 
 			// Check if an item with the same barcode already exists in the database
-			if (_context.Items.Any(x => x.Item_barcode == item.Item_barcode))
+			if (_context.Items.Any(x => x.Item_barcode == item.Item_barcode && x.Item_id != item.Item_id))
 			{
 				ModelState.AddModelError("Item_barcode", "An item with the same barcode already exists.");
 			}
 
-			if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {
                     _context.Update(item);
                     await _context.SaveChangesAsync();
 
-					// Code that generates a report in the log.txt file 
-					_logFileHelper.LogEvent("Edit", $"Edited Item '{item.Item_name}'");
-				}
+                    // Code that generates a report in the log.txt file 
+                    _logFileHelper.LogEvent("Edit", $"Edited Item '{item.Item_name}'");
+                }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!ItemExists(item.Item_id))
@@ -167,6 +181,19 @@ namespace Systems_Project_Spring_2023.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
+            else 
+            {
+                // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
+                var statusCode = _context.Statuses.ToList();
+                // This is code for creating a dropdown box for the MACC IDs(Pulls MACC IDs from Student table).
+                var maccid_room = _context.Students.Select(s => new { s.Student_macid }).ToList();
+
+                ViewBag.Students = new SelectList(maccid_room, "Student_macid", "Student_macid");
+
+                // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
+                ViewBag.Statuses = new SelectList(statusCode, "Status_code", "Status_desc");
+            }
+
             return View(item);
         }
 

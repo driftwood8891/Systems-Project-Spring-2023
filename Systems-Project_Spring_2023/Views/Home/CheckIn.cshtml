@@ -44,18 +44,29 @@
                 }
             </select>
         </div>
-
+        
         <div class="form-group">
-            <label for="locationName">Select a Location:</label>
-            <select id="locationName" name="locationName" class="form-control">
-	            <option value="">Select a Campus</option>
-	            <option value="MOB">Moberly</option>
-	            <option value="COL">Columbia</option>
-	            <option value="HAN">Hannibal</option>
-	            <option value="MEX">Mexico</option>
-	            <option value="KIR">Kirksville</option>
+            <label for="campus">Select a Location:</label>
+            <select id="campus" name="campus" class="form-control">
+                <option value="">Campus</option>
+                <option value="MOB">Moberly</option>
+                <option value="COL">Columbia</option>
+                <option value="HAN">Hannibal</option>
+                <option value="MEX">Mexico</option>
+                <option value="KIR">Kirksville</option>
             </select>
         </div>
+
+        @*<div class="form-group">
+            <label for="studentName">Select a Location:</label>
+            <select id="studentName" name="studentName" class="form-control">
+                <option value="">Select a Student</option>
+                @foreach (var student in Model.Students)
+                {
+                    <option value="@student.Student_fname">@student.Student_fname</option>
+                }
+            </select>
+        </div>*@
 
         <button type="submit" class="btn btn-primary">Check In</button>
     </form>
