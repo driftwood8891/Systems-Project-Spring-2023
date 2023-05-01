@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject UserManager<IdentityUser> UserManagerz
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
@@ -16,22 +16,25 @@
                 <span class="top-bot top-bot-border"></span>
                 <li> 
                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="UserProfile">Profile</a>          
+                </li>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Assistant"))
+                {
+                    <li>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Checkin">Checkin Item/Kit</a>
                     </li>
-                <li>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Checkin">Checkin Item/Kit</a>
-                </li>
-                <li>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Checkout">Checkout Item/Kit</a>
-                </li>
-                <li>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Reports" asp-action="Index">Reports</a>
-                </li>
-                <li>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="InventoryManagement">Inventory Management</a>
-                </li>
-                <li>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Student Management</a>
-                </li>
+                    <li>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Checkout">Checkout Item/Kit</a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Reports" asp-action="Index">Reports</a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="InventoryManagement">Inventory Management</a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Student Management</a>
+                    </li>
+                }
                 <li>
                     <form style="width: 100%" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                         <button style="width: 100%; text-align: center" type="submit" class="nav-link btn btn-link text-dark">Logout</button>

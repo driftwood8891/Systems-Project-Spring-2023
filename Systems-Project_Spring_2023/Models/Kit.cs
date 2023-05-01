@@ -80,9 +80,9 @@ namespace Systems_Project_Spring_2023.Models
         [Required(ErrorMessage = "Status code is required.")]
         public string Status_code { get; set; } = null!;
 
-        [Display(Name = "MACC ID/Room number")]
+        [Display(Name = "Location (Student / Campus)")]
         [StringLength(10)]
-        [Required(ErrorMessage = "MACC ID or Room number is required.")]
+        [Required(ErrorMessage = "Location (Student / Campus) is required.")]
         public string Student_macid { get; set; } = null!;
 
         public virtual Student? Student { get; set; }
