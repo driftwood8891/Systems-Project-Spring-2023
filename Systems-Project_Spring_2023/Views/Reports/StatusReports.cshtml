@@ -67,7 +67,7 @@
                     <th>Kit ID</th>
                     <th>Barcode</th>
                     <th>Name</th>
-                    <th>Type</th>
+                    @*<th>Type</th>*@
                     <th>Cost</th>
                     <th>Date</th>
                     <th>Note</th>
@@ -77,13 +77,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var kit in Model.kitdetails)
+            @foreach (var kit in Model.kitdetails)
                 {
                     <tr>
                         <td>@Html.DisplayFor(modelItem => kit.Kit_id)</td>
                         <td>@Html.DisplayFor(modelItem => kit.Kit_barcd)</td>
                         <td>@Html.DisplayFor(modelItem => kit.Kit_name)</td>
-                        <td>@Html.DisplayFor(modelItem => kit.Kit_type)</td>
+                        @*<td>@Html.DisplayFor(modelItem => kit.Kt_id)</td>*@
                         <td>@Html.DisplayFor(modelItem => kit.Kit_cost)</td>
                         <td>@Html.DisplayFor(modelItem => kit.Kit_date)</td>
                         <td>@Html.DisplayFor(modelItem => kit.Kit_note)</td>

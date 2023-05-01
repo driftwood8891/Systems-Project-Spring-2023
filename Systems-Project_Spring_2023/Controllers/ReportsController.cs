@@ -52,6 +52,7 @@ namespace Systems_Project_Spring_2023.Controllers
 		    kits = kits.Where(k => k.Status_code == status);
 	    }
 
+
 	    var data = new SharedData()
 	    {
 			// Pulling shared data from the SharedData model(Read-only)
