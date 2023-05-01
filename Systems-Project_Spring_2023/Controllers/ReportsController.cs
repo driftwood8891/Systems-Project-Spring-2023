@@ -23,6 +23,8 @@ namespace Systems_Project_Spring_2023.Controllers
             _logFileHelper = logFileHelper;
         }
 
+
+
         public IActionResult Index()
         {
             var logItems = _logFileHelper.GetLogItems("log.txt");
@@ -30,8 +32,10 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
 
+		// Setting up status-code based report tables
         public async Task<IActionResult> StatusReports(string status)
-    {
+		{
+			// Query for items
 	    var items = from i in _context.Items
 		    select i;
 
@@ -39,7 +43,7 @@ namespace Systems_Project_Spring_2023.Controllers
 	    {
 		    items = items.Where(i => i.Status_code == status);
 	    }
-
+			// Query for kits
 	    var kits = from k in _context.Kits
 		    select k;
 
@@ -50,10 +54,11 @@ namespace Systems_Project_Spring_2023.Controllers
 
 	    var data = new SharedData()
 	    {
+			// Pulling shared data from the SharedData model(Read-only)
 		    itemdetails = await items.ToListAsync(),
 		    kitdetails = await kits.ToListAsync()
 	    };
-
+			// Setting up our list of status codes
 	    ViewBag.StatusCodes = new List<SelectListItem>()
 	    {
 		    new SelectListItem() { Text = "All", Value = "All", Selected = status == "All" },

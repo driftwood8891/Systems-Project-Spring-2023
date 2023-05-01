@@ -4,6 +4,8 @@ namespace Systems_Project_Spring_2023.Controllers
 {
 	public class TeamController : Controller
 	{
+		// Rendering Team pages
+
 		public IActionResult Index()
 		{
 			return View();

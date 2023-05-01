@@ -46,6 +46,7 @@ namespace Systems_Project_Spring_2023.Controllers
 			return View();
 		}
 
+        // Listing both items and kits in the same list
         public IActionResult InventoryManagement()
         {
 
@@ -93,12 +94,12 @@ namespace Systems_Project_Spring_2023.Controllers
 
 
 
-
+        // GET - For Checkout view 
         public IActionResult Checkout()
         {
 	        var viewModel = new JoinData();
 			
-	        
+	        // list dropdown boxes
             viewModel.Kits = _context.Kits.Where(k => k.Status_code == "1").ToList();
 	        viewModel.Students = _context.Students.ToList();
 	        viewModel.Items = _context.Items.Where(i => i.Status_code == "1").ToList();
@@ -107,11 +108,15 @@ namespace Systems_Project_Spring_2023.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Checkout(string checkOutOption, string kitName, string studentName, string itemName)
         {
+            // Reference students, items, and kits by their names
 	        var kit = _context.Kits.FirstOrDefault(k => k.Kit_name == kitName);
 	        var student = _context.Students.FirstOrDefault(s => s.Student_fname == studentName);
 	        var item = _context.Items.FirstOrDefault(i => i.Item_name == itemName);
+
+            // If else setup for radio button
 	        if (checkOutOption == "kit" && kit != null && student != null)
 	        {
 		        // use the selected Kit object and its properties
@@ -147,30 +152,38 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
 
-
+        // GET - For CheckIn view
         public IActionResult Checkin()
         {
             var viewModel = new JoinData();
 			
 	        // Display data within dropdown boxes and Filtering by status code
             viewModel.Kits = _context.Kits.Where(k => k.Status_code == "2").ToList();
-            viewModel.Students = _context.Students.ToList();
+            //viewModel.Students = _context.Students.ToList();
             viewModel.Items = _context.Items.Where(i => i.Status_code == "2").ToList();
             return View(viewModel);
         }
 
 
         [HttpPost]
-        public IActionResult Checkin(string checkInOption, string kitName, string studentName, string itemName)
+        [ValidateAntiForgeryToken]
+        public IActionResult Checkin(string checkInOption, string kitName, string locationName, string itemName)
         {
+            // Reference kits, students, and items by their names
             var kit = _context.Kits.FirstOrDefault(k => k.Kit_name == kitName);
-            var student = _context.Students.FirstOrDefault(s => s.Student_fname == studentName);
+            //var student = _context.Students.FirstOrDefault(s => s.Student_fname == studentName);
+            //var student = _context.Students.FirstOrDefault(s => s.Student_camp == locationName);
             var item = _context.Items.FirstOrDefault(i => i.Item_name == itemName);
-            if (checkInOption == "kit" && kit != null && student != null)
+            // get the selected value from the drop-down list
+            string selectedLocation = Request.Form["locationName"];
+
+            // If else for radio buttion
+            if (checkInOption == "kit" && kit != null /*&& student != null*/)
             {
                 // use the selected Kit object and its properties
                 kit.Status_code = "1";
-                kit.Student_macid = student.Student_macid;
+                //kit.Student_macid = student.Student_macid;
+                kit.Student_macid = selectedLocation;
 
                 // Code to generate logging
 				_logFileHelper.LogEvent("Checked In", $"Checked In '{kit.Kit_name}'");
@@ -179,11 +192,12 @@ namespace Systems_Project_Spring_2023.Controllers
 				TempData["success"] = "Kit successfully checked in"; // create alert
 				return RedirectToAction("InventoryManagement");
 			}
-            else if (checkInOption == "item" && item != null && student != null)
+            else if (checkInOption == "item" && item != null /*&& student != null*/)
             {
                 // use the selected Item object and its properties
                 item.Status_code = "1";
-                item.Student_macid = student.Student_macid;
+                //item.Student_macid = student.Student_macid;
+                item.Student_macid = selectedLocation;
 
 				// Code to generate logging
 				_logFileHelper.LogEvent("Checked In", $"Checked In '{item.Item_name}'");

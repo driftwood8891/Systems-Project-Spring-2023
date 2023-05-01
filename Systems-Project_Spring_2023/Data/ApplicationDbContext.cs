@@ -20,7 +20,7 @@ namespace Systems_Project_Spring_2023.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 	        base.OnModelCreating(modelBuilder);
-
+			// Adding seed data for Status codes
 	        modelBuilder.Entity<Status>().HasData(
 		        new Status { Status_code = "1", Status_desc = "Checked_In" },
 		        new Status { Status_code = "2", Status_desc = "Checked_Out" },
