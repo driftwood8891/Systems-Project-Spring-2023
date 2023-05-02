@@ -1,79 +1,146 @@
 ﻿@model Systems_Project_Spring_2023.Models.Kit
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Kit";
 }
 
-<h1>Edit</h1>
+<hr class="hr-w hr-w-3" />
 
-<h4>Kit</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Kit_id" />
-            <div class="form-group">
-                <label asp-for="Kit_barcd" class="control-label"></label>
-                <input asp-for="Kit_barcd" class="form-control" />
-                <span asp-validation-for="Kit_barcd" class="text-danger"></span>
+<div class="container">
+    <h1 class="pb-3 mb-4 border-bottom">Edit Kit</h1>
+
+    <hr class="hr-w hr-w-4" />
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" name="Kit_id" value="@Model.Kit_id" />
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <div class="form-group">
+                    <label asp-for="Kit_barcd" class="control-label"></label>
+                    <input asp-for="Kit_barcd" class="form-control" />
+                    <span asp-validation-for="Kit_barcd" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Kit_name" class="control-label"></label>
-                <input asp-for="Kit_name" class="form-control" />
-                <span asp-validation-for="Kit_name" class="text-danger"></span>
+            <div class="form-group col-md-6">
+                <div class="form-group">
+                    <label asp-for="Kit_name" class="control-label"></label>
+                    <input asp-for="Kit_name" class="form-control" />
+                    <span asp-validation-for="Kit_name" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Kit_qty" class="control-label"></label>
-                <input asp-for="Kit_qty" class="form-control" />
-                <span asp-validation-for="Kit_qty" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <div class="form-group">
+                    <label asp-for="Kit_note" class="control-label"></label>
+                    <input asp-for="Kit_note" class="form-control" />
+                    <span asp-validation-for="Kit_note" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Kit_desc" class="control-label"></label>
-                <input asp-for="Kit_desc" class="form-control" />
-                <span asp-validation-for="Kit_desc" class="text-danger"></span>
+            <div class="form-group col-md-6">
+                <div class="form-group">
+                    <label asp-for="Kt_id" class="control-label"></label>
+                    <select asp-for="Kt_id" class="form-control" asp-items="@ViewBag.Kit_types">
+                        <option value="">Kit Type</option>
+                    </select>
+                    <span asp-validation-for="Kt_id" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Kit_cost" class="control-label"></label>
-                <input asp-for="Kit_cost" class="form-control" />
-                <span asp-validation-for="Kit_cost" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <div class="form-group">
+                    <label asp-for="Status_code" class="control-label"></label>
+                    @*<input asp-for="Status_code" class="form-control" />*@
+                    @*We make the changes here in order to use the dropdown box created in the kit controller.*@
+                    <select asp-for="Status_code" class="form-control" id="status-select" asp-items="@ViewBag.Statuses">
+                        <option value="">Select a Status</option>
+                    </select>
+                    <span asp-validation-for="Status_code" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Kit_date" class="control-label"></label>
-                <input asp-for="Kit_date" class="form-control" />
-                <span asp-validation-for="Kit_date" class="text-danger"></span>
+
+            <div class="form-group col-md-6">
+                <div id="campusDropdown">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label asp-for="Student_macid" class="control-label"></label>
+                            <select asp-for="Student_macid" class="form-control">
+                                <option value="">Campus</option>
+                                <option value="MOB">Moberly</option>
+                                <option value="COL">Columbia</option>
+                                <option value="HAN">Hannibal</option>
+                                <option value="MEX">Mexico</option>
+                                <option value="KIR">Kirksville</option>
+                            </select>
+                            <span asp-validation-for="Student_macid" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="studentDropdown" style="display: none;">
+                    <div class="form-group">
+                        <label asp-for="Student_macid" class="control-label"></label>
+                        <select asp-for="Student_macid" class="form-control" asp-items="@ViewBag.Students" id="student-select">
+                            <option value="">Select Student</option>
+                        </select>
+                        <span asp-validation-for="Student_macid" class="text-danger"></span>
+                    </div>
+
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Kit_note" class="control-label"></label>
-                <input asp-for="Kit_note" class="form-control" />
-                <span asp-validation-for="Kit_note" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Kt_id" class="control-label"></label>
-                <input asp-for="Kt_id" class="form-control" />
-                <span asp-validation-for="Kt_id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status_code" class="control-label"></label>
-                <input asp-for="Status_code" class="form-control" />
-                <span asp-validation-for="Status_code" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Student_macid" class="control-label"></label>
-                <input asp-for="Student_macid" class="form-control" />
-                <span asp-validation-for="Student_macid" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+
+
+    <div>
+        <a asp-action="Index">Back to List</a>
     </div>
+
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<hr class="hr-w hr-w-3" />
+
+<script>
+    // show/hide the corresponding dropdown box based on the selected option
+    const campusOption = document.querySelector('input[value="campus"]');
+    const studentOption = document.querySelector('input[value="student"]');
+    const statusSelect = document.getElementById('status-select');
+    const campusDropdown = document.getElementById('campusDropdown');
+    const studentDropdown = document.getElementById('studentDropdown');
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var studentSelect = document.getElementById('student-select');
+        var select2 = new Select2(studentSelect);
+    });
+
+    statusSelect.addEventListener('change', function () {
+        // Code to execute when the selected option changes
+        const selectedOption = statusSelect.value;
+
+        if (selectedOption == "2") {
+            studentDropdown.parentNode.insertBefore(campusDropdown, studentDropdown.nextSibling);
+            campusDropdown.style.display = 'none';
+            studentDropdown.style.display = 'block';
+        } else {
+            campusDropdown.parentNode.insertBefore(studentDropdown, campusDropdown.nextSibling);
+            campusDropdown.style.display = 'block';
+            studentDropdown.style.display = 'none';
+        }
+    });
+</script>
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

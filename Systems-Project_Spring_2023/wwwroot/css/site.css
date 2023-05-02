@@ -1,144 +1,201 @@
+/********************************** 
+ * General Layout
+**********************************/
+
+/** Font Styles / Typography **/
 html {
     font-size: 14px;
+    font-family: 'Noto Sans', sans-serif;
+    height: 100%;
+    margin: 0;
 }
-
 @media (min-width: 768px) {
     html {
         font-size: 16px;
     }
 }
 
-html {
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Archivo Black', sans-serif;
+}
+
+/** Header Content **/
+.navbar {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 0px;
+}
+.macc-logo {
+    width: 125px;
+    height: auto;
+}
+.profile-icon {
+    width: 35px;
+    height: 35px;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+.sub-menu-items li {
+    margin-left: 0px !important;
+}
+.sub-menu-items li:hover {
+    background-color: rgb(225, 225, 225);
+    cursor: pointer;
+}
+.addHeaderPopup {
+    width: 0px;
+    height: 0px;
+}
+.sub-menu-items {
+    padding: 0px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 3px black;
     position: relative;
+    right: 156.5px;
+    top: 5px;
+    z-index: 10;
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 1px;
+    background-color: white;
+}
+.sub-menu-items li {
+    margin: 0px;
+    list-style-type: none;
+}
+.top-bot {
+    position: absolute;
+    top: -21px;
+    right: -1px;
+    z-index: 10;
+    width: 0;
+    height: 0;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+.addHeaderPopup {
+    display: block;
+}
+.removeHeaderPopup {
+    display: none;
+}
+.top-bot-border {
+    top: -19px;
+    border-color: transparent transparent #fff transparent;
+}
+
+/** Body Content **/
+body {
+    display: flex;
+    flex-direction: column;
     min-height: 100%;
 }
-
-body {
-    margin-bottom: 60px;
+.container {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
 }
 
-/********************************** 
- * Team Page
- * Credit to https://www.bootdey.com/ for parts of CSS
-**********************************/
-.welcome-banner {
-    background: url("/Images/team-welcome-banner.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.wb-layer {
-    background: rgb(0, 0, 0, 0.75);
+/** Footer Content **/
+footer {
+    background-color: #333333;
+    flex-shrink: 0;
+    flex: 1 0 auto;
     color: white;
-}
-
-.our-team {
-    margin-bottom: 30px;
-    box-shadow: 10px 10px 10px -10px rgba(0, 64, 128, .3);
-    transform: scale(1, 1);
-    transition: transform 0.3s ease-in-out;
-}
-
-.our-team:hover {
-    transform: scale(1.05, 1.05);
-    transition: transform 0.3s ease-in-out;
-}
-
-.our-team .team-content {
-    padding: 20px 0;
-    background: #fff;
-}
-
-.our-team .title {
-    font-size: 18px;
-    font-weight: bold;
-    color: rgb(205,32,40);
-    text-transform: capitalize;
-    margin: 0 0 20px;
-    position: relative;
-}
-
-.our-team .title:before {
-    content: "";
-    width: 25px;
-    height: 1px;
-    background: rgb(205,32,40);
-    position: absolute;
-    bottom: -10px;
-    right: 50%;
-    margin-right: 9px;
-    transition-duration: 0.25s;
-}
-
-.our-team .title:after {
-    content: "";
-    width: 25px;
-    height: 1px;
-    background: rgb(205,32,40);
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    margin-left: 9px;
-    transition-duration: 0.25s;
-}
-
-.our-team:hover .title:before,
-.our-team:hover .title:after {
-    width: 50px;
-}
-
-.our-team .post {
-    display: inline-block;
-    font-size: 15px;
-    text-transform: capitalize;
-}
-
-.our-team .post span {
-    position: relative;
-    top: -10px;
-}
-
-.our-team .post:before {
-    content: "";
-    display: block;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: rgb(205, 32, 40);
-    margin: 0 auto;
-    position: relative;
-    top: -13px;
-}
-
-@media only screen and (max-width: 990px) {
-    .our-team {
-        margin-bottom: 30px;
-    }
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 25px;
+    margin-top: 0px;
 }
 
 /********************************** 
- * Team Member Page
+ * General Layout
 **********************************/
-.about-card .about-text, .about-card a {
-    text-align: left;
-    float: left;
-    margin-left: 0px;
-    padding: 0px;
-}
 
-.about-card .row div {
+/** Styling hr **/
+.hr-w {
+    height: 0px !important;
+    background-color: none !important;
+    border: !important;
+    margin-bottom: 0px;
+}
+.hr-w-1 {
+    margin-top: 100px;
+}
+.hr-w-2 {
     margin-top: 50px;
 }
-
-.about-card .about-title { }
-
-.about-card .about-subtitle { }
-
-.about-card .nav-link {
-    clear: both;
-    float: none;
-    display: block;
+.hr-w-3 {
+    margin-top: 25px;
+}
+.hr-w-4 {
+    margin-top: 15px;
+}
+.hr-w-5 {
     margin-top: 10px;
-    margin-left: 0px;
+}
+.hr-w-6 {
+    margin-top: 5px;
+}
+
+.border-bottom {
+    border-color: #cd2028 !important;
+    border-width: 500px;
+}
+
+/** Styling Buttons **/
+.btn-primary {
+    background-color: #cd2028;
+    border: none;
+}
+.btn-primary:hover {
+    background-color: #921020;
+}
+.btn-outline-primary {
+    border-color: #cd2028;
+    color: #cd2028;
+}
+.btn-outline-primary:hover {
+    border-color: #fd2028;
+    color: white;
+    background-color: #dc3545;
+}
+.btn.active,
+.btn:active {
+    color: #fff;
+    background-color: #921020;
+    border-color: #dc3545;
+}
+
+
+.btn-fix {
+    width: 250px;
+    margin: 5px 0px;
+}
+
+/** Make tables scrollable horizontally **/
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.table-wrapper table {
+    width: 100%;
+    min-width: 1200px; /* adjust as needed **/
+}
+
+
+/** Styling Forms **/
+@media (min-width: 768px) {
+    .form-row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        background-color: red;
+    }
+
+    .form-group {
+        flex-basis: 50%;
+    }
 }

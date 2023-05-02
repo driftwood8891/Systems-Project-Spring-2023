@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,40 +14,27 @@ namespace Systems_Project_Spring_2023.Controllers
 {
     public class StatusController : Controller
     {
-        private readonly ApplicationDbContext _context;
+		private readonly ApplicationDbContext _context;
+		private readonly IWebHostEnvironment _env;
+		private readonly LogFileHelper _logFileHelper;
 
-        public StatusController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+		public StatusController(ApplicationDbContext context, IWebHostEnvironment env, LogFileHelper logFileHelper)
+		{
+			_context = context;
+			_env = env;
+			_logFileHelper = logFileHelper;
+		}
 
-        // GET: Status
-        public async Task<IActionResult> Index()
+		// GET: Status
+		public async Task<IActionResult> Index()
         {
               return _context.Statuses != null ? 
                           View(await _context.Statuses.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Statuses'  is null.");
-        }
+		}
 
-        // GET: Status/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.Statuses == null)
-            {
-                return NotFound();
-            }
-
-            var status = await _context.Statuses
-                .FirstOrDefaultAsync(m => m.Status_code == id);
-            if (status == null)
-            {
-                return NotFound();
-            }
-
-            return View(status);
-        }
-
-        // GET: Status/Create
+		// GET: Status/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -56,10 +45,14 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Status_code,Status_desc")] Status status)
         {
             if (ModelState.IsValid)
             {
+				// Code that generates a report in the log.txt file 
+				_logFileHelper.LogEvent("Create", $"Created Status Code '{status.Status_code}'");
+
                 _context.Add(status);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -68,6 +61,7 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: Status/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.Statuses == null)
@@ -88,6 +82,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(string id, [Bind("Status_code,Status_desc")] Status status)
         {
             if (id != status.Status_code)
@@ -99,7 +94,11 @@ namespace Systems_Project_Spring_2023.Controllers
             {
                 try
                 {
-                    _context.Update(status);
+
+					// Code that generates a report in the log.txt file 
+					_logFileHelper.LogEvent("Edit", $"Edited Status Code '{status.Status_code}'");
+
+					_context.Update(status);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -119,6 +118,7 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: Status/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.Statuses == null)
@@ -139,6 +139,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // POST: Status/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.Statuses == null)
@@ -148,7 +149,10 @@ namespace Systems_Project_Spring_2023.Controllers
             var status = await _context.Statuses.FindAsync(id);
             if (status != null)
             {
-                _context.Statuses.Remove(status);
+				// Code that generates a report in the log.txt file 
+				_logFileHelper.LogEvent("Delete", $"Deleted Status Code '{status.Status_code}'");
+
+				_context.Statuses.Remove(status);
             }
             
             await _context.SaveChangesAsync();

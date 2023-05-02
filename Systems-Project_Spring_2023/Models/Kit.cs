@@ -3,11 +3,36 @@ using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Systems_Project_Spring_2023.Data;
 
 namespace Systems_Project_Spring_2023.Models
 {
+
     public class Kit
     {
+        public Kit()
+        {
+            // Retrieve the TimeZoneInfo object for Central Standard Time
+            var cstTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            var timeZoneOffset = cstTimeZone.BaseUtcOffset;
+
+            // Check if daylight saving time is in effect
+            if (cstTimeZone.IsDaylightSavingTime(DateTime.UtcNow))
+            {
+                timeZoneOffset += TimeSpan.FromHours(1);
+            }
+
+            // Adjust the UTC time by the time zone offset
+            Kit_date = DateTime.UtcNow.Add(timeZoneOffset);
+
+            // Generate a unique Kit ID
+            if (string.IsNullOrEmpty(Kit_id))
+            {
+                Kit_id = Guid.NewGuid().ToString().Substring(0, 10);
+            }
+		}
+
+
         [Key]
         [Display(Name = "Kit ID")]
         [StringLength(10)]
@@ -20,14 +45,14 @@ namespace Systems_Project_Spring_2023.Models
         public string? Kit_barcd { get; set; }
 
         [Display(Name = "Kit Name")]
-        [StringLength(20)]
+        [StringLength(35)]
         [Required(ErrorMessage = "Kit Name is required.")]
         public string Kit_name { get; set; } = null!;
 
-        [Display(Name = "Kit Quantity")]
+        /*[Display(Name = "Kit Quantity")]
         [Range(1, 2)]
         [Required(ErrorMessage = "Kit quantity is required.")]
-        public int Kit_qty { get; set; }
+        public int Kit_qty { get; set; }*/
 
         [Display(Name = "Kit Description")]
         [StringLength(120)]
@@ -39,8 +64,7 @@ namespace Systems_Project_Spring_2023.Models
         [Required(ErrorMessage = "Kit cost is required.")]
         public decimal Kit_cost { get; set; }
 
-        [Display(Name = "Kit Date")]
-        [Required(ErrorMessage = "Kit date is required.")]
+        [Display(Name = "Date")]
         public DateTime Kit_date { get; set; }
 
         [Display(Name = "Notes")]
@@ -48,7 +72,7 @@ namespace Systems_Project_Spring_2023.Models
         public string? Kit_note { get; set; }
 
         [Display(Name = "Kit Type")]
-        [StringLength(8)]
+        [StringLength(10)]
         [Required(ErrorMessage = "Kit type is required.")]
         public string Kt_id { get; set; } = null!;
 
@@ -57,9 +81,9 @@ namespace Systems_Project_Spring_2023.Models
         [Required(ErrorMessage = "Status code is required.")]
         public string Status_code { get; set; } = null!;
 
-        [Display(Name = "MACC ID/Room number")]
+        [Display(Name = "Location (Student ID / Campus)")]
         [StringLength(10)]
-        [Required(ErrorMessage = "MACC ID or Room number is required.")]
+        [Required(ErrorMessage = "Location (Student / Campus) is required.")]
         public string Student_macid { get; set; } = null!;
 
         public virtual Student? Student { get; set; }

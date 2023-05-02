@@ -1,0 +1,53 @@
+﻿@page
+@model Systems_Project_Spring_2023.Areas.AssignRolesModel
+
+<hr class="hr-w hr-w-3" />
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<h1>Account and Role Relationships</h1>
+			<hr class="hr-w hr-w-4" />
+
+			<table class="table table-striped table-bordered" style="max-width: 800px;">
+				<thead class="thead-dark">
+				<tr>
+					<th>Account</th>
+					<th>Role</th>
+				</tr>
+				</thead>
+				<tbody>
+				@foreach (var accountRole in Model.AccountRoles)
+				{
+					<tr>
+						<td>@accountRole.accountName</td>
+						<td>@accountRole.roleName</td>
+					</tr>
+				}
+				</tbody>
+			</table>
+		</div>
+
+		<div class="col-md-6">
+			<h1>Assign Roles</h1>
+			<hr class="hr-w hr-w-4" />
+			<form method="post">
+				<div class="form-group">
+					<label for="accountDropDown">Select Account</label>
+					<select class="form-control" id="accountDropDown" asp-items="@Model.Accounts.Where(a => a.Value != "admin@admin.com")" asp-for="AccountId"></select>
+				</div>
+
+
+
+				<div class="form-group">
+					<label for="roleDropDown">Select Role</label>
+					<select class="form-control" id="roleDropDown" asp-items="@Model.Roles" asp-for="RoleId"></select>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Assign Role</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<hr class="hr-w hr-w-3" />

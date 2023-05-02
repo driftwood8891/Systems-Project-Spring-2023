@@ -1,0 +1,82 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model List<LogItem>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<hr class="hr-w hr-w-3" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            @if (User.IsInRole("Admin"))
+            {
+                <h2>Teacher View</h2>
+                <p>Welcome, @User.Identity.Name!</p>
+            } 
+            else if (User.IsInRole("Assistant"))
+            {
+                <h2>Lab Assistant View</h2>
+                <p>Welcome, @User.Identity.Name!</p>
+            }
+            else
+            {
+                <h2>Student View</h2>
+                <p>Welcome, @User.Identity.Name!<br /><br />Right now there is no student view for this application. If you are a lab assistant, please email your teacher and request that your account be given lab assistant privileges.</p>
+            }
+
+            
+            @if (User.IsInRole("Admin") || User.IsInRole("Assistant"))
+            {
+                <hr class="hr-w hr-w-4" />
+
+                <h2>Latest Transactions</h2>
+                int i = 3; 
+                @foreach (var logItem in Model)
+                {
+                    <p class="profile-report">@logItem.Description</p>
+                    i--;
+                    @if (i <= 0)
+                    {
+                        break;    
+                    }
+                }
+                
+                <a class="btn btn-primary btn-md btn-fix" asp-controller="Reports" asp-action="Index">All Reports</a>
+
+                <hr class="hr-w hr-w-4" />
+
+                <h2>Common Tasks</h2>
+                <p>Use the buttons below for quick navigation for common tasks.</p>
+                <a class="btn btn-primary btn-md btn-fix" asp-controller="Home" asp-action="InventoryManagement">Manage Inventory</a>
+                <a class="btn btn-primary btn-md btn-fix" asp-controller="Students" asp-action="Index">Manage Students</a>
+                <a class="btn btn-primary btn-md btn-fix" asp-controller="Home" asp-action="CheckIn">Check In Item/Kit</a>
+                <a class="btn btn-primary btn-md btn-fix" asp-controller="Home" asp-action="CheckOut">Check Out Item/Kit</a>
+            
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <hr class="hr-w hr-w-4" />
+	                <h2>User Management</h2>
+	            
+	                <a class="btn btn-primary btn-md btn-fix" asp-area="Identity" asp-page="/Account/AssignRoles">Assign Roles</a>
+                    <a class="btn btn-primary btn-md btn-fix" asp-controller="LabAssistants" asp-action="Index">Manage Lab Assistants</a>
+                }
+
+            }
+        </div>
+        <div class="col-lg-6 align-items-center">
+            <hr class="d-sm-block d-md-none col-sm hr-w hr-w-2" />
+            <div class="image-container">
+                <img alt="Placeholder image of computers." class="img-fluid" src="@Url.Content("~/Images/computers.jpg")" />
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+<hr class="hr-w hr-w-2" />

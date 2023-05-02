@@ -1,59 +1,62 @@
 ﻿@model IEnumerable<Systems_Project_Spring_2023.Models.Kit_Type>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Kit Type Management";
 }
 
-<h1>Index</h1>
+<hr class="hr-w hr-w-3" />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Kt_item_name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Kt_item_qty)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Kt_item_cost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Kt_date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Item_id)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kt_item_name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kt_item_qty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kt_item_cost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kt_date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item_id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Kt_id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Kt_id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Kt_id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container">
+    <h1 class="pb-3 mb-4 border-bottom">Kit Type Management</h1>
+    <a class="btn btn-primary" asp-controller="Home" asp-action="InventoryManagement">Back</a>
+    <a class="btn btn-primary btn-md btn-fix" asp-action="Create">Create New Kit Type</a>
+
+    <hr class="hr-w hr-w-5" />
+    <div class="table-wrapper">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Kt_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Kt_cost)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Kt_date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Kt_desc)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Kt_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Kt_cost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Kt_date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Kt_desc)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Kt_id">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Kt_id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<hr class="hr-w hr-w-3" />

@@ -1,0 +1,100 @@
+﻿@model JoinData
+@{
+    ViewData["Title"] = "Check In";
+}
+
+<hr class="hr-w hr-w-3" />
+
+<div class="container">
+    <h1 class="pb-3 mb-4 border-bottom">Checkin an Item/Kit</h1>
+
+    <hr class="hr-w hr-w-4" />
+
+    <form method="post" asp-action="CheckIn">
+        <div class="form-group">
+            <label>Select an option:</label><br />
+            <div class="form-check form-check-inline">
+                <input type="radio" name="checkInOption" value="kit" class="form-check-input" checked>
+                <label class="form-check-label">Check in a Kit</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" name="checkInOption" value="item" class="form-check-input">
+                <label class="form-check-label">Check in an Item</label>
+            </div>
+        </div>
+
+        <div id="kitDropdown" class="form-group">
+            <label for="kitName">Select a Kit:</label>
+            <select id="kitName" name="kitName" class="form-control">
+                <option value="">Select a Kit</option>
+                @foreach (var kit in Model.Kits)
+                {
+                    <option value="@kit.Kit_name">@kit.Kit_name</option>
+                }
+            </select>
+        </div>
+
+        <div id="itemDropdown" class="form-group" style="display: none;">
+            <label for="itemName">Select an Item:</label>
+            <select id="itemName" name="itemName" class="form-control">
+                <option value="">Select an Item</option>
+                @foreach (var item in Model.Items)
+                {
+                    <option value="@item.Item_name">@item.Item_name</option>
+                }
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="campus">Select a Campus:</label>
+            <select id="campus" name="campus" class="form-control">
+                <option value="">Campus</option>
+                <option value="MOB">Moberly</option>
+                <option value="COL">Columbia</option>
+                <option value="HAN">Hannibal</option>
+                <option value="MEX">Mexico</option>
+                <option value="KIR">Kirksville</option>
+            </select>
+        </div>
+
+        @*<div class="form-group">
+            <label for="studentName">Select a Location:</label>
+            <select id="studentName" name="studentName" class="form-control">
+                <option value="">Select a Student</option>
+                @foreach (var student in Model.Students)
+                {
+                    <option value="@student.Student_fname">@student.Student_fname</option>
+                }
+            </select>
+        </div>*@
+
+        <button type="submit" class="btn btn-primary">Check In</button>
+    </form>
+
+</div>
+
+<hr class="hr-w hr-w-3" />
+
+@*// This is our JavaScript code that hides the dropbox that isnt selected in the radio button option*@
+<script>
+    // show/hide the corresponding dropdown box based on the selected option
+    const kitOption = document.querySelector('input[value="kit"]');
+    const itemOption = document.querySelector('input[value="item"]');
+    const kitDropdown = document.getElementById('kitDropdown');
+    const itemDropdown = document.getElementById('itemDropdown');
+
+    kitOption.addEventListener('click', () => {
+        kitDropdown.style.display = 'block';
+        itemDropdown.style.display = 'none';
+    });
+
+    itemOption.addEventListener('click', () => {
+        kitDropdown.style.display = 'none';
+        itemDropdown.style.display = 'block';
+    });
+</script>
+
+@if (TempData["ErrorMessage"] != null)
+{
+	<div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}

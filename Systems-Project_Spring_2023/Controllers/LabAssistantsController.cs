@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,40 +14,27 @@ namespace Systems_Project_Spring_2023.Controllers
 {
     public class LabAssistantsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+		private readonly ApplicationDbContext _context;
+		private readonly IWebHostEnvironment _env;
+		private readonly LogFileHelper _logFileHelper;
 
-        public LabAssistantsController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+		public LabAssistantsController(ApplicationDbContext context, IWebHostEnvironment env, LogFileHelper logFileHelper)
+		{
+			_context = context;
+			_env = env;
+			_logFileHelper = logFileHelper;
+		}
 
-        // GET: LabAssistants
-        public async Task<IActionResult> Index()
+		// GET: LabAssistants
+		public async Task<IActionResult> Index()
         {
               return _context.LabAssistant != null ? 
                           View(await _context.LabAssistant.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.LabAssistant'  is null.");
-        }
+		}
 
-        // GET: LabAssistants/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.LabAssistant == null)
-            {
-                return NotFound();
-            }
-
-            var labAssistant = await _context.LabAssistant
-                .FirstOrDefaultAsync(m => m.La_id == id);
-            if (labAssistant == null)
-            {
-                return NotFound();
-            }
-
-            return View(labAssistant);
-        }
-
-        // GET: LabAssistants/Create
+		// GET: LabAssistants/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -56,11 +45,16 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("La_id,La_fname,La_lname,La_camp,La_sch")] LabAssistant labAssistant)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(labAssistant);
+
+				// Code that generates a report in the log.txt file 
+				_logFileHelper.LogEvent("Create", $"Created Lab Assistant '{labAssistant.La_fname}'");
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -68,6 +62,8 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: LabAssistants/Edit/5
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.LabAssistant == null)
@@ -88,6 +84,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("La_id,La_fname,La_lname,La_camp,La_sch")] LabAssistant labAssistant)
         {
             if (id != labAssistant.La_id)
@@ -99,7 +96,10 @@ namespace Systems_Project_Spring_2023.Controllers
             {
                 try
                 {
-                    _context.Update(labAssistant);
+					// Code that generates a report in the log.txt file 
+					_logFileHelper.LogEvent("Edit", $"Edited Lab Assistant '{labAssistant.La_fname}'");
+
+					_context.Update(labAssistant);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -119,6 +119,7 @@ namespace Systems_Project_Spring_2023.Controllers
         }
 
         // GET: LabAssistants/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.LabAssistant == null)
@@ -139,6 +140,7 @@ namespace Systems_Project_Spring_2023.Controllers
         // POST: LabAssistants/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.LabAssistant == null)
@@ -148,7 +150,10 @@ namespace Systems_Project_Spring_2023.Controllers
             var labAssistant = await _context.LabAssistant.FindAsync(id);
             if (labAssistant != null)
             {
-                _context.LabAssistant.Remove(labAssistant);
+				// Code that generates a report in the log.txt file 
+				_logFileHelper.LogEvent("Delete", $"Deleted Lab Assistant '{labAssistant.La_fname}'");
+
+				_context.LabAssistant.Remove(labAssistant);
             }
             
             await _context.SaveChangesAsync();
