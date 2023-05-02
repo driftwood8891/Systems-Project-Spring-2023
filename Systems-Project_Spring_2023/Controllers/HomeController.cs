@@ -123,7 +123,7 @@ namespace Systems_Project_Spring_2023.Controllers
         {
             // Reference students, items, and kits by their names
 	        var kit = _context.Kits.FirstOrDefault(k => k.Kit_name == kitName);
-	        var student = _context.Students.FirstOrDefault(s => s.Student_fname == studentName);
+	        var student = _context.Students.FirstOrDefault(s => s.Student_macid == studentName);
 	        var item = _context.Items.FirstOrDefault(i => i.Item_name == itemName);
 
             // If else setup for radio button
