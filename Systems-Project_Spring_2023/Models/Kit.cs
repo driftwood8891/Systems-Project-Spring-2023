@@ -64,6 +64,7 @@ namespace Systems_Project_Spring_2023.Models
         [Required(ErrorMessage = "Kit cost is required.")]
         public decimal Kit_cost { get; set; }
 
+        [Display(Name = "Date")]
         public DateTime Kit_date { get; set; }
 
         [Display(Name = "Notes")]
@@ -80,7 +81,7 @@ namespace Systems_Project_Spring_2023.Models
         [Required(ErrorMessage = "Status code is required.")]
         public string Status_code { get; set; } = null!;
 
-        [Display(Name = "Location (Student / Campus)")]
+        [Display(Name = "Location (Student ID / Campus)")]
         [StringLength(10)]
         [Required(ErrorMessage = "Location (Student / Campus) is required.")]
         public string Student_macid { get; set; } = null!;

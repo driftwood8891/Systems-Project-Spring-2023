@@ -64,7 +64,7 @@ namespace Systems_Project_Spring_2023.Models
 		[Required(ErrorMessage = "Item cost is required.")]
 		public decimal Item_cost { get; set; }
 
-		//[Display(Name = "Creation Date")]
+		[Display(Name = "Date")]
 		//[Required(ErrorMessage = "Creation date is required.")]
 		public DateTime Item_date { get; set; }
 
@@ -78,7 +78,7 @@ namespace Systems_Project_Spring_2023.Models
 		[Required(ErrorMessage = "Status Code is required.")]
 		public string Status_code { get; set; } = null!;
 
-		[Display(Name = "Location (Student / Campus)")]
+		[Display(Name = "Location (Student ID / Campus)")]
 		[StringLength(10)]
 		[Required(ErrorMessage = "Location (Student / Campus) is required.")]
 		public string Student_macid { get; set; } = null!;
