@@ -1,4 +1,4 @@
-﻿@model Systems_Project_Spring_2023.Models.SharedData
+﻿@model Systems_Project_Spring_2023.Models.JoinData
 
 @{
     ViewData["Title"] = "Status Reports";
@@ -9,17 +9,17 @@
 <div class="container">
     <h2 class="pb-3 mb-4 border-bottom">Status Code Reports</h2>
 
-    @using (Html.BeginForm("StatusReports", "Reports", FormMethod.Get))
-    {
-	    <div class="form-group-row">
-		    <div class="col-md-4">
-                <label class="form-check-label">Filter Report:</label>
-		        @Html.DropDownList("status", new SelectList(ViewBag.StatusCodes, "Value", "Text"), "- Select a Status Code - ", new { @class = "form-control", onchange = "this.form.submit();" })
-	        </div>
-	    </div>
-    }
+	@using (Html.BeginForm("StatusReports", "Reports", FormMethod.Get))
+	{
+		<div class="form-group-row">
+			<div class="col-md-4">
+				<label class="form-check-label">Filter Report:</label>
+				@Html.DropDownList("status", (SelectList)ViewBag.Statuses, "- Select a Status Code - ", new { @class = "form-control", onchange = "this.form.submit();" })
+			</div>
+		</div>
+	}
 
-    <hr class="hr-w hr-w-5" />
+	<hr class="hr-w hr-w-5" />
 
     <h2>Items</h2>
 
@@ -39,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.itemdetails)
+                @foreach (var item in Model.Items)
                 {
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.Item_id)</td>
@@ -75,13 +75,13 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach (var kit in Model.kitdetails)
+            @foreach (var kit in Model.Kits)
                 {
                     <tr>
                         <td>@Html.DisplayFor(modelItem => kit.Kit_id)</td>
                         <td>@Html.DisplayFor(modelItem => kit.Kit_barcd)</td>
                         <td>@Html.DisplayFor(modelItem => kit.Kit_name)</td>
-                        @*<td>@Html.DisplayFor(modelItem => kit.Kt_id)</td>*@  @*Showing up as memory location*@
+                        @*<td>@Html.DisplayFor(modelItem => kit.Kit_type)</td>*@  @*Showing up as memory location*@
                         <td>@Html.DisplayFor(modelItem => kit.Kit_cost)</td>
                         <td>@Html.DisplayFor(modelItem => kit.Kit_date)</td>
                         <td>@Html.DisplayFor(modelItem => kit.Kit_note)</td>

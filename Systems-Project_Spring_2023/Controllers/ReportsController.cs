@@ -52,29 +52,19 @@ namespace Systems_Project_Spring_2023.Controllers
 		    kits = kits.Where(k => k.Status_code == status);
 	    }
 
+            // Query for Status codes
+        var statusCode = _context.Statuses.ToList();
+        ViewBag.Statuses = new SelectList(statusCode, "Status_code", "Status_desc");
 
-	    var data = new SharedData()
+
+	    var data = new JoinData()
 	    {
-			// Pulling shared data from the SharedData model(Read-only)
-		    itemdetails = await items.ToListAsync(),
-		    kitdetails = await kits.ToListAsync()
-	    };
-			// Setting up our list of status codes
-	    ViewBag.StatusCodes = new List<SelectListItem>()
-	    {
-		    new SelectListItem() { Text = "All", Value = "All", Selected = status == "All" },
-		    new SelectListItem() { Text = "Checked-In", Value = "1", Selected = status == "1" },
-		    new SelectListItem() { Text = "Checked Out", Value = "2", Selected = status == "2" },
-		    new SelectListItem() { Text = "Dead", Value = "3", Selected = status == "3" },
-		    new SelectListItem() { Text = "Lost", Value = "4", Selected = status == "4" },
-		    new SelectListItem() { Text = "In_Transit", Value = "5", Selected = status == "5" },
-		    new SelectListItem() { Text = "Needs_Repair", Value = "6", Selected = status == "6" },
-		    new SelectListItem() { Text = "Pending", Value = "7", Selected = status == "7" },
-		    new SelectListItem() { Text = "Ready", Value = "8", Selected = status == "8" },
-		    new SelectListItem() { Text = "Unknown", Value = "9", Selected = status == "9" }
+			// Pulling shared data from the JoinData model
+		    Items = await items.ToListAsync(),
+		    Kits = await kits.ToListAsync()
 	    };
 
-	    return View(data);
+        return View(data);
     }
 
     }
