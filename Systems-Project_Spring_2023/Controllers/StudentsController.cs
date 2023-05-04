@@ -38,6 +38,11 @@ namespace Systems_Project_Spring_2023.Controllers
         
         public IActionResult Create()
         {
+            // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
+            var location = _context.Location.ToList();
+            ViewBag.Location = new SelectList(location, "loc_name", "loc_name");
+
+
             return View();
         }
 

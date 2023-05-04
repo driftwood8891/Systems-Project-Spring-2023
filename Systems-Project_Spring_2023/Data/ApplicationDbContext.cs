@@ -17,6 +17,8 @@ namespace Systems_Project_Spring_2023.Data
         public virtual DbSet<Status> Statuses { get; set; } = null!;
         public DbSet<LabAssistant>? LabAssistant { get; set; }
 
+        public virtual DbSet<Location> Location { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 	        base.OnModelCreating(modelBuilder);

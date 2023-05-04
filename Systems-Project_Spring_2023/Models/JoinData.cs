@@ -11,5 +11,7 @@
 
 		public List<Item> Items { get; set; }
 		public Item SelectedItem { get; set; }
+
+		public List<Location> Locations { get; set; }
 	}
 }

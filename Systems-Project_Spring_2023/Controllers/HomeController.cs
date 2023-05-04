@@ -170,6 +170,8 @@ namespace Systems_Project_Spring_2023.Controllers
 	        // Display data within dropdown boxes and Filtering by status code
             viewModel.Kits = _context.Kits.Where(k => k.Status_code == "2").ToList();
             viewModel.Items = _context.Items.Where(i => i.Status_code == "2").ToList();
+            viewModel.Locations = _context.Location.ToList();
+
             return View(viewModel);
         }
 
@@ -180,6 +182,8 @@ namespace Systems_Project_Spring_2023.Controllers
             // Reference kits, students, and items by their names
             var kit = _context.Kits.FirstOrDefault(k => k.Kit_name == kitName);
            var item = _context.Items.FirstOrDefault(i => i.Item_name == itemName);
+           var location = _context.Location.FirstOrDefault(l => l.loc_name == campus);
+
             if (checkInOption == "kit" && kit != null && campus != null)
             {
                 // use the selected Kit object and its properties

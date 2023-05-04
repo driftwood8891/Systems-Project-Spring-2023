@@ -266,8 +266,8 @@ namespace Systems_Project_Spring_2023.Migrations
 
                     b.Property<string>("Student_macid")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
 
                     b.Property<string>("Student_macid1")
                         .HasColumnType("nvarchar(10)");
@@ -329,8 +329,8 @@ namespace Systems_Project_Spring_2023.Migrations
 
                     b.Property<string>("Student_macid")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
 
                     b.Property<string>("Student_macid1")
                         .HasColumnType("nvarchar(10)");
@@ -404,6 +404,24 @@ namespace Systems_Project_Spring_2023.Migrations
                     b.HasKey("La_id");
 
                     b.ToTable("LabAssistant");
+                });
+
+            modelBuilder.Entity("Systems_Project_Spring_2023.Models.Location", b =>
+                {
+                    b.Property<int>("loc_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("loc_id"), 1L, 1);
+
+                    b.Property<string>("loc_name")
+                        .IsRequired()
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
+
+                    b.HasKey("loc_id");
+
+                    b.ToTable("Location");
                 });
 
             modelBuilder.Entity("Systems_Project_Spring_2023.Models.Status", b =>
@@ -482,8 +500,8 @@ namespace Systems_Project_Spring_2023.Migrations
 
                     b.Property<string>("Student_camp")
                         .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
 
                     b.Property<string>("Student_cmail")
                         .IsRequired()

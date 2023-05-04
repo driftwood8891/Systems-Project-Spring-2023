@@ -110,3 +110,49 @@ Checked Out|Checked Out 'HDMI Cable #2'|5/1/2023 7:09:14 PM
 
 Create|Created Student 'Joe'|5/1/2023 7:10:45 PM
 
+Create|Created Kit Type 'Network'|5/3/2023 7:28:04 PM
+
+Create|Created Kit Type 'Backpack'|5/3/2023 7:28:13 PM
+
+Create|Created Kit Type 'Builder-Box-Windows'|5/3/2023 7:28:23 PM
+
+Create|Created Kit Type 'Raspberry Pi 4 Kit'|5/3/2023 7:28:32 PM
+
+Create|Created Kit Type 'Builder-Box-Linux'|5/3/2023 7:29:07 PM
+
+Create|Created Kit Type 'Raspberry Pi 3 Kit'|5/3/2023 7:30:08 PM
+
+Create|Created Student 'Oren'|5/3/2023 7:37:38 PM
+
+Create|Created Student 'Oren'|5/3/2023 7:41:22 PM
+
+Create|Created Status Code '1'|5/3/2023 7:45:25 PM
+
+Create|Created Status Code '2'|5/3/2023 7:45:32 PM
+
+Create|Created Status Code '3'|5/3/2023 7:46:11 PM
+
+Create|Created Status Code '4'|5/3/2023 7:46:17 PM
+
+Create|Created Status Code '5'|5/3/2023 7:46:31 PM
+
+Create|Created Status Code '6'|5/3/2023 7:46:42 PM
+
+Create|Created Status Code '7'|5/3/2023 7:46:52 PM
+
+Create|Created Status Code '8'|5/3/2023 7:47:07 PM
+
+Create|Created Status Code '9'|5/3/2023 7:47:15 PM
+
+Create|Created Kit 'Network Kit #1'|5/3/2023 7:50:57 PM
+
+Create|Created Kit 'Network Kit #2'|5/3/2023 7:57:53 PM
+
+Create|Created Item 'HDMI cable #1'|5/3/2023 7:58:49 PM
+
+Create|Created Item 'HDMI cable #2'|5/3/2023 7:59:06 PM
+
+Checked In|Checked In 'Network Kit #1'|5/4/2023 12:46:17 AM
+
+Checked In|Checked In 'HDMI cable #2'|5/4/2023 12:46:34 AM
+

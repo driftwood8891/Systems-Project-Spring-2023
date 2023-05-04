@@ -79,7 +79,7 @@ namespace Systems_Project_Spring_2023.Models
 		public string Status_code { get; set; } = null!;
 
 		[Display(Name = "Location (Student ID / Campus)")]
-		[StringLength(10)]
+		[StringLength(35)]
 		[Required(ErrorMessage = "Location (Student / Campus) is required.")]
 		public string Student_macid { get; set; } = null!;
 

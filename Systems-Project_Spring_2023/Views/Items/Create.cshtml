@@ -88,15 +88,18 @@
                 <div id="campusDropdown">
                     <div class="form-group">
                         <div class="form-group">
-                            <label asp-for="Student_macid" class="control-label"></label>
-                            <select asp-for="Student_macid" class="form-control">
+	                        <label asp-for="Student_macid" class="control-label"></label>
+	                        <select asp-for="Student_macid" class="form-control" id="status-select" asp-items="@ViewBag.Location">
+		                        <option value="">Select a Location</option>
+	                        </select>
+                            @*<select asp-for="Student_macid" class="form-control">
                                 <option value="">Campus</option>
                                 <option value="MOB">Moberly</option>
                                 <option value="COL">Columbia</option>
                                 <option value="HAN">Hannibal</option>
                                 <option value="MEX">Mexico</option>
                                 <option value="KIR">Kirksville</option>
-                            </select>
+                            </select>*@
                             <span asp-validation-for="Student_macid" class="text-danger"></span>
                         </div>
                     </div>

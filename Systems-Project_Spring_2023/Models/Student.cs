@@ -58,7 +58,7 @@ namespace Systems_Project_Spring_2023.Models
 		public string Student_cour { get; set;} = null!;
 
 		[Display(Name = "Campus")]
-		[StringLength(3)]
+		[StringLength(35)]
 		[Required(ErrorMessage = "Campus abbreviation is required.")]
 		public string Student_camp { get; set;} = null!;
 

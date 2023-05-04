@@ -52,6 +52,10 @@ namespace Systems_Project_Spring_2023.Controllers
             var kitType = _context.Kit_types.ToList();
             ViewBag.Kit_types = new SelectList(kitType, "Kt_id", "Kt_name");
 
+            // This is code for creating a dropdown box for the location(Pulls descriptions from database).
+            var location = _context.Location.ToList();
+            ViewBag.Location = new SelectList(location, "loc_name", "loc_name");
+
             // This is code for creating a dropdown box for the MACC IDs(Pulls MACC IDs from Student table).
             var maccid_room = _context.Students.Select(s => new { s.Student_macid }).ToList();
 

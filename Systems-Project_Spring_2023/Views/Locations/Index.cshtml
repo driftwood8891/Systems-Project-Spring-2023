@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Systems_Project_Spring_2023.Models.Location>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Location Management</h1>
+
+<p>
+	<a class="btn btn-primary btn-md btn-fix" asp-action="Create">Create New Location</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.loc_name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.loc_name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.loc_id">Edit</a> |
+	            <a asp-action="Delete" asp-route-id="@item.loc_id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
