@@ -53,7 +53,7 @@ namespace Systems_Project_Spring_2023.Models
 	        return logItems;
         }
 
-        /** Removes logs after 120 days **/
+        /** Removes logs after 365 days **/
         public void RemoveOldLogs()
         {
             try
@@ -71,7 +71,7 @@ namespace Systems_Project_Spring_2023.Models
                     {
                         var date = DateTime.Parse(fields[2]);
                         var age = DateTime.Now.Subtract(date).TotalDays;
-                        return age <= 120;
+                        return age <= 365;
                     }
                     return true;
                 });
