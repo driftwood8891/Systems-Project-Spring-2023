@@ -84,15 +84,7 @@
 	            <select asp-for="Student_camp" class="form-control" id="status-select" asp-items="@ViewBag.Location">
 		            <option value="">Select a Location</option>
 	            </select>
-                @*<select asp-for="Student_camp" class="form-control">
-                    <option value="">Campus</option>
-                    <option value="MOB">Moberly</option>
-                    <option value="COL">Columbia</option>
-                    <option value="HAN">Hannibal</option>
-                    <option value="MEX">Mexico</option>
-                    <option value="KIR">Kirksville</option>
-                </select>*@
-                <span asp-validation-for="Student_camp" class="text-danger"></span>
+	            <span asp-validation-for="Student_camp" class="text-danger"></span>
             </div>
         </div>
         <div class="row">
