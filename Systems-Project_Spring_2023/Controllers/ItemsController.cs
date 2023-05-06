@@ -132,6 +132,10 @@ namespace Systems_Project_Spring_2023.Controllers
 
             ViewBag.Students = new SelectList(maccid_room, "Student_macid", "Student_macid");
 
+            // This is code for creating a dropdown box for the location(Pulls descriptions from database).
+            var location = _context.Location.ToList();
+            ViewBag.Location = new SelectList(location, "loc_name", "loc_name");
+
             // This is code for creating a dropdown box for the status codes(Pulls descriptions from database).
             ViewBag.Statuses = new SelectList(statusCode, "Status_code", "Status_desc");
 

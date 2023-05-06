@@ -61,6 +61,7 @@ namespace Systems_Project_Spring_2023.Models
 		[Display(Name = "Item Cost")]
 		[DataType(DataType.Currency)]
 		[Column(TypeName = "decimal(8,2)")]
+        [Range(1,1000)]
 		[Required(ErrorMessage = "Item cost is required.")]
 		public decimal Item_cost { get; set; }
 

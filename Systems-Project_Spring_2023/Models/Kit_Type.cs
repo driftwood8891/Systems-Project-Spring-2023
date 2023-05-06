@@ -51,6 +51,7 @@ namespace Systems_Project_Spring_2023.Models
 
         [DataType(DataType.Currency)]
 		[Column(TypeName = "decimal(8,2)")]
+        [Range(1,1000)]
 		[Display(Name = "Kit Type Cost")]
 		[Required(ErrorMessage = "Kit Type cost is required.")]
 		public decimal Kt_cost { get; set; }

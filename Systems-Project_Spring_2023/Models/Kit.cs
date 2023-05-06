@@ -90,6 +90,8 @@ namespace Systems_Project_Spring_2023.Models
 
         public virtual Status? Status { get; set; }
 
+        //public virtual Location? Location { get; set; }
+
         public virtual Kit_Type? Kit_type { get; set; }
 
         public class MyModelConfiguration : IEntityTypeConfiguration<Kit>

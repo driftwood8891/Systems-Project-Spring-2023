@@ -107,13 +107,16 @@ namespace Systems_Project_Spring_2023.Controllers
         // GET - For Checkout view 
         public IActionResult Checkout()
         {
+            // This string allows us to filter multiple status codes
+            string[] checkinCodes = new[] { "1", "8" };
+
 	        var viewModel = new JoinData();
 			
 	        // list dropdown boxes
-            viewModel.Kits = _context.Kits.Where(k => k.Status_code == "1").ToList();
+            viewModel.Kits = _context.Kits.Where(k => checkinCodes.Contains(k.Status_code)).ToList();
 	        viewModel.Students = _context.Students.ToList();
-	        viewModel.Items = _context.Items.Where(i => i.Status_code == "1").ToList();
-	        return View(viewModel);
+            viewModel.Items = _context.Items.Where(i => checkinCodes.Contains(i.Status_code)).ToList();
+            return View(viewModel);
         }
 
 
