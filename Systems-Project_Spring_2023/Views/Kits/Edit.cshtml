@@ -33,22 +33,39 @@
         </div>
 
         <div class="row">
-            <div class="form-group col-md-6">
-                <div class="form-group">
-                    <label asp-for="Kit_note" class="control-label"></label>
-                    <input asp-for="Kit_note" class="form-control" />
-                    <span asp-validation-for="Kit_note" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <div class="form-group">
-                    <label asp-for="Kt_id" class="control-label"></label>
-                    <select asp-for="Kt_id" class="form-control" asp-items="@ViewBag.Kit_types">
-                        <option value="">Kit Type</option>
-                    </select>
-                    <span asp-validation-for="Kt_id" class="text-danger"></span>
-                </div>
-            </div>
+	        <div class="form-group col-md-6">
+		        <div class="form-group">
+			        <label asp-for="Kit_note" class="control-label"></label>
+			        <input asp-for="Kit_note" class="form-control" />
+			        <span asp-validation-for="Kit_note" class="text-danger"></span>
+		        </div>
+	        </div>
+	        <div class="form-group col-md-6">
+		        <div class="form-group">
+			        <label asp-for="Kt_id" class="control-label"></label>
+			        <select asp-for="Kt_id" class="form-control" asp-items="@ViewBag.Kit_types">
+				        <option value="">Kit Type</option>
+			        </select>
+			        <span asp-validation-for="Kt_id" class="text-danger"></span>
+		        </div>
+	        </div>
+        </div>
+        
+        <div class="row">
+	        <div class="form-group col-md-6">
+		        <div class="form-group">
+			        <label asp-for="Kit_cost" class="control-label"></label>
+			        <input asp-for="Kit_cost" class="form-control" />
+			        <span asp-validation-for="Kit_cost" class="text-danger"></span>
+		        </div>
+	        </div>
+	        <div class="form-group col-md-6">
+		        <div class="form-group">
+			        <label asp-for="Kit_desc" class="control-label"></label>
+                    <input asp-for="Kit_desc" class="form-control" />
+			        <span asp-validation-for="Kit_desc" class="text-danger"></span>
+		        </div>
+	        </div>
         </div>
 
         <div class="row">
