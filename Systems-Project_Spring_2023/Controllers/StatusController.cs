@@ -55,6 +55,10 @@ namespace Systems_Project_Spring_2023.Controllers
 
                 _context.Add(status);
                 await _context.SaveChangesAsync();
+
+                //Create Alert
+                TempData["success"] = "Status was created successfully";
+
                 return RedirectToAction(nameof(Index));
             }
             return View(status);
@@ -100,6 +104,9 @@ namespace Systems_Project_Spring_2023.Controllers
 
 					_context.Update(status);
                     await _context.SaveChangesAsync();
+
+                    //Create Alert
+                    TempData["success"] = "Status was edited successfully";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -156,6 +163,10 @@ namespace Systems_Project_Spring_2023.Controllers
             }
             
             await _context.SaveChangesAsync();
+
+            //Create Alert
+            TempData["success"] = "Status was deleted successfully";
+
             return RedirectToAction(nameof(Index));
         }
 
